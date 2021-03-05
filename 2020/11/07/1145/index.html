@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      Nginx学习 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx介绍"><span class="toc-text">Nginx介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代理"><span class="toc-text">代理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正向代理"><span class="toc-text">正向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx安装"><span class="toc-text">Nginx安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker安装"><span class="toc-text">Docker安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非Docker安装"><span class="toc-text">非Docker安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx配置文件"><span class="toc-text">Nginx配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx常用配置"><span class="toc-text">Nginx常用配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理配置"><span class="toc-text">反向代理配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location路径映射配置"><span class="toc-text">location路径映射配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡策略"><span class="toc-text">负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动静分离配置"><span class="toc-text">动静分离配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#动态资源代理"><span class="toc-text">动态资源代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态资源代理"><span class="toc-text">静态资源代理</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Nginx学习</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/11/07</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/11/07/1145/" data-flag-title="Nginx学习">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/前端">前端</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Nginx">Nginx</a>
+                  
+                
+                  
+                    <a href="/tags/代理">代理</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="Nginx介绍">Nginx介绍<a class="post-anchor" href="#Nginx介绍"></a></h1><h2 id="引言">引言<a class="post-anchor" href="#引言"></a></h2><ul>
+<li>问题：双十一时会有大量用户访问淘宝，一个服务器肯定不行，需要多个服务器，那用户该访问哪一个服务器呢？</li>
+</ul>
+<div style="margin:0; width:90%">
+
+<p><a href="/2020/11/07/1145/1.png" data-caption="image1" data-fancybox="images"><img src="/2020/11/07/1145/1.png" alt="image1"></a></p>
+</div>
+
+<p>这就用到Nginx了，</p>
+<div style="margin:0; width:90%">
+
+<p><a href="/2020/11/07/1145/2.png" data-caption="image2" data-fancybox="images"><img src="/2020/11/07/1145/2.png" alt="image2"></a></p>
+</div>
+
+<p>客户端统一访问Nginx的服务器，然后由Nginx来做一个负载均衡的策略，根据一些算法来决定客户端的请求发给哪一个服务器，若是请求静态资源的话，还可以直接让Nginx的服务器发送给客户端。</p>
+<p>此时这个Nginx的服务器，也叫<code>反向代理服务器</code></p>
+<h2 id="介绍">介绍<a class="post-anchor" href="#介绍"></a></h2><p>Nginx是俄罗斯人写的！！厉害厉害</p>
+<p>特点：</p>
+<ol>
+<li><p>稳定性极强</p>
+</li>
+<li><p>占用内存小，并发能力强</p>
+</li>
+</ol>
+<h1 id="代理">代理<a class="post-anchor" href="#代理"></a></h1><h2 id="正向代理">正向代理<a class="post-anchor" href="#正向代理"></a></h2><ol>
+<li><p>正向代理服务时由客户端设立</p>
+</li>
+<li><p>客户端知道代理服务器和目标服务器是谁</p>
+</li>
+<li><p>有助于客户端突破访问权限，提高访问速度，对目标服务器隐藏客户端的ip地址</p>
+</li>
+</ol>
+<div style="margin:0; width:90%">
+
+<p><a href="/2020/11/07/1145/3.png" data-caption="img1" data-fancybox="images"><img src="/2020/11/07/1145/3.png" alt="img1"></a></p>
+</div>
+
+<blockquote>
+<p>典型应用：SSR</p>
+</blockquote>
+<h2 id="反向代理">反向代理<a class="post-anchor" href="#反向代理"></a></h2><ol>
+<li>反向代理服务器是配置在服务端</li>
+<li>客户端不知道访问的是哪一台服务器</li>
+<li>有助于负载均衡，并且可以隐藏服务器真正的ip地址</li>
+</ol>
+<div style="margin:0; width:90%">
+
+<p><a href="/2020/11/07/1145/4.png" data-caption="img4" data-fancybox="images"><img src="/2020/11/07/1145/4.png" alt="img4"></a></p>
+</div>
+
+<blockquote>
+<p>典型应用：Nginx</p>
+</blockquote>
+<h1 id="Nginx安装">Nginx安装<a class="post-anchor" href="#Nginx安装"></a></h1><h2 id="安装">安装<a class="post-anchor" href="#安装"></a></h2><h3 id="Docker安装">Docker安装<a class="post-anchor" href="#Docker安装"></a></h3><h3 id="非Docker安装">非Docker安装<a class="post-anchor" href="#非Docker安装"></a></h3><p>在Ubuntu中，安装Nginx也很简单</p>
+<figure class="highlight shell"><table><tbody><tr><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 切换到root用户</span><br><span class="hljs-meta">$</span><span class="bash"> sudo -i</span><br><span class="hljs-meta">#</span><span class="bash"> 安装nginx</span><br><span class="hljs-meta">$</span><span class="bash"> apt-get install nginx</span><br><span class="hljs-meta">#</span><span class="bash"> 验证</span><br><span class="hljs-meta">$</span><span class="bash"> nginx -v</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="Nginx配置文件">Nginx配置文件<a class="post-anchor" href="#Nginx配置文件"></a></h2><ul>
+<li><p>Nginx的核心配置文件是<code>nginx.conf</code></p>
+<figure class="highlight yml"><table><tbody><tr><td class="code"><pre><code class="hljs yml"><span class="hljs-string">user</span> <span class="hljs-string">www-data;</span><br><span class="hljs-string">worker_processes</span> <span class="hljs-string">auto;</span><br><span class="hljs-string">pid</span> <span class="hljs-string">/run/nginx.pid;</span><br><span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/modules-enabled/*.conf;</span><br><br><span class="hljs-comment"># 以上是全局块</span><br><span class="hljs-comment"># worker_processes的数值越大，Nginx的并发能力越强</span><br><span class="hljs-comment"># pid：nginx运行的一个标识</span><br><span class="hljs-comment"># include：引入该目录下的全部.conf文件配置</span><br><span class="hljs-comment"># 有的还会有error_log /var/log/nginx/error.log; 指nginx错误日志的存放位置</span><br><br><span class="hljs-string">events</span> <span class="hljs-string">{</span><br>	<span class="hljs-string">worker_connections</span> <span class="hljs-number">768</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># multi_accept on;</span><br><span class="hljs-string">}</span><br><br><span class="hljs-comment"># 以上是events块</span><br><span class="hljs-comment"># worker_connections值越大，nginx并发能力越强</span><br><br><span class="hljs-string">http</span> <span class="hljs-string">{</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/mime.types;</span><br>	<span class="hljs-string">default_type</span> <span class="hljs-string">application/octet-stream;</span><br><br>	<br>	<span class="hljs-comment"># Logging Settings</span><br>	<span class="hljs-string">access_log</span> <span class="hljs-string">/var/log/nginx/access.log;</span><br>	<span class="hljs-string">error_log</span> <span class="hljs-string">/var/log/nginx/error.log;</span><br><br><br>	<span class="hljs-string">server</span> <span class="hljs-string">{</span><br>        <span class="hljs-string">listen</span>       <span class="hljs-number">80</span><span class="hljs-string">;</span><br>        <span class="hljs-string">server_name</span>  <span class="hljs-string">localhost;</span><br><br>        <span class="hljs-string">location</span> <span class="hljs-string">/</span> <span class="hljs-string">{</span><br>           <span class="hljs-string">root</span>   <span class="hljs-string">/home/Documents/nginx_html;</span><br>           <span class="hljs-string">index</span>  <span class="hljs-string">index.html</span> <span class="hljs-string">index.htm;</span><br>        <span class="hljs-string">}</span><br>        <span class="hljs-comment"># location块</span><br>        <span class="hljs-comment"># root：将接收到的请求根据/home/Documents/nginx_html去查找静态资源</span><br>        <span class="hljs-comment"># index：默认去上述的路径中找index.html或index.htm</span><br>	<br>	<span class="hljs-string">}</span><br>	<span class="hljs-comment"># server块</span><br>	<span class="hljs-comment"># listen：代表Nginx监听的端口号</span><br>	<span class="hljs-comment"># server_name：代表Nginx接收请求的ip</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/conf.d/*.conf;</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/sites-enabled/*;</span><br><span class="hljs-string">}</span> <br><br><span class="hljs-comment"># Http块</span><br><span class="hljs-comment"># include代表引入一个外部的文件 ->mime.type中放着大量的媒体类型</span><br><span class="hljs-comment"># include /etc/nginx/conf.d/*.conf; ->引入conf.d目录下的以.conf结尾的配置文件</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>修改了Nginx的配置文件后，需重启一下Nginx</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Ubuntu系统</span><br>$ service nginx stop<br>$ service nginx start<br></code></pre></td></tr></tbody></table></figure>
+
+
+</li>
+</ul>
+<h1 id="Nginx常用配置">Nginx常用配置<a class="post-anchor" href="#Nginx常用配置"></a></h1><h2 id="反向代理配置">反向代理配置<a class="post-anchor" href="#反向代理配置"></a></h2><figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">server{<br>	listen 80;<br>	server_name localhost;<br>	<br>	location / {<br>		proxy_pass http://192.168.199.109:8080/;<br>    	proxy_send_timeout 120;      # nginx发送数据到服务器的超时时间，默认60s<br>    	proxy_read_timeout 120;      # nginx接收服务器的数据的超时时间，默认60s<br>	}<br>}<br># 当客户端访问Nginx服务器时，会映射到http://192.168.199.109:8080/<br></code></pre></td></tr></tbody></table></figure>
+
+<p>今天发现服务器上的网页，有个请求请求了1分钟，不多不少，然后报404错误；然后在本地运行的时候，那个请求请求了1分半后，200，并返回了数据。</p>
+<p>弄了很久，才突然意识到是nginx的代理超时时间配置的问题</p>
+<h2 id="location路径映射配置">location路径映射配置<a class="post-anchor" href="#location路径映射配置"></a></h2><figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json"># 1. = 匹配<br>location = / {<br>	# 精准匹配，主机名后面不能带任何的字符串<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json"># 2. 通用匹配<br>location /xxx {<br> 	# 匹配所有以/xxx开头的路径   <br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json"># 3. 正则匹配<br>location ~ /xxx {<br>	# 匹配所有以/xxx开头的路径<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json"># 4. 匹配开头路径<br>location ^~ /images/ {<br>    # 匹配所有以/images开头的路径<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json"># 5. 匹配结尾路径<br>location ~* \.(gif|jpg|png)$ {<br>	# 匹配以gif或jpg或png为结尾的路径<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>优先级关系：</p>
+<p>（location =） > （location /xxx/yyy/zzz） > （location ^<del>） > （location ~，</del>*） > （location /起始路径）>（location / ）</p>
+<h2 id="负载均衡策略">负载均衡策略<a class="post-anchor" href="#负载均衡策略"></a></h2><p>  Nginx默认提供了三种负载均衡策略</p>
+<ol>
+<li><p><strong>轮询</strong>：将客户端发起的请求，平均地分配给每一台服务器</p>
+<p>配置</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">http{<br>	...<br>    upstream 名字{<br>        # 自己声明的变量一般不要用下划线，用下划线的一般是关键字<br>        server ip:port;<br>        server ip:port;<br>    	...<br>	}<br>	server{<br>        listen 80;<br>        server_name localhost;<br>        <br>        location / {<br>        	proxy_pass http://upstream的名字/;<br>    	}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>比如：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">http{<br>	...<br>    upstream my-server{<br>        # 自己声明的变量一般不要用下划线，用下划线的一般是关键字<br>        server 192.168.199.109:8080;<br>        server 192.168.199.109:8081;<br>	}<br>	server{<br>        listen 80;<br>        server_name localhost;<br>        <br>        location / {<br>        	proxy_pass http://my-server/;<br>    	}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p><strong>权重</strong>：会将客户端的请求，根据服务器的权重值来分配</p>
+<p>配置</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">http{<br>	...<br>    upstream 名字{<br>        # 自己声明的变量一般不要用下划线，用下划线的一般是关键字<br>        server ip:port weight=权重值;<br>        server ip:port weight=权重值;<br>    	...<br>	}<br>	server{<br>        listen 80;<br>        server_name localhost;<br>        <br>        location / {<br>        	proxy_pass http://upstream的名字/;<br>    	}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>比如：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">http{<br>	...<br>    upstream my-server{<br>        # 自己声明的变量一般不要用下划线，用下划线的一般是关键字<br>        server 192.168.199.109:8080 weight=10;<br>        server 192.168.199.109:8081 weight=2;<br>	}<br>	server{<br>        listen 80;<br>        server_name localhost;<br>        <br>        location / {<br>        	proxy_pass http://my-server/;<br>    	}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p><strong>ip_hash</strong>：基于发起请求的客户端的ip地址不同，始终将请求发送到指定的服务器上</p>
+<p>配置</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">http{<br>	...<br>    upstream 名字{<br>        # 自己声明的变量一般不要用下划线，用下划线的一般是关键字<br>        ip_hash;<br>    	server ip:port;<br>        server ip:port;<br>    	...<br>	}<br>	server{<br>        listen 80;<br>        server_name localhost;<br>        <br>        location / {<br>        	proxy_pass http://upstream的名字/;<br>    	}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>比如：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">http{<br>	...<br>    upstream my-server{<br>        # 自己声明的变量一般不要用下划线，用下划线的一般是关键字<br>    	ip_hash;<br>        server 192.168.199.109:8080;<br>        server 192.168.199.109:8081;<br>	}<br>	server{<br>        listen 80;<br>        server_name localhost;<br>        <br>        location / {<br>        	proxy_pass http://my-server/;<br>    	}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="动静分离配置">动静分离配置<a class="post-anchor" href="#动静分离配置"></a></h2><p>对于这样的一个环境</p>
+<div style="margin:0; width:90%">
+
+<p><a href="/2020/11/07/1145/5.png" data-caption="img5" data-fancybox="images"><img src="/2020/11/07/1145/5.png" alt="img5"></a></p>
+</div>
+
+
+<p>Nginx并发能力计算：</p>
+<p>$$<br>Nginx最终的并发能力= worker_processes * worker_connections /4|2<br>$$</p>
+<p>其中，除以4是请求动态资源时，除以2是请求静态资源时</p>
+<p>这样，通过动静分离，有助于提升Nginx的并发能力，从而更快的给用户响应</p>
+<h3 id="动态资源代理">动态资源代理<a class="post-anchor" href="#动态资源代理"></a></h3><p>配置：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">location / {<br>    proxy_pass 路径;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>也就是反向代理配置</p>
+<h3 id="静态资源代理">静态资源代理<a class="post-anchor" href="#静态资源代理"></a></h3><p>配置：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json"># 访问 / 时的静态资源 （局部）<br>location / {<br>    root 静态资源路径;<br>    index 默认访问路径下的什么资源;<br>    autoindex on;  # 代表展示静态资源的全部内容，并以列表的形式展开 （可要可不要）<br>    expires 缓存时间;   # 启用缓存<br>}<br><br><br># 访问Nginx服务器时的静态资源 （全局）<br>server{<br>    root 静态资源路径;<br>    index 默认访问路径下的什么资源;<br>    autoindex on;  # 代表展示静态资源的全部内容，并以列表的形式展开 （可要可不要）<br>    expires 缓存时间;   # 启用缓存<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>比如：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">server{<br>    root /home/lab1204/Documents/nginx_html;<br>	index index.html index.htm;<br>    expires 24h;  # 启用缓存,有效期为24小时<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/11/13/1017/">java的HashMap</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/10/12/null/">git fetch不了</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/11/07/1145/">https://wakie01.github.io/2020/11/07/1145/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

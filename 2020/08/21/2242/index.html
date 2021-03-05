@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      java解析和编辑Excel文件 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven导入Jar包"><span class="toc-text">Maven导入Jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析简单表"><span class="toc-text">解析简单表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解析复杂表"><span class="toc-text">解析复杂表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑Excel表"><span class="toc-text">编辑Excel表</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">java解析和编辑Excel文件</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/08/21</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/08/21/2242/" data-flag-title="java解析和编辑Excel文件">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Java">Java</a>
+                
+              
+                
+                  <a href="/categories/BackEnd">BackEnd</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Java">Java</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>Java解析Excel文件常用<a href="http://poi.apache.org/" target="_blank" rel="noopener">Apache的POI</a></p>
+<h2 id="Maven导入Jar包">Maven导入Jar包<a class="post-anchor" href="#Maven导入Jar包"></a></h2><figure class="highlight xml"><table><tbody><tr><td class="code"><pre><code class="hljs xml"><span class="hljs-tag"><<span class="hljs-name">dependency</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">groupId</span>></span>org.apache.poi<span class="hljs-tag"></<span class="hljs-name">groupId</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">artifactId</span>></span>poi-ooxml<span class="hljs-tag"></<span class="hljs-name">artifactId</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">version</span>></span>4.1.0<span class="hljs-tag"></<span class="hljs-name">version</span>></span><br><span class="hljs-tag"></<span class="hljs-name">dependency</span>></span><br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="解析简单表">解析简单表<a class="post-anchor" href="#解析简单表"></a></h2><p>先来个解析类似这样的简单表</p>
+<div style="width:100%;margin:auto">
+
+<p><a href="/2020/08/21/2242/1.png" data-caption="img1" data-fancybox="images"><img src="/2020/08/21/2242/1.png" alt="img1"></a></p>
+</div>
+
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">"/importExcel"</span>)<br><span class="hljs-function"><span class="hljs-keyword">public</span> List <span class="hljs-title">importExcel</span><span class="hljs-params">(@RequestParam(<span class="hljs-string">"excelFile"</span>)</span> MultipartFile excelFile)</span>{<br>    List<List> returnList=<span class="hljs-keyword">new</span> ArrayList<>();<br>    <span class="hljs-keyword">try</span> {<br>        InputStream inputStream=excelFile.getInputStream();<br>        <br>        <span class="hljs-comment">//根据inputStream的类型自动建立 HSSFWorkbook 或 XSSFWorkbook的 Workbook对象</span><br>        <span class="hljs-comment">//其中HSSFWorkbook用来解析xls格式的excel，XSSFWorkbook用来解析xlsx格式的excel</span><br>        Workbook workbook=WorkbookFactory.create(inputStream);<br><br>        Sheet sheet=workbook.getSheetAt(<span class="hljs-number">0</span>);   <span class="hljs-comment">//获取表格对象</span><br>        <span class="hljs-keyword">int</span> rowNum=sheet.getPhysicalNumberOfRows();    <span class="hljs-comment">//获取表格行数</span><br>        <span class="hljs-keyword">int</span> colNum=sheet.getRow(<span class="hljs-number">0</span>).getPhysicalNumberOfCells();      <span class="hljs-comment">//获取表格第一行的列数</span><br>        <br>        <span class="hljs-comment">//从第二行开始解析</span><br>        <span class="hljs-comment">//由于数据量过多，chrome的DevTools显示不了，所以先来99个</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i<<span class="hljs-number">100</span>;i++){   <br>            List<Map> tempList=<span class="hljs-keyword">new</span> ArrayList<>();<br>            Row row=sheet.getRow(i);<br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span>(Cell cell:row){<br>                Map<String,String> tempMap=<span class="hljs-keyword">new</span> HashMap<>();<br>                <span class="hljs-keyword">if</span>(cell.getCellType().equals(CellType.NUMERIC)){    <span class="hljs-comment">//数字的获取数字，字符串的获取字符串，不可弄混</span><br>                    tempMap.put(sheet.getRow(<span class="hljs-number">0</span>).getCell(j).getStringCellValue(),cell.getNumericCellValue()+<span class="hljs-string">""</span>);<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cell.getCellType().equals(CellType.STRING)){<br>                    tempMap.put(sheet.getRow(<span class="hljs-number">0</span>).getCell(j).getStringCellValue(),cell.getStringCellValue());<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cell.getCellType().equals(CellType.BOOLEAN)){<br>                    tempMap.put(sheet.getRow(<span class="hljs-number">0</span>).getCell(j).getStringCellValue(),String.valueOf(cell.getBooleanCellValue()));<br>                }<br>                j++;<br>                tempList.add(tempMap);<br>            }<br>            returnList.add(tempList);<br>        }<br>    } <span class="hljs-keyword">catch</span> (IOException e) {<br>        e.printStackTrace();<br>    }<br>    <span class="hljs-keyword">return</span> returnList;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>结果</strong></p>
+<div style="width:100%;margin:auto">
+
+<p><a href="/2020/08/21/2242/2.png" data-caption="img1" data-fancybox="images"><img src="/2020/08/21/2242/2.png" alt="img1"></a></p>
+</div>
+
+
+<h2 id="解析复杂表">解析复杂表<a class="post-anchor" href="#解析复杂表"></a></h2><p>再来个解析类似这样的较为复杂的表，表里的部分内容为空</p>
+<div style="width:100%;margin:auto">
+
+<p><a href="/2020/08/21/2242/3.png" data-caption="img1" data-fancybox="images"><img src="/2020/08/21/2242/3.png" alt="img1"></a></p>
+</div>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java">Row headerRow=sheet.getRow(<span class="hljs-number">0</span>);<br>Row subheaderRow=sheet.getRow(<span class="hljs-number">1</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+<p>获取表格的第一行和第二行数据，结果如下：</p>
+<div style="width:100%;margin:auto">
+
+<p><a href="/2020/08/21/2242/4.png" data-caption="img4" data-fancybox="images"><img src="/2020/08/21/2242/4.png" alt="img4"></a></p>
+</div>
+
+<p>这时候就根据这个来分析表头就好了</p>
+<p><strong>代码</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping</span>(<span class="hljs-string">"/importExcel2"</span>)<br><span class="hljs-function"><span class="hljs-keyword">public</span> List <span class="hljs-title">importExcel2</span><span class="hljs-params">(@RequestParam(<span class="hljs-string">"excelFile"</span>)</span> MultipartFile excelFile)</span>{<br>    List<List> returnList=<span class="hljs-keyword">new</span> ArrayList<>();<br>    <span class="hljs-keyword">try</span> {<br>        InputStream inputStream=excelFile.getInputStream();<br><br>        <span class="hljs-comment">//根据inputStream的类型自动建立 HSSFWorkbook 或 XSSFWorkbook的 Workbook对象</span><br>        <span class="hljs-comment">//其中HSSFWorkbook用来解析xls格式的excel，XSSFWorkbook用来解析xlsx格式的excel</span><br>        Workbook workbook=WorkbookFactory.create(inputStream);<br>        Sheet sheet=workbook.getSheetAt(<span class="hljs-number">0</span>);   <span class="hljs-comment">//获取表格对象</span><br>        <span class="hljs-keyword">int</span> rowNum=sheet.getPhysicalNumberOfRows();    <span class="hljs-comment">//获取表格行数</span><br>        <span class="hljs-keyword">int</span> colNum=sheet.getRow(<span class="hljs-number">0</span>).getPhysicalNumberOfCells();      <span class="hljs-comment">//获取表格第一行的列数</span><br><br>        Row headerRow=sheet.getRow(<span class="hljs-number">0</span>);    <span class="hljs-comment">//获取表格的第一行</span><br>        Row subheaderRow=sheet.getRow(<span class="hljs-number">1</span>);    <span class="hljs-comment">//获取表格的第二行</span><br><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i<<span class="hljs-number">100</span>;i++) {    <span class="hljs-comment">//从第三行开始解析</span><br>            List<Map> tempList=<span class="hljs-keyword">new</span> ArrayList<>();<br>            Row row=sheet.getRow(i);<br>            <span class="hljs-keyword">int</span> headerIndex=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">int</span> subheaderIndex=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span>(Cell cell:row){<br>                Map<String,String> tempMap=<span class="hljs-keyword">new</span> HashMap<>();<br>                String key;<br>                <span class="hljs-keyword">if</span>(headerIndex==<span class="hljs-number">0</span>){<br>                    key=headerRow.getCell(headerIndex++).getStringCellValue();<br>                    subheaderIndex++;<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(headerIndex<<span class="hljs-number">4</span>){<br>                    key=headerRow.getCell(<span class="hljs-number">1</span>).getStringCellValue()+<span class="hljs-string">"-"</span>+subheaderRow.getCell(subheaderIndex++).getStringCellValue();<br>                    headerIndex++;<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(headerIndex<<span class="hljs-number">7</span>){<br>                    key=headerRow.getCell(<span class="hljs-number">4</span>).getStringCellValue()+<span class="hljs-string">"-"</span>+subheaderRow.getCell(subheaderIndex++).getStringCellValue();<br>                    headerIndex++;<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(headerIndex<<span class="hljs-number">9</span>){<br>                    key=headerRow.getCell(<span class="hljs-number">7</span>).getStringCellValue()+<span class="hljs-string">"-"</span>+subheaderRow.getCell(subheaderIndex++).getStringCellValue();<br>                    headerIndex++;<br>                }<span class="hljs-keyword">else</span>{<br>                    key=headerRow.getCell(headerIndex++).getStringCellValue();<br>                }<br><br>                <span class="hljs-comment">//数字的获取数字，字符串的获取字符串，空白的取空，不可弄混</span><br>                <span class="hljs-keyword">if</span>(cell.getCellType().equals(CellType.NUMERIC)){<br>                    tempMap.put(key,cell.getNumericCellValue()+<span class="hljs-string">""</span>);<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cell.getCellType().equals(CellType.STRING)){<br>                    tempMap.put(key,cell.getStringCellValue());<br>                }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cell.getCellType().equals(CellType.BLANK)){<br>                    tempMap.put(key,<span class="hljs-string">""</span>);<br>                }<br>                tempList.add(tempMap);<br>            }<br>            returnList.add(tempList);<br>        }<br>    } <span class="hljs-keyword">catch</span> (IOException e) {<br>        e.printStackTrace();<br>    }<br>    <span class="hljs-keyword">return</span> returnList;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+<p><strong>结果</strong></p>
+<div style="width:100%;margin:auto">
+
+<p><a href="/2020/08/21/2242/5.png" data-caption="img5" data-fancybox="images"><img src="/2020/08/21/2242/5.png" alt="img5"></a></p>
+</div>
+
+
+
+<h2 id="编辑Excel表">编辑Excel表<a class="post-anchor" href="#编辑Excel表"></a></h2><p>最近要弄一个这样的东西，在这个表中插入几百条随机数据，怎么弄呢？</p>
+<p><a href="/2020/08/21/2242/blog\source_posts\java解析Excel文件\6.png" data-caption="img6" data-fancybox="images"><img src="/2020/08/21/2242/blog\source_posts\java解析Excel文件\6.png" alt="img6"></a></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">createRandomExcel2</span><span class="hljs-params">(@RequestParam(<span class="hljs-string">"excelFile"</span>)</span> MultipartFile excelFile)</span>{<br>        <span class="hljs-keyword">try</span> {<br>            InputStream inputStream=excelFile.getInputStream();<br><br>            <span class="hljs-comment">//根据inputStream的类型自动建立 HSSFWorkbook 或 XSSFWorkbook的 Workbook对象</span><br>            <span class="hljs-comment">//其中HSSFWorkbook用来解析xls格式的excel，XSSFWorkbook用来解析xlsx格式的excel</span><br>            Workbook workbook= WorkbookFactory.create(inputStream);<br><br>            Sheet sheet=workbook.getSheetAt(<span class="hljs-number">0</span>);   <span class="hljs-comment">//获取表格对象</span><br>            <span class="hljs-keyword">int</span> rowNum=sheet.getPhysicalNumberOfRows();    <span class="hljs-comment">//获取表格行数</span><br>            <span class="hljs-keyword">int</span> colNum=sheet.getRow(<span class="hljs-number">3</span>).getPhysicalNumberOfCells();      <span class="hljs-comment">//获取表格第一行的列数</span><br><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">4</span>;i<rowNum;i++){       <span class="hljs-comment">//从第5行开始插入</span><br>                Row row=sheet.getRow(i);     <br>                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j<colNum;j++){<br>                    <span class="hljs-keyword">switch</span> (j){<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:{<br>                            row.getCell(j).setCellValue(<span class="hljs-string">"海原站-彭阳站"</span>);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:{<br>                            row.getCell(j).setCellValue(<span class="hljs-keyword">new</span> BigDecimal(Math.random()*<span class="hljs-number">5000</span>).setScale(<span class="hljs-number">0</span>,RoundingMode.DOWN).intValue());<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:{<br>                            String[] types={<span class="hljs-string">"-"</span>,<span class="hljs-string">"杂散电流干扰"</span>};<br><br>                            <span class="hljs-keyword">if</span>(Math.random()*<span class="hljs-number">10</span><<span class="hljs-number">7.5</span>){<br>                                row.getCell(j++).setCellValue(types[<span class="hljs-number">0</span>]);<br>                                row.getCell(j).setCellValue(<span class="hljs-string">"-"</span>);<br>                            }<span class="hljs-keyword">else</span>{<br>                                row.getCell(j++).setCellValue(types[<span class="hljs-number">1</span>]);<br>                                row.getCell(j).setCellValue(<span class="hljs-string">"土壤酸碱性"</span>);<br>                            }<br><br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">6</span>:{<br>                            <span class="hljs-keyword">int</span> hh1=<span class="hljs-keyword">new</span> Double(Math.random()*<span class="hljs-number">24</span>).intValue();<br>                            <span class="hljs-keyword">int</span> mm1=<span class="hljs-keyword">new</span> Double(Math.random()*<span class="hljs-number">60</span>).intValue();<br>                            <span class="hljs-keyword">int</span> interval;<br>                            <span class="hljs-keyword">int</span> repeatTime=<span class="hljs-number">1</span>;<br>                            <span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>){<br>                                interval=<span class="hljs-keyword">new</span> Double(Math.random()*<span class="hljs-number">60</span>).intValue();<br>                                <span class="hljs-keyword">if</span>(mm1+interval<<span class="hljs-number">60</span>){<br>                                    <span class="hljs-keyword">break</span>;<br>                                }<br>                                <span class="hljs-keyword">if</span>(repeatTime><span class="hljs-number">10</span>){<br>                                    mm1=<span class="hljs-keyword">new</span> Double(Math.random()*<span class="hljs-number">60</span>).intValue();<br>                                    repeatTime=<span class="hljs-number">1</span>;<br>                                }<br>                            }<br>                            String hour1=hh1<<span class="hljs-number">10</span>? <span class="hljs-string">"0"</span>+hh1:<span class="hljs-string">""</span>+hh1;<br>                            String minute1=mm1<<span class="hljs-number">10</span>? <span class="hljs-string">"0"</span>+mm1:<span class="hljs-string">""</span>+mm1;<br>                            row.getCell(j++).setCellValue(hour1+<span class="hljs-string">":"</span>+minute1);<br><br>                            minute1=(mm1+interval)<<span class="hljs-number">10</span>? <span class="hljs-string">"0"</span>+(mm1+interval):<span class="hljs-string">""</span>+(mm1+interval);<br>                            row.getCell(j++).setCellValue(hour1+<span class="hljs-string">":"</span>+minute1);<br>                            row.getCell(j).setCellValue(interval);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">10</span>:{<br>                            <span class="hljs-keyword">double</span> num1=<span class="hljs-keyword">new</span> BigDecimal(Math.random()*<span class="hljs-number">100</span>).setScale(<span class="hljs-number">2</span>,RoundingMode.DOWN).doubleValue();<br>                            <span class="hljs-keyword">double</span> num2=<span class="hljs-keyword">new</span> BigDecimal(Math.random()*(<span class="hljs-number">100</span>-num1)).setScale(<span class="hljs-number">2</span>,RoundingMode.DOWN).doubleValue();<br>                            <span class="hljs-keyword">double</span> num3=<span class="hljs-keyword">new</span> BigDecimal(Math.random()*(<span class="hljs-number">100</span>-num1-num2)).setScale(<span class="hljs-number">2</span>,RoundingMode.DOWN).doubleValue();<br>                            <span class="hljs-keyword">double</span> num4=<span class="hljs-number">100</span>-num1-num2-num3;<br>                            row.getCell(j++).setCellValue(num1);<br>                            row.getCell(j++).setCellValue(num2);<br>                            row.getCell(j++).setCellValue(num3);<br>                            row.getCell(j).setCellValue(num4);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">14</span>:{<br>                            String[] strs={<span class="hljs-string">"强"</span>,<span class="hljs-string">"中"</span>,<span class="hljs-string">"弱"</span>};<br>                            row.getCell(j).setCellValue(strs[<span class="hljs-keyword">new</span> BigDecimal(Math.random()*<span class="hljs-number">3</span>).setScale(<span class="hljs-number">0</span>,RoundingMode.DOWN).intValue()]);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">15</span>:{<br>                            String[] strs={<span class="hljs-string">"好"</span>,<span class="hljs-string">"较好"</span>,<span class="hljs-string">"一般"</span>,<span class="hljs-string">"较差"</span>,<span class="hljs-string">"差"</span>};<br>                            row.getCell(j).setCellValue(strs[<span class="hljs-keyword">new</span> BigDecimal(Math.random()*<span class="hljs-number">5</span>).setScale(<span class="hljs-number">0</span>,RoundingMode.DOWN).intValue()]);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">16</span>:{<br>                            row.getCell(j).setCellValue(<span class="hljs-string">"暂无"</span>);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">17</span>:{<br>                            String month;<br>                            String day;<br>                            <span class="hljs-keyword">int</span> MM=<span class="hljs-keyword">new</span> BigDecimal(Math.random()*<span class="hljs-number">10</span>).setScale(<span class="hljs-number">0</span>,RoundingMode.HALF_DOWN).intValue();<br>                            <span class="hljs-keyword">int</span> dd=<span class="hljs-keyword">new</span> BigDecimal(Math.random()*<span class="hljs-number">30</span>).setScale(<span class="hljs-number">0</span>,RoundingMode.HALF_DOWN).intValue();<br>                            month=MM<<span class="hljs-number">10</span>? <span class="hljs-string">"0"</span>+MM:<span class="hljs-string">""</span>+MM;<br>                            day=dd<<span class="hljs-number">10</span>? <span class="hljs-string">"0"</span>+dd:<span class="hljs-string">""</span>+dd;<br>                            row.getCell(j).setCellValue(<span class="hljs-string">"2020"</span>+month+day);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">18</span>:<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">19</span>:<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">20</span>:<br>                        <span class="hljs-keyword">case</span> <span class="hljs-number">21</span>:{<br>                            row.getCell(j).setCellValue(<span class="hljs-string">"-"</span>);<br>                            <span class="hljs-keyword">break</span>;<br>                        }<br><br><br>                    }<br><br>                }<br>            }<br>            <span class="hljs-comment">//写入文件</span><br>            OutputStream fileOut=<span class="hljs-keyword">new</span> FileOutputStream(<span class="hljs-string">"C:/Users/15513/Desktop/直流.xlsx"</span>);<br>            workbook.write(fileOut);<br>        } <span class="hljs-keyword">catch</span> (IOException e) {<br>            e.printStackTrace();<br>        }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<br>
+
+<br>
+
+<p>站在巨人的肩膀上</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/08/23/1137/">Chrome跨域时的Cookie问题</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/08/20/1232/">java数据类型转换</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/08/21/2242/">https://wakie01.github.io/2020/08/21/2242/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

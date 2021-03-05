@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      前端常用缓存技术 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Local-Storage"><span class="toc-text">Local Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session-Storage"><span class="toc-text">Session Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-1"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookies"><span class="toc-text">Cookies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-2"><span class="toc-text">使用</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">前端常用缓存技术</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/09/10</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/09/10/1625/" data-flag-title="前端常用缓存技术">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/前端">前端</a>
+                
+              
+                
+                  <a href="/categories/Cache">Cache</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Cache">Cache</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>之前在弄记住密码时接触到部分前端缓存的皮毛，大为震惊！！没想到还有这东西！！当时就想一定要记录一下</p>
+<hr>
+<p>前端常用的缓存技术有，如下图所示：(或许我这个称呼不太对)</p>
+<ul>
+<li><p><strong>Local Storage</strong></p>
+</li>
+<li><p><strong>Session Storage</strong></p>
+</li>
+<li><p><strong>Cookies</strong></p>
+</li>
+</ul>
+<div style="width:60%;margin:auto">
+
+<p><a href="/2020/09/10/1625/1.png" data-caption="img1" data-fancybox="images"><img src="/2020/09/10/1625/1.png" alt="img1"></a></p>
+</div>
+
+
+<p>至于上图中的<strong>IndexedDB</strong>、<strong>Web SQL</strong>、<strong>Cache Storage</strong>、<strong>Application Cache</strong>，我还不太熟悉</p>
+<h2 id="Local-Storage">Local Storage<a class="post-anchor" href="#Local-Storage"></a></h2><p>在HTML5中，新加入了一个localStorage特性，这个特性主要是用来作为本地存储来使用的，解决了cookie存储空间不足的问题(cookie中每条cookie的存储空间为4k)，localStorage中一般浏览器支持的是5M大小</p>
+<p><a href="http://dev-test.nemikor.com/web-storage/support-test/" target="_blank" rel="noopener">测试localStorage、sessionStorage在浏览器中支持的存储大小</a></p>
+<div style="width:80%;margin:auto">
+
+<p><a href="/2020/09/10/1625/2.png" data-caption="img1" data-fancybox="images"><img src="/2020/09/10/1625/2.png" alt="img1"></a></p>
+</div>
+
+
+<p><strong>localStorage的优势</strong></p>
+<ul>
+<li><p>localStorage拓展了cookie的4K限制</p>
+</li>
+<li><p>将第一次请求的数据直接存储到本地，节约带宽</p>
+</li>
+</ul>
+<p><strong>localStorage的局限</strong></p>
+<ul>
+<li><p>浏览器的大小不统一，并且在IE8以上的IE版本才支持localStorage这个属性</p>
+</li>
+<li><p>目前所有的浏览器中都会把localStorage的值类型限定为string类型，这个在对我们日常比较常见的JSON对象类型需要一些转换</p>
+</li>
+<li><p>localStorage在浏览器的隐私模式下面是不可读取的</p>
+</li>
+<li><p>localStorage本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，会导致页面变卡</p>
+</li>
+<li><p>localStorage不能被爬虫抓取到</p>
+</li>
+</ul>
+<h3 id="使用">使用<a class="post-anchor" href="#使用"></a></h3><p><strong>测试可用性</strong></p>
+<p>由于部分浏览器在某些情况下会禁用Local Storage，如私有浏览模式、用户手动禁用，所以在使用前最好先判断一下，测试一下Local Storage可用性</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//测试函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">storageAvailable</span>(<span class="hljs-params">type</span>) </span>{<br>    <span class="hljs-keyword">var</span> storage;<br>    <span class="hljs-keyword">try</span> {<br>        storage = <span class="hljs-built_in">window</span>[type];<br>        <span class="hljs-keyword">var</span> x = <span class="hljs-string">'__storage_test__'</span>;<br>        storage.setItem(x, x);<br>        storage.removeItem(x);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br>    <span class="hljs-keyword">catch</span>(e) {<br>        <span class="hljs-keyword">return</span> e <span class="hljs-keyword">instanceof</span> DOMException && (<br>            <span class="hljs-comment">// everything except Firefox</span><br>            e.code === <span class="hljs-number">22</span> ||<br>            <span class="hljs-comment">// Firefox</span><br>            e.code === <span class="hljs-number">1014</span> ||<br>            <span class="hljs-comment">// test name field too, because code might not be present</span><br>            <span class="hljs-comment">// everything except Firefox</span><br>            e.name === <span class="hljs-string">'QuotaExceededError'</span> ||<br>            <span class="hljs-comment">// Firefox</span><br>            e.name === <span class="hljs-string">'NS_ERROR_DOM_QUOTA_REACHED'</span>) &&<br>            <span class="hljs-comment">// acknowledge QuotaExceededError only if there's something already stored</span><br>            (storage && storage.length !== <span class="hljs-number">0</span>);<br>    }<br>}<br><br><span class="hljs-comment">//使用时判断</span><br><span class="hljs-keyword">if</span> (storageAvailable(<span class="hljs-string">'localStorage'</span>)) {<br>  <span class="hljs-comment">// Yippee! We can use localStorage awesomeness</span><br>}<br><span class="hljs-keyword">else</span> {<br>  <span class="hljs-comment">// Too bad, no localStorage for us</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>从存储中设置/获取/删除值</strong></p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//设置local storage的font键值对</span><br>localStorage.setItem(<span class="hljs-string">'font'</span>, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'font'</span>).value);<br><br><span class="hljs-comment">//设置local storage的json键值对</span><br><span class="hljs-keyword">var</span> data = {<br>    name:<span class="hljs-string">'xiecanyong'</span>,<br>    sex:<span class="hljs-string">'man'</span>,<br>    hobby:<span class="hljs-string">'program'</span><br>};<br><span class="hljs-keyword">var</span> d = <span class="hljs-built_in">JSON</span>.stringify(data);     <span class="hljs-comment">//json字符串化</span><br>localStorage.setItem(<span class="hljs-string">"data"</span>,d);<br><br><span class="hljs-comment">//获取local storage的font键值对</span><br><span class="hljs-keyword">var</span> currentFont = localStorage.getItem(<span class="hljs-string">'font'</span>);    <br><br><span class="hljs-comment">//获取local storage的json键值对</span><br><span class="hljs-keyword">var</span> json = localStorage.getItem(<span class="hljs-string">"data"</span>);<br><span class="hljs-keyword">var</span> jsonObj = <span class="hljs-built_in">JSON</span>.parse(json);<br><br><span class="hljs-comment">//删除local storage的font键值对</span><br>localStorage.removeItem(<span class="hljs-string">'font'</span>);   <br><br><span class="hljs-comment">//删除local storage的全部内容</span><br>localStorage.clear();<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="Session-Storage">Session Storage<a class="post-anchor" href="#Session-Storage"></a></h2><p>Session Storage与Local Storage很类似，只不过localStorage里面存储的数据没有过期时间设置，而Session Storage只用于存储当前会话的数据，当会话结束后，Session Storage的数据会随之销毁。</p>
+<p>sessionStorage中一般浏览器支持的也是5M大小</p>
+<p><a href="http://dev-test.nemikor.com/web-storage/support-test/" target="_blank" rel="noopener">测试localStorage、sessionStorage在浏览器中支持的存储大小</a></p>
+<div style="width:80%;margin:auto">
+
+<p><a href="/2020/09/10/1625/3.png" data-caption="img1" data-fancybox="images"><img src="/2020/09/10/1625/3.png" alt="img1"></a></p>
+</div>
+
+<ul>
+<li><p>页面会话在浏览器打开期间一直保持，并且重新加载或恢复页面仍会保持原来的页面会话</p>
+</li>
+<li><p>在新标签或窗口打开一个页面时会复制顶级浏览会话的上下文作为新会话的上下文，这点和 session cookies 的运行方式不同</p>
+</li>
+<li><p>打开多个相同的URL的Tabs页面，会创建各自的sessionStorage</p>
+</li>
+<li><p>关闭对应浏览器tab，会清除对应的sessionStorage</p>
+</li>
+</ul>
+<h3 id="使用-1">使用<a class="post-anchor" href="#使用-1"></a></h3><p><strong>测试可用性</strong></p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//测试函数</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">storageAvailable</span>(<span class="hljs-params">type</span>) </span>{<br>    <span class="hljs-keyword">var</span> storage;<br>    <span class="hljs-keyword">try</span> {<br>        storage = <span class="hljs-built_in">window</span>[type];<br>        <span class="hljs-keyword">var</span> x = <span class="hljs-string">'__storage_test__'</span>;<br>        storage.setItem(x, x);<br>        storage.removeItem(x);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    }<br>    <span class="hljs-keyword">catch</span>(e) {<br>        <span class="hljs-keyword">return</span> e <span class="hljs-keyword">instanceof</span> DOMException && (<br>            <span class="hljs-comment">// everything except Firefox</span><br>            e.code === <span class="hljs-number">22</span> ||<br>            <span class="hljs-comment">// Firefox</span><br>            e.code === <span class="hljs-number">1014</span> ||<br>            <span class="hljs-comment">// test name field too, because code might not be present</span><br>            <span class="hljs-comment">// everything except Firefox</span><br>            e.name === <span class="hljs-string">'QuotaExceededError'</span> ||<br>            <span class="hljs-comment">// Firefox</span><br>            e.name === <span class="hljs-string">'NS_ERROR_DOM_QUOTA_REACHED'</span>) &&<br>            <span class="hljs-comment">// acknowledge QuotaExceededError only if there's something already stored</span><br>            (storage && storage.length !== <span class="hljs-number">0</span>);<br>    }<br>}<br><br><span class="hljs-comment">//使用时判断</span><br><span class="hljs-keyword">if</span> (storageAvailable(<span class="hljs-string">'localStorage'</span>)) {<br>  <span class="hljs-comment">// Yippee! We can use localStorage awesomeness</span><br>}<br><span class="hljs-keyword">else</span> {<br>  <span class="hljs-comment">// Too bad, no localStorage for us</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+<p><strong>从存储中设置/获取/删除值</strong></p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//设置session storage的font键值对</span><br>sessionStorage.setItem(<span class="hljs-string">'font'</span>, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'font'</span>).value);<br><br><span class="hljs-comment">//设置session storage的json键值对</span><br><span class="hljs-keyword">var</span> data = {<br>    name:<span class="hljs-string">'xiecanyong'</span>,<br>    sex:<span class="hljs-string">'man'</span>,<br>    hobby:<span class="hljs-string">'program'</span><br>};<br><span class="hljs-keyword">var</span> d = <span class="hljs-built_in">JSON</span>.stringify(data);     <span class="hljs-comment">//json字符串化</span><br>sessionStorage.setItem(<span class="hljs-string">"data"</span>,d);<br><br><span class="hljs-comment">//获取session storage的font键值对</span><br><span class="hljs-keyword">var</span> currentFont = sessionStorage.getItem(<span class="hljs-string">'font'</span>);    <br><br><span class="hljs-comment">//获取session storage的json键值对</span><br><span class="hljs-keyword">var</span> json = sessionStorage.getItem(<span class="hljs-string">"data"</span>);<br><span class="hljs-keyword">var</span> jsonObj = <span class="hljs-built_in">JSON</span>.parse(json);<br><br><span class="hljs-comment">//删除session storage的font键值对</span><br>sessionStorage.removeItem(<span class="hljs-string">'font'</span>);   <br><br><span class="hljs-comment">//删除session storage的全部内容</span><br>sessionStorage.clear();<br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>Local Storage 与 Session Storage统称为Web Storage</p>
+</blockquote>
+<h2 id="Cookies">Cookies<a class="post-anchor" href="#Cookies"></a></h2><div style="width:80%;margin:auto">
+
+<p><a href="/2020/09/10/1625/4.png" data-caption="img1" data-fancybox="images"><img src="/2020/09/10/1625/4.png" alt="img1"></a></p>
+</div>
+
+<p>这里的Cookies也叫<code>Http Cookie</code>、<code>Web Cookie</code>、<code>浏览器Cookie</code>，是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。通常，它用于告知服务端两个请求是否来自同一浏览器，如保持用户的登录状态。Cookie 使基于无状态的HTTP协议记录稳定的状态信息成为了可能</p>
+<p>Cookie 曾一度用于客户端数据的存储，因当时并没有其它合适的存储办法而作为唯一的存储手段，但现在随着现代浏览器开始支持各种各样的存储方式，Cookie 渐渐被淘汰。由于服务器指定 Cookie 后，浏览器的每次请求都会携带 Cookie 数据，会带来额外的性能开销（尤其是在移动环境下）。新的浏览器API已经允许开发者直接将数据存储到本地，如使用 Web storage API （本地存储和会话存储）或 IndexedDB</p>
+<p>这里先记录Cookies在Angular下的使用，其实也是一样的，只不过等一下记录的那个是经过封装过的</p>
+<h3 id="使用-2">使用<a class="post-anchor" href="#使用-2"></a></h3><ol>
+<li>先安装<code>ngx-cookie-service</code>的npm包</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs terminal">npm i ngx-cookie-service<br></code></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li>在<code>app.modules.ts</code>那里注入服务</li>
+</ol>
+<figure class="highlight typescript"><table><tbody><tr><td class="code"><pre><code class="hljs typescript">  <span class="hljs-meta">@NgModule</span>({<br>  declarations: [AppComponent],<br>  entryComponents: [],<br>  imports: [<br>    <span class="hljs-comment">//import modules</span><br>  ],<br>  providers: [<br>    CookieService,<br>    <span class="hljs-comment">//import providers</span><br>  ],<br>  bootstrap: [AppComponent]<br>})<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppModule {}<br></code></pre></td></tr></tbody></table></figure>
+
+<ol start="3">
+<li>在构造函数中声明<code>CookieService</code>变量</li>
+</ol>
+<figure class="highlight typescript"><table><tbody><tr><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AcotPage {<br>  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span><br><span class="hljs-params">    <span class="hljs-keyword">private</span> cookieService:CookieService,</span><br><span class="hljs-params">  </span>) {}<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>从存储中设置/获取/删除值</strong></p>
+<figure class="highlight typescript"><table><tbody><tr><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">//set 函数</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @param name     Cookie name</span><br><span class="hljs-comment">  * @param value    Cookie value</span><br><span class="hljs-comment">  * @param expires  Number of days until the cookies expires or an actual `Date`</span><br><span class="hljs-comment">  * @param path     Cookie path</span><br><span class="hljs-comment">  * @param domain   Cookie domain</span><br><span class="hljs-comment">  * @param secure   Secure flag</span><br><span class="hljs-comment">  * @param sameSite OWASP samesite token `Lax`, `None`, or `Strict`. Defaults to `Lax`</span><br><span class="hljs-comment">  */</span><br><span class="hljs-keyword">set</span>(name: <span class="hljs-built_in">string</span>, value: <span class="hljs-built_in">string</span>, expires?: <span class="hljs-built_in">number</span> | <span class="hljs-built_in">Date</span>, path?: <span class="hljs-built_in">string</span>, domain?: <span class="hljs-built_in">string</span>, secure?: <span class="hljs-built_in">boolean</span>, sameSite?: <span class="hljs-string">'Lax'</span> | <span class="hljs-string">'None'</span> | <span class="hljs-string">'Strict'</span>): <span class="hljs-built_in">void</span>;<br><br><span class="hljs-comment">//设置Cookies键值对 此时设置的有效时间为7天</span><br><span class="hljs-keyword">this</span>.cookieService.set(<span class="hljs-string">"name"</span>,<span class="hljs-string">"value"</span>,<span class="hljs-number">7</span>);<br><br><br><span class="hljs-comment">//get 函数</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @param name Cookie name</span><br><span class="hljs-comment">  * @returns property value</span><br><span class="hljs-comment">  */</span><br><span class="hljs-keyword">get</span>(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>;<br><br><span class="hljs-comment">//获取Cookies值</span><br><span class="hljs-keyword">let</span> value=<span class="hljs-keyword">this</span>.cookieService.get(<span class="hljs-string">"name"</span>);<br><br><span class="hljs-comment">//check 函数</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @param name Cookie name</span><br><span class="hljs-comment">  * @returns boolean - whether cookie with specified name exists</span><br><span class="hljs-comment">  */</span><br>check(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;<br><br><span class="hljs-comment">//delete 函数</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">  * @param name   Cookie name</span><br><span class="hljs-comment">  * @param path   Cookie path</span><br><span class="hljs-comment">  * @param domain Cookie domain</span><br><span class="hljs-comment">  */</span><br><span class="hljs-keyword">delete</span>(name: <span class="hljs-built_in">string</span>, path?: <span class="hljs-built_in">string</span>, domain?: <span class="hljs-built_in">string</span>, secure?: <span class="hljs-built_in">boolean</span>, sameSite?: <span class="hljs-string">'Lax'</span> | <span class="hljs-string">'None'</span> | <span class="hljs-string">'Strict'</span>): <span class="hljs-built_in">void</span>;<br></code></pre></td></tr></tbody></table></figure>
+
+<br>
+
+<p>参考：<br>1.<a href="https://www.cnblogs.com/crj1998/articles/12385939.html" target="_blank" rel="noopener">Maze的前端常用缓存技术</a><br>2.<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API" target="_blank" rel="noopener">MDN 使用 Web Storage API</a><br>3.<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/sessionStorage" target="_blank" rel="noopener">MDN sessionStorage</a><br>4.<a href="https://blog.csdn.net/mengshang529/article/details/98735158" target="_blank" rel="noopener">梦殇918的sessionStorage详解</a><br>5.<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API" target="_blank" rel="noopener">MDN 使用 Web Storage API</a><br>6.<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies" target="_blank" rel="noopener">MDN http cookies</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/09/19/1957/">机器学习基础</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/08/23/1137/">Chrome跨域时的Cookie问题</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/09/10/1625/">https://wakie01.github.io/2020/09/10/1625/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

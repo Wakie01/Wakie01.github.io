@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      html+css+js实现验证码 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">html+css+js实现验证码</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/10/03</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/10/03/1302/" data-flag-title="html+css+js实现验证码">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/前端">前端</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/前端">前端</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>我这个验证码的实现主要用的是canvas标签，然后获取canvas的CanvasRenderingContext2D，然后用它来手动绘画</p>
+<p><strong>代码</strong></p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><code class="hljs html"><span class="hljs-meta"><!DOCTYPE <span class="hljs-meta-keyword">HTML</span>></span><br><span class="hljs-tag"><<span class="hljs-name">html</span>></span><br><span class="hljs-tag"><<span class="hljs-name">head</span>></span><br>  <span class="hljs-tag"><<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> canvasWidth = <span class="hljs-number">400</span>; <span class="hljs-comment">//验证码宽度 （与px的对不上，可能是单位问题）</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> canvasHeight = <span class="hljs-number">155</span>; <span class="hljs-comment">//验证码高度</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> codeLength = <span class="hljs-number">4</span>; <span class="hljs-comment">//验证码长度</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> backgroundColorMin = <span class="hljs-number">200</span>; <span class="hljs-comment">//验证码图片背景色最小值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> backgroundColorMax = <span class="hljs-number">220</span>; <span class="hljs-comment">//验证码图片背景色最大值</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> fontColorMin = <span class="hljs-number">50</span>; <span class="hljs-comment">//数字颜色最小值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> fontColorMax = <span class="hljs-number">160</span>; <span class="hljs-comment">//数字颜色最大值</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> fontSizeMin = <span class="hljs-number">45</span>; <span class="hljs-comment">// 字体最小值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> fontSizeMax = <span class="hljs-number">55</span>; <span class="hljs-comment">// 字体最大值</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> degMin = <span class="hljs-number">-30</span>; <span class="hljs-comment">//旋转最小角度</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> degMax = <span class="hljs-number">30</span>; <span class="hljs-comment">//旋转最大角度</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> lineColorMin = <span class="hljs-number">100</span>; <span class="hljs-comment">//干扰线颜色最小值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> lineColorMax = <span class="hljs-number">200</span>; <span class="hljs-comment">//干扰线颜色最大值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> lineNum = <span class="hljs-number">10</span>; <span class="hljs-comment">//干扰线数量</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> dotColorMin = <span class="hljs-number">0</span>; <span class="hljs-comment">//干扰点颜色最小值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> dotColorMax = <span class="hljs-number">255</span>; <span class="hljs-comment">//干扰点颜色最大值</span></span><br><span class="actionscript">    <span class="hljs-keyword">var</span> dotNum = <span class="hljs-number">30</span>; <span class="hljs-comment">//干扰点数量</span></span><br><br><span class="actionscript">    <span class="hljs-keyword">var</span> code=<span class="hljs-string">""</span>;</span><br><br><span class="javascript">    <span class="hljs-built_in">window</span>.onload = drawPic;</span><br><br><span class="actionscript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawPic</span><span class="hljs-params">()</span> </span>{</span><br><span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"codeInput"</span>).value=<span class="hljs-string">""</span>;</span><br><span class="javascript">      <span class="hljs-keyword">var</span> verticalCode = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"verticalCode"</span>);</span><br><span class="actionscript">      <span class="hljs-keyword">var</span> content2d = verticalCode.getContext(<span class="hljs-string">"2d"</span>); <span class="hljs-comment">//获得CanvasRenderingContext2D 实例</span></span><br><span class="actionscript">      content2d.fillStyle = randomColor(backgroundColorMin, backgroundColorMax); <span class="hljs-comment">//设置背景颜色</span></span><br><span class="actionscript">      content2d.fillRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, canvasWidth, canvasHeight); <span class="hljs-comment">//根据当前的填充样式，填充矩形</span></span><br><span class="actionscript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i < codeLength; i++) {</span><br>        drawText(content2d, i);<br>      }<br>      drawLine(content2d);<br>      drawDot(content2d);<br>    }<br><br><span class="actionscript">    <span class="hljs-comment">//生成随机颜色</span></span><br><span class="actionscript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">randomColor</span><span class="hljs-params">(min, max)</span> </span>{</span><br><span class="javascript">      <span class="hljs-keyword">var</span> r = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (max - min) + min);</span><br><span class="javascript">      <span class="hljs-keyword">var</span> g = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (max - min) + min);</span><br><span class="javascript">      <span class="hljs-keyword">var</span> b = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (max - min) + min);</span><br><span class="actionscript">      <span class="hljs-keyword">return</span> <span class="hljs-string">'rgb('</span> + r + <span class="hljs-string">','</span> + g + <span class="hljs-string">','</span> + b + <span class="hljs-string">')'</span>;</span><br>    }<br><br><span class="actionscript">    <span class="hljs-comment">//绘制随机数字</span></span><br><span class="actionscript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawText</span><span class="hljs-params">(content2d, i)</span> </span>{</span><br><span class="actionscript">      content2d.fillStyle = randomColor(fontColorMin, fontColorMax); <span class="hljs-comment">//随机生成字体颜色</span></span><br><span class="javascript">      content2d.font = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (fontSizeMax - fontSizeMin) + fontSizeMin) + <span class="hljs-string">'px SimHei'</span>; <span class="hljs-comment">//设置字体</span></span><br><span class="actionscript">      <span class="hljs-keyword">var</span> x = (i + <span class="hljs-number">1</span>) * (canvasWidth / (codeLength+<span class="hljs-number">3</span>));</span><br><span class="javascript">      <span class="hljs-keyword">var</span> y = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (canvasHeight - <span class="hljs-number">5</span> - fontSizeMax) + fontSizeMax);</span><br><span class="javascript">      <span class="hljs-keyword">var</span> deg = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * (degMax - degMin) + degMin); <span class="hljs-comment">//随机角度</span></span><br><span class="javascript">      <span class="hljs-keyword">var</span> txt = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * <span class="hljs-number">9</span>).toString(); <span class="hljs-comment">//随机数</span></span><br>      if(i==0){<br><span class="actionscript">        code=<span class="hljs-string">""</span>;</span><br>      }<br>      code+=txt;<br><span class="actionscript">      <span class="hljs-comment">// 修改坐标原点和旋转角度</span></span><br><span class="actionscript">      content2d.translate(x, y); <span class="hljs-comment">//移动坐标原点</span></span><br><span class="javascript">      content2d.rotate(deg * <span class="hljs-built_in">Math</span>.PI / <span class="hljs-number">180</span>); <span class="hljs-comment">//旋转</span></span><br>      content2d.fillText(txt, 0, 0);<br><br><span class="actionscript">      <span class="hljs-comment">//恢复坐标原点和旋转角度</span></span><br><span class="javascript">      content2d.rotate(-deg * <span class="hljs-built_in">Math</span>.PI / <span class="hljs-number">180</span>);</span><br>      content2d.translate(-x, -y)<br>    }<br><br><span class="actionscript">    <span class="hljs-comment">// 绘制干扰线</span></span><br><span class="actionscript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawLine</span><span class="hljs-params">(content2d)</span> </span>{</span><br><span class="actionscript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i < lineNum; i++) {</span><br><span class="actionscript">        content2d.strokeStyle = randomColor(lineColorMin, lineColorMax); <span class="hljs-comment">//设置画笔的颜色</span></span><br><span class="actionscript">        content2d.beginPath(); <span class="hljs-comment">//清空子路径列表，并开始一个新路径</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> moveToX = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * canvasWidth);</span><br><span class="javascript">        <span class="hljs-keyword">var</span> moveToY = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * canvasHeight);</span><br><span class="actionscript">        content2d.moveTo(moveToX, moveToY); <span class="hljs-comment">//移动路径的起点</span></span><br><br><span class="javascript">        <span class="hljs-keyword">var</span> lineToX = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * canvasWidth);</span><br><span class="javascript">        <span class="hljs-keyword">var</span> lineToY = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * canvasHeight);</span><br><span class="actionscript">        content2d.lineTo(lineToX, lineToY); <span class="hljs-comment">//使用直线连接路径的终点到x，y坐标，注意：并不会真正地绘制</span></span><br><span class="actionscript">        content2d.stroke(); <span class="hljs-comment">//绘制当前或已经存在的路径的方法</span></span><br>      }<br>    }<br><br><span class="actionscript">    <span class="hljs-comment">// 绘制干扰点</span></span><br><span class="actionscript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drawDot</span><span class="hljs-params">(content2d)</span> </span>{</span><br><span class="actionscript">      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i < dotNum; i++) {</span><br>        content2d.fillStyle = randomColor(dotColorMin, dotColorMax);<br>        content2d.beginPath();<br><span class="javascript">        <span class="hljs-keyword">var</span> x = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * canvasWidth); <span class="hljs-comment">//圆心的 x 轴坐标。</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> y = <span class="hljs-built_in">Math</span>.floor(<span class="hljs-built_in">Math</span>.random() * canvasHeight); <span class="hljs-comment">//圆心的 y 轴坐标。</span></span><br><span class="actionscript">        <span class="hljs-keyword">var</span> radius = <span class="hljs-number">1</span>; <span class="hljs-comment">//圆弧的半径</span></span><br><span class="actionscript">        <span class="hljs-keyword">var</span> startAngle = <span class="hljs-number">0</span>; <span class="hljs-comment">//圆弧的起始点</span></span><br><span class="javascript">        <span class="hljs-keyword">var</span> endAngle = <span class="hljs-number">2</span> * <span class="hljs-built_in">Math</span>.PI; <span class="hljs-comment">//圆弧的终点</span></span><br><span class="actionscript">        content2d.arc(x, y, radius, startAngle, endAngle); <span class="hljs-comment">//绘制圆弧路径</span></span><br><span class="actionscript">        content2d.fill(); <span class="hljs-comment">//根据当前的填充样式，填充当前或已存在的路径</span></span><br>      }<br>    }<br><br><span class="actionscript">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">vertify</span><span class="hljs-params">()</span></span>{</span><br><span class="javascript">      <span class="hljs-keyword">var</span> codeInput=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"codeInput"</span>).value;</span><br>      if(codeInput==code){<br><span class="actionscript">        alert(<span class="hljs-string">"验证正确"</span>);</span><br><span class="actionscript">      }<span class="hljs-keyword">else</span>{</span><br><span class="actionscript">        alert(<span class="hljs-string">"验证错误"</span>);</span><br>      }<br><span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"codeInput"</span>).value=<span class="hljs-string">""</span>;</span><br>    }<br>  <span class="hljs-tag"></<span class="hljs-name">script</span>></span><br><span class="hljs-tag"></<span class="hljs-name">head</span>></span><br><br><span class="hljs-tag"><<span class="hljs-name">body</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"margin:0px;"</span>></span><br>  <span class="hljs-tag"><<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"width:100%;display:flex; "</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"codeInput"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">maxlength</span>=<span class="hljs-string">4</span> <span class="hljs-attr">required</span>></span><span class="hljs-tag"></<span class="hljs-name">input</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"verticalCode"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"width:100px;height:30px;"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"drawPic()"</span>></span><span class="hljs-tag"></<span class="hljs-name">canvas</span>></span><br>  <span class="hljs-tag"></<span class="hljs-name">div</span>></span><br>  <span class="hljs-tag"><<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"width:50px;margin-top:15px;"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"验证"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"vertify()"</span>></span><span class="hljs-tag"></<span class="hljs-name">input</span>></span><br><span class="hljs-tag"></<span class="hljs-name">body</span>></span><br><br><span class="hljs-tag"></<span class="hljs-name">html</span>></span><br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>运行结果：</strong></p>
+<div style="margin:auto">
+
+<p><a href="/2020/10/03/1302/1.png" data-caption="img1" data-fancybox="images"><img src="/2020/10/03/1302/1.png" alt="img1"></a></p>
+<p><a href="/2020/10/03/1302/2.png" data-caption="img2" data-fancybox="images"><img src="/2020/10/03/1302/2.png" alt="img2"></a></p>
+</div>
+
+
+<p>站在巨人的肩膀上</p>
+<br>
+
+<p>参考：<br>1.<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API" target="_blank" rel="noopener">MDN-canvas标签</a><br>2.<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D" target="_blank" rel="noopener">MDN-CanvasRenderingContext2D API</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/10/04/1534/">前端跨域问题</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/09/30/1037/">Typescript Map使用</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/10/03/1302/">https://wakie01.github.io/2020/10/03/1302/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

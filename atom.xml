@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Wakie&#39;s Blog</title>
+  <icon>https://wakie01.github.io/icon.png</icon>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://wakie01.github.io/"/>
+  <updated>2021-03-05T06:30:35.410Z</updated>
+  <id>https://wakie01.github.io/</id>
+  
+  <author>
+    <name>Wakie</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java Lamda表达式</title>
+    <link href="https://wakie01.github.io/2021/03/01/1044/"/>
+    <id>https://wakie01.github.io/2021/03/01/1044/</id>
+    <published>2021-03-01T02:44:23.000Z</published>
+    <updated>2021-03-05T06:30:35.410Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;Lamda表达式&quot;&gt;Lamda表达式&lt;a class=&quot;post-anchor&quot; href=&quot;#Lamda表达式&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;是JDK1.8以后的内容，是用于简化&lt;code&gt;函数式接口（Functio
+      
+    
+    </summary>
+    
+    
+      <category term="Java BackEnd" scheme="https://wakie01.github.io/categories/Java-BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java对List进行排序</title>
+    <link href="https://wakie01.github.io/2021/01/12/null/"/>
+    <id>https://wakie01.github.io/2021/01/12/null/</id>
+    <published>2021-01-12T03:22:06.000Z</published>
+    <updated>2021-01-12T06:36:35.687Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;简单的&quot;&gt;简单的&lt;a class=&quot;post-anchor&quot; href=&quot;#简单的&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td cl
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java获取当前时间的前n天</title>
+    <link href="https://wakie01.github.io/2021/01/12/1118/"/>
+    <id>https://wakie01.github.io/2021/01/12/1118/</id>
+    <published>2021-01-12T02:34:48.000Z</published>
+    <updated>2021-01-12T03:18:14.549Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs java&quot;&gt;&lt;span class=&quot;hljs-ke
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/BackEnd/"/>
+    
+    
+      <category term="Time" scheme="https://wakie01.github.io/tags/Time/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Learning Hierarchy-Aware Knowledge Graph Embeddings for Link Prediction论文学习笔记</title>
+    <link href="https://wakie01.github.io/2021/01/04/1133/"/>
+    <id>https://wakie01.github.io/2021/01/04/1133/</id>
+    <published>2021-01-04T03:26:37.000Z</published>
+    <updated>2021-01-08T05:15:22.964Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;中文名：面向链路预测的学习层次感知知识图嵌入&lt;/p&gt;
+&lt;h1 id=&quot;1-干什么的&quot;&gt;1.干什么的&lt;a class=&quot;post-anchor&quot; href=&quot;#1-干什么的&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;提出了Hierarchy-
+      
+    
+    </summary>
+    
+    
+      <category term="paper" scheme="https://wakie01.github.io/categories/paper/"/>
+    
+    
+      <category term="AI" scheme="https://wakie01.github.io/tags/AI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ARP协议</title>
+    <link href="https://wakie01.github.io/2021/01/02/null/"/>
+    <id>https://wakie01.github.io/2021/01/02/null/</id>
+    <published>2021-01-02T02:23:27.000Z</published>
+    <updated>2021-01-08T05:15:22.946Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;概述&quot;&gt;概述&lt;a class=&quot;post-anchor&quot; href=&quot;#概述&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;ARP协议，Address Resolution Protocol，地址解析协议，用于实现从IP地址到MAC地
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java的Enum使用</title>
+    <link href="https://wakie01.github.io/2020/12/27/1030/"/>
+    <id>https://wakie01.github.io/2020/12/27/1030/</id>
+    <published>2020-12-27T08:31:08.000Z</published>
+    <updated>2021-01-08T05:15:22.964Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;枚举&quot;&gt;枚举&lt;a class=&quot;post-anchor&quot; href=&quot;#枚举&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;枚举类型有以下特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不可变&lt;/li&gt;
+&lt;li&gt;不相同&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java的static使用</title>
+    <link href="https://wakie01.github.io/2020/12/26/1741/"/>
+    <id>https://wakie01.github.io/2020/12/26/1741/</id>
+    <published>2020-12-26T08:56:28.000Z</published>
+    <updated>2021-01-08T05:15:22.993Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;概述&quot;&gt;概述&lt;a class=&quot;post-anchor&quot; href=&quot;#概述&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;&lt;code&gt;static&lt;/code&gt;是静态修饰符，所谓静态就是指在编译后所分配的内存会一直存在，直到程序退出
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java多线程学习</title>
+    <link href="https://wakie01.github.io/2020/11/18/1130/"/>
+    <id>https://wakie01.github.io/2020/11/18/1130/</id>
+    <published>2020-11-18T01:37:30.000Z</published>
+    <updated>2021-03-05T02:49:12.935Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;进程与线程&quot;&gt;进程与线程&lt;a class=&quot;post-anchor&quot; href=&quot;#进程与线程&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;进程：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;​    每个进程都有独立的代码的数
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java的HashMap</title>
+    <link href="https://wakie01.github.io/2020/11/13/1017/"/>
+    <id>https://wakie01.github.io/2020/11/13/1017/</id>
+    <published>2020-11-13T02:05:53.000Z</published>
+    <updated>2021-01-08T05:15:22.991Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;java HashMap的查询时间复杂度为O(1)，why？&lt;/p&gt;
+&lt;p&gt;首先得说一下HashMap的put()方法&lt;/p&gt;
+&lt;div style=&quot;margin:0 auto;width:55%&quot;&gt;
+
+&lt;p&gt;&lt;a hre
+      
+    
+    </summary>
+    
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/BackEnd/"/>
+    
+    
+      <category term="java" scheme="https://wakie01.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx学习</title>
+    <link href="https://wakie01.github.io/2020/11/07/1145/"/>
+    <id>https://wakie01.github.io/2020/11/07/1145/</id>
+    <published>2020-11-07T03:45:07.000Z</published>
+    <updated>2021-01-08T05:15:22.976Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;Nginx介绍&quot;&gt;Nginx介绍&lt;a class=&quot;post-anchor&quot; href=&quot;#Nginx介绍&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;h2 id=&quot;引言&quot;&gt;引言&lt;a class=&quot;post-anchor&quot; href=&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="Nginx" scheme="https://wakie01.github.io/tags/Nginx/"/>
+    
+      <category term="代理" scheme="https://wakie01.github.io/tags/%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git fetch不了</title>
+    <link href="https://wakie01.github.io/2020/10/12/null/"/>
+    <id>https://wakie01.github.io/2020/10/12/null/</id>
+    <published>2020-10-12T12:19:20.000Z</published>
+    <updated>2021-01-08T05:15:22.983Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs plain&quot;&gt;fatal: early EOF&lt;b
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>前端跨域问题</title>
+    <link href="https://wakie01.github.io/2020/10/04/1534/"/>
+    <id>https://wakie01.github.io/2020/10/04/1534/</id>
+    <published>2020-10-04T07:33:24.000Z</published>
+    <updated>2021-01-08T05:15:23.007Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;记得在弄毕业设计时，遇到一个问题，至今我都印象深刻：&lt;/p&gt;
+&lt;div style=&quot;margin:auto;&quot;&gt;
+
+&lt;p&gt;&lt;a href=&quot;/2020/10/04/1534/1.png&quot; data-caption=&quot;img
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="跨域" scheme="https://wakie01.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>html+css+js实现验证码</title>
+    <link href="https://wakie01.github.io/2020/10/03/1302/"/>
+    <id>https://wakie01.github.io/2020/10/03/1302/</id>
+    <published>2020-10-03T05:02:37.000Z</published>
+    <updated>2021-01-08T05:15:22.986Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;我这个验证码的实现主要用的是canvas标签，然后获取canvas的CanvasRenderingContext2D，然后用它来手动绘画&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;&lt;/p&gt;
+&lt;figure clas
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Typescript Map使用</title>
+    <link href="https://wakie01.github.io/2020/09/30/1037/"/>
+    <id>https://wakie01.github.io/2020/09/30/1037/</id>
+    <published>2020-09-30T02:36:50.000Z</published>
+    <updated>2021-01-08T05:15:22.982Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Typescript中的Map类型类似于Java中的Hashset&lt;/p&gt;
+&lt;p&gt;今天认识到了关于Typescript的Map的一种不知道叫什么名字的用法，直接来吧&lt;/p&gt;
+&lt;figure class=&quot;highlight 
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="Typescript" scheme="https://wakie01.github.io/tags/Typescript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端export default跟export的区别</title>
+    <link href="https://wakie01.github.io/2020/09/28/1507/"/>
+    <id>https://wakie01.github.io/2020/09/28/1507/</id>
+    <published>2020-09-28T07:05:58.000Z</published>
+    <updated>2021-01-08T05:15:23.003Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;之前在弄Ionic4时，还有现在在弄的Vue中，都多次接触到&lt;code&gt;export default&lt;/code&gt;与&lt;code&gt;export&lt;/code&gt;的字样，如：&lt;/p&gt;
+&lt;div style=&quot;margin:auto;
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习基础</title>
+    <link href="https://wakie01.github.io/2020/09/19/1957/"/>
+    <id>https://wakie01.github.io/2020/09/19/1957/</id>
+    <published>2020-09-19T11:57:36.000Z</published>
+    <updated>2021-01-08T05:15:23.018Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;在我的理解中，机器学习就是用数据训练出一个模型，然后用这个模型去预测新的数据。&lt;/p&gt;
+&lt;h2 id=&quot;基本术语&quot;&gt;基本术语&lt;a class=&quot;post-anchor&quot; href=&quot;#基本术语&quot;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="ML" scheme="https://wakie01.github.io/categories/ML/"/>
+    
+    
+      <category term="ML" scheme="https://wakie01.github.io/tags/ML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端常用缓存技术</title>
+    <link href="https://wakie01.github.io/2020/09/10/1625/"/>
+    <id>https://wakie01.github.io/2020/09/10/1625/</id>
+    <published>2020-09-10T08:23:00.000Z</published>
+    <updated>2021-01-08T05:15:23.005Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;之前在弄记住密码时接触到部分前端缓存的皮毛，大为震惊！！没想到还有这东西！！当时就想一定要记录一下&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;前端常用的缓存技术有，如下图所示：(或许我这个称呼不太对)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;str
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="Cache" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/Cache/"/>
+    
+    
+      <category term="Cache" scheme="https://wakie01.github.io/tags/Cache/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Chrome跨域时的Cookie问题</title>
+    <link href="https://wakie01.github.io/2020/08/23/1137/"/>
+    <id>https://wakie01.github.io/2020/08/23/1137/</id>
+    <published>2020-08-23T03:36:05.000Z</published>
+    <updated>2021-01-08T05:15:22.948Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;最近突然发现一个问题，之前前端访问后端时都没问题，最近突然出问题了！！&lt;/p&gt;
+&lt;p&gt;一开始我还想是跨域问题吗？是Cookie跨域？每次访问后端时，所获取的Session ID都不一样，可是这些CORS我都配置好了&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="CORS" scheme="https://wakie01.github.io/categories/CORS/"/>
+    
+    
+      <category term="CORS" scheme="https://wakie01.github.io/tags/CORS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java解析和编辑Excel文件</title>
+    <link href="https://wakie01.github.io/2020/08/21/2242/"/>
+    <id>https://wakie01.github.io/2020/08/21/2242/</id>
+    <published>2020-08-21T14:40:25.000Z</published>
+    <updated>2021-01-08T05:15:22.993Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Java解析Excel文件常用&lt;a href=&quot;http://poi.apache.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apache的POI&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Maven导
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/categories/Java/"/>
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/Java/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java数据类型转换</title>
+    <link href="https://wakie01.github.io/2020/08/20/1232/"/>
+    <id>https://wakie01.github.io/2020/08/20/1232/</id>
+    <published>2020-08-20T14:12:31.000Z</published>
+    <updated>2021-01-08T05:15:22.991Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;我今天发现一个有趣的数据类型转换，特地记录一下 &lt;/p&gt;
+&lt;div style=&quot;width:7%;&quot;&gt; 
+
+&lt;p&gt;&lt;a href=&quot;/2020/08/20/1232/1.jpg&quot; data-caption=&quot;img1&quot; d
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/categories/Java/"/>
+    
+      <category term="BackEnd" scheme="https://wakie01.github.io/categories/Java/BackEnd/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
+  
+</feed>

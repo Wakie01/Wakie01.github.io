@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      npm使用 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般命令"><span class="toc-text">一般命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Package"><span class="toc-text">安装Package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-install常见后缀"><span class="toc-text">npm install常见后缀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除Package"><span class="toc-text">删除Package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-install常见后缀-1"><span class="toc-text">npm install常见后缀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装package-json文件的依赖"><span class="toc-text">安装package.json文件的依赖</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">npm使用</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/06/22</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/06/22/0911/" data-flag-title="npm使用">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/node.js">node.js</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Npm">Npm</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h2 id="前言">前言<a class="post-anchor" href="#前言"></a></h2><p>使用了大半年了Npm，一直都对它模模糊糊，今天对其整理一下。</p>
+<p>Npm（Node Package Manager）是一个包管理工具，在安装Node.js时会自动安装好，它很方便让JavaScript开发者下载、安装、上传以及管理已经安装的包。</p>
+<h2 id="一般命令">一般命令<a class="post-anchor" href="#一般命令"></a></h2><ul>
+<li>查看Npm版本</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm -v<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>查看Npm全局目录</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm root -g<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>初始Npm项目</li>
+</ul>
+<p>一般cd到项目根目录，然后执行下面命令</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm init<br></code></pre></td></tr></tbody></table></figure>
+
+<p>其运行结果：</p>
+<p><a href="/2020/06/22/0911/npm_init.png" data-caption="img1" data-fancybox="images"><img src="/2020/06/22/0911/npm_init.png" alt="img1"></a></p>
+<blockquote>
+<p>在配置过程中，直接按回车表示默认</p>
+</blockquote>
+<p>快速初始命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm init -y<br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p><code>-y</code> 表示在初始项目时，Package.json文件的各种参数采用默认值，之后可以自己慢慢改</p>
+</blockquote>
+<p>初始完成后，会在该初始目录下新建package.json文件：</p>
+<p><a href="/2020/06/22/0911/package1.png" data-caption="img2" data-fancybox="images"><img src="/2020/06/22/0911/package1.png" alt="img2"></a></p>
+<p>其中package.json文件中的</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">"scripts":{<br>  "test": "echo \"Error: no test specified\" && exit 1"<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>是npm的一些小脚本，”test”是脚本名字，后面是其内容,当输入</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm <span class="hljs-built_in">test</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>会运行该脚本，此时结果是输出”Error: no test specified”</p>
+<h2 id="常用命令">常用命令<a class="post-anchor" href="#常用命令"></a></h2><h3 id="安装Package">安装Package<a class="post-anchor" href="#安装Package"></a></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm install [package name]<br><br>$ npm i [package name]    <span class="hljs-comment">##简写</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>该命令默认安装当前Package的最新版本，当需要安装某一个版本时，可在[package name]后添加<code>@[版本]</code></p>
+<p>当安装的Package已存在，将自动替换掉已有的Package</p>
+<p>查找Package可到<a href="https://www.npmjs.com/" target="_blank" rel="noopener">Npm官网</a></p>
+<p>当非全局安装Package完成后，该项目会出现node_modules文件夹，存放Package，同时package.json文件也会变动</p>
+<h4 id="npm-install常见后缀">npm install常见后缀<a class="post-anchor" href="#npm-install常见后缀"></a></h4><ol>
+<li><code>无后缀</code></li>
+</ol>
+<p>默认安装到生产环境中，在package.json中可见</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">"dependencies": {    //"包名": "版本号"<br>  "bootstrap": "^4.5.0",<br>  "jquery": "^3.5.1"<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li><code>-g</code> </li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm install -g [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>全局安装，安装的包放在全局目录下，并且可以直接在命令行里使用。</p>
+<ol start="3">
+<li><code>--save</code></li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm install --save [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>效果跟无后缀一样</p>
+<ol start="4">
+<li><code>--save-dev</code></li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm install --save-dev [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>安装到开发环境中，在package.json中可见</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><code class="hljs json">"devDependencies": {    //"包名": "版本号"<br>  "primeng": "^9.1.0"<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>生产环境：正式提供对外服务的环境 <br> 开发环境：</p>
+</blockquote>
+<h3 id="删除Package">删除Package<a class="post-anchor" href="#删除Package"></a></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm uninstall [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>非全局删除Package，即删除项目中node_modules文件夹中的Package，同时package.json文件也会变动</p>
+<h4 id="npm-install常见后缀-1">npm install常见后缀<a class="post-anchor" href="#npm-install常见后缀-1"></a></h4><ol>
+<li><code>-g</code></li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm uninstall -g [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>全局删除</p>
+<ol start="2">
+<li><code>无后缀</code></li>
+</ol>
+<p>本地删除，删除的是生产依赖，所以package.json中的<code>dependencies</code>会变动</p>
+<ol start="3">
+<li><code>--save</code></li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm uninstall --save [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>同无后缀</p>
+<ol start="4">
+<li><code>--save-dev</code></li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm uninstall --save-dev [package name]<br></code></pre></td></tr></tbody></table></figure>
+
+<p>本地删除，删除的是开发依赖，所以package.json中的<code>devdependencies</code>会变动</p>
+<h3 id="安装package-json文件的依赖">安装package.json文件的依赖<a class="post-anchor" href="#安装package-json文件的依赖"></a></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm install<br></code></pre></td></tr></tbody></table></figure>
+
+<p>当有了package.json文件，执行上面命令将自动下载项目的各种依赖。</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/07/10/1731/">Mysql数据长度设置</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/06/18/1032/">git&github使用</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/06/22/0911/">https://wakie01.github.io/2020/06/22/0911/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

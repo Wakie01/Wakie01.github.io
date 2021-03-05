@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      机器学习基础 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本术语"><span class="toc-text">基本术语</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">机器学习基础</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/09/19</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/09/19/1957/" data-flag-title="机器学习基础">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/ML">ML</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/ML">ML</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>在我的理解中，机器学习就是用数据训练出一个模型，然后用这个模型去预测新的数据。</p>
+<h2 id="基本术语">基本术语<a class="post-anchor" href="#基本术语"></a></h2><ul>
+<li><p><strong>模型（Model）：</strong> 计算机层面的认知</p>
+</li>
+<li><p><strong>学习算法（Learning Algorithm）：</strong> 计算机从数据中产生模型的算法</p>
+</li>
+<li><p><strong>示例（Instance）：</strong> 对象的一条记录</p>
+</li>
+<li><p><strong>样本（Sample）：</strong> 同示例</p>
+</li>
+<li><p><strong>属性（Attribute）：</strong> 对象在某方面的表现或性质</p>
+</li>
+<li><p><strong>特征（Feature）：</strong> 同属性</p>
+</li>
+<li><p><strong>属性值（Attribute Value）：</strong> 属性值</p>
+</li>
+<li><p><strong>属性空间（Attribute Space）：</strong> 属性张成的空间，n个属性就是n维空间</p>
+</li>
+<li><p><strong>样本空间（Sample Space）：</strong> 同属性空间</p>
+</li>
+<li><p><strong>输入空间：</strong> 同属性空间</p>
+</li>
+<li><p><strong>特征向量（Feature Vector）：</strong> 一个样本在属性空间中对应的坐标向量，因此也把一个样本称作特征向量</p>
+</li>
+<li><p><strong>维数（Dimensionality）：</strong> 对象的属性数量</p>
+</li>
+<li><p><strong>学习（Learning）：</strong> 从数据中学得模型的过程 </p>
+</li>
+<li><p><strong>训练（Training）：</strong> 同学习</p>
+</li>
+<li><p><strong>训练数据（Training Data）：</strong> 训练过程中使用的数据</p>
+</li>
+<li><p><strong>训练样本（Training Sample）：</strong> 训练数据中的一条数据</p>
+</li>
+<li><p><strong>训练示例（Training Instance）：</strong> 同训练样本</p>
+</li>
+<li><p><strong>训练例：</strong> 同训练示例</p>
+</li>
+<li><p><strong>训练集（Training Set）：</strong> 训练样本组成的集合，即训练数据</p>
+</li>
+<li><p><strong>假设（Hypothesis）：</strong> 模型对应关于数据的某种可能的规律，即有可能的算法</p>
+</li>
+<li><p><strong>真相、真实（Ground-Truth）：</strong> 模型对应关于数据的真正的规律，即正确的算法</p>
+</li>
+<li><p><strong>学习器（Learner）：</strong> 模型的另一种叫法，把学习算法在给定数据和参数空间的实例</p>
+</li>
+<li><p><strong>预测（Prediction）：</strong> 判断一个样本的标记</p>
+</li>
+<li><p><strong>标记（Label）：</strong> 示例结果的信息</p>
+</li>
+<li><p><strong>样例（Example）：</strong> 拥有标记信息的示例</p>
+<blockquote>
+<p>若将标记看作对象本身的一部分，则**<code>样例</code><strong>有时也称为</strong><code>样本</code>**</p>
+</blockquote>
+</li>
+<li><p><strong>标记空间（Label Space）：</strong> 向量的集合，其中这个向量是<code>((属性值一,属性值二,……,属性值n),标记)</code></p>
+</li>
+<li><p><strong>输出空间：</strong> 同标记空间</p>
+</li>
+<li><p><strong>回归（Regression）：</strong> 预测的值是个连续值，即标记是个连续值</p>
+</li>
+<li><p><strong>分类（Classification）：</strong> 预测的值是个离散值，即标记是个离散值</p>
+</li>
+<li><p><strong>二分类（Binary Classification）：</strong> 分类的值只有两个，其中一个叫<code>正类（Positive Class）</code>，另一个叫<code>反类（Negative Class）</code></p>
+</li>
+<li><p><strong>多分类（Multi-class Classification）：</strong> 分类的值不止两个</p>
+</li>
+<li><p><strong>测试（Testing）：</strong> 学得模型后，使用其进行预测的过程</p>
+<blockquote>
+<p><strong><code>学得模型</code></strong> ：我理解是学习完成后的模型<br>为什么不叫 <strong><code>学习模型</code></strong> ？因为我感觉这是还在学习的意思，还没学完</p>
+</blockquote>
+</li>
+<li><p><strong>测试样本（Testing Sample）：</strong> 测试时使用的样本</p>
+</li>
+<li><p><strong>测试示例（Testing Instance）：</strong> 同测试样本</p>
+</li>
+<li><p><strong>测试例：</strong> 同测试样本</p>
+</li>
+<li><p><strong>聚类（Clustering）：</strong> 把训练集中的对象分为若干组</p>
+</li>
+<li><p><strong>簇（Cluster）：</strong> 聚类后的每一组叫簇</p>
+</li>
+<li><p><strong>监督学习（Supervised Learning）：</strong> 训练数据中有标记的学习，典型代表有<code>回归</code>和<code>分类</code></p>
+</li>
+<li><p><strong>有导师学习：</strong> 同监督学习</p>
+</li>
+<li><p><strong>无监督学习（Unsupervised Learning）：</strong> 训练数据中没有标记的学习，典型代表有<code>聚类</code></p>
+</li>
+<li><p><strong>泛化（Generalization）：</strong> 学得模型适应新样本的能力</p>
+</li>
+<li><p><strong>分布（Distribution）：</strong> 样本空间的全体样本服从的一种规律</p>
+</li>
+<li><p><strong>独立同分布（Independent And Identically Distributed，简称: <code>i.i.d.</code>）：</strong> 获得的每个样本都是独立地从这个分布上采样获得的</p>
+</li>
+<li><p><strong>验证集（Validation Set）：</strong> 指模型评估与选择中用于评估测试的数据集</p>
+</li>
+<li><p><strong>测试集：</strong> 其实测试集包含验证集，不过为了区分，现在都默认指学得模型在实际使用中遇到的数据集</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>机械学习：</strong> 仅把训练集中的样本记住</p>
+</li>
+<li><p><strong>死记硬背式学习：</strong> 同机械学习</p>
+</li>
+<li><p><strong>版本空间（Version Space）：</strong> 与训练集对应上的假设的集合，即假设集合</p>
+</li>
+<li><p><strong>归纳偏好（Inductive Bias）：</strong> 机器学习算法在学习过程中对某种类型假设的偏好，简称<code>偏好</code></p>
+</li>
+<li><p><strong>“没有免费的午餐”定理（No Free Lunch Theorem）：</strong> 在所有”问题”出现的机会相<br>同、或所有问题同等重要的前提下，学习算法的期望性能都是相同的，简称<code>NFL定理</code></p>
+</li>
+</ul>
+<br>
+
+<p>参考：<br>1.《机器学习》（西瓜书） 周志华</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/09/28/1507/">前端export default跟export的区别</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/09/10/1625/">前端常用缓存技术</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/09/19/1957/">https://wakie01.github.io/2020/09/19/1957/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      Learning Hierarchy-Aware Knowledge Graph Embeddings for Link Prediction论文学习笔记 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-干什么的"><span class="toc-text">1.干什么的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-完善了什么"><span class="toc-text">2.完善了什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-怎么完善"><span class="toc-text">3.怎么完善</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-评价方法"><span class="toc-text">4.评价方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补漏"><span class="toc-text">补漏</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#知识图谱"><span class="toc-text">知识图谱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建模"><span class="toc-text">建模</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语义分层"><span class="toc-text">语义分层</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Learning Hierarchy-Aware Knowledge Graph Embeddings for Link Prediction论文学习笔记</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/01/04</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/01/04/1133/" data-flag-title="Learning Hierarchy-Aware Knowledge Graph Embeddings for Link Prediction论文学习笔记">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/paper">paper</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/AI">AI</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>中文名：面向链路预测的学习层次感知知识图嵌入</p>
+<h1 id="1-干什么的">1.干什么的<a class="post-anchor" href="#1-干什么的"></a></h1><p>提出了Hierarchy-Aware Knowledge Graph Embeddings（HAKE模型），完善对知识图谱的建模</p>
+<h1 id="2-完善了什么">2.完善了什么<a class="post-anchor" href="#2-完善了什么"></a></h1><p>在这之前，TransE与RotatE也进行了对知识图谱的建模，不过都有不足之处</p>
+<ul>
+<li><p><strong>TransE：</strong>可以建模互逆关系与复合关系，却难以建模对称关系</p>
+</li>
+<li><p><strong>RotatE：</strong>可以建模互逆关系与复合关系，还有对称关系，却难以建模在知识图谱中普遍存在的语义分层现象</p>
+</li>
+</ul>
+<p>所以，这篇论文解决的就是：建模在知识图谱中普遍存在的语义分层现象</p>
+<h1 id="3-怎么完善">3.怎么完善<a class="post-anchor" href="#3-怎么完善"></a></h1><p>HAKE模型通过**<em>极坐标系**</em>表示语义层级的树型结构，它将所有实体都嵌入、映射到同一个极坐标系中，其中</p>
+<ul>
+<li><p>模长：用于表示分属不同层级的实体</p>
+</li>
+<li><p>角度：用于表示同一层级的实体</p>
+</li>
+</ul>
+<blockquote>
+<p>在论文中，这个<code>模长</code>与<code>角度</code>有更专业的术语，分别是<code>模量（Modules）</code>与<code>相位（Phase)</code></p>
+<p>下图中的p、m下标指的就是Modules与Phase的缩写</p>
+</blockquote>
+<p><a href="/2021/01/04/1133/4.png" data-caption="img" data-fancybox="images"><img src="/2021/01/04/1133/4.png" alt="img"></a></p>
+<h1 id="4-评价方法">4.评价方法<a class="post-anchor" href="#4-评价方法"></a></h1><p>通过链接预测任务来对模型的有效性进行评价</p>
+<p>就是对于给定的三元组，先去掉他们的头实体或尾实体，然后生成测试三元组，然后再拿这些测试三元组进行嵌入补全测试，然后得到一个预测的完整三元组，然后再拿这个预测的三元组与真实的三元组进行比较，得到一个分数值，最后对该分数值进行降序排序。</p>
+<p>还有，这个分数值采用<code>MRR(Mean Reciprocal Rank)</code>和<code>H@N(Hits at N)</code>作为评价指标，MRR为预测结果平均排名的指标，H@N为预测结果排在前N名中的比例，总之，越好的预测结果，MRR值与H@N值也越高</p>
+<h1 id="补漏">补漏<a class="post-anchor" href="#补漏"></a></h1><h2 id="知识图谱">知识图谱<a class="post-anchor" href="#知识图谱"></a></h2><p>知识图谱，是一种揭示实体之间关系的语义网络</p>
+<p>信息与知识的关系，就好比这个图，信息是零散的，对信息建立联系就变成了知识</p>
+<p><a href="/2021/01/04/1133/1.jpg" data-caption="preview" data-fancybox="images"><img src="/2021/01/04/1133/1.jpg" alt="preview"></a></p>
+<p>所以，知识图谱是由一条条知识组成，这一条条的知识有个专业术语：事实（Fact）</p>
+<p>事实（Fact）一般以三元组（Triple）的形式表示：<头实体，关系，尾实体>（<head entity，relation，tail entity>）</p>
+<p>又比如下面这个图，<DA VINCI，painted，MONA LISA>就是一个三元组，表示DA VINCI painted MONA LISA。</p>
+<div style="margin:0">
+
+<p><a href="/2021/01/04/1133/2.jpeg" data-caption="preview" data-fancybox="images"><img src="/2021/01/04/1133/2.jpeg" alt="preview"></a></p>
+</div>
+
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/71128505" target="_blank" rel="noopener">知乎-什么是知识图谱?</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1589421" target="_blank" rel="noopener">AAAI 2020 | 中科大：可建模语义分层的知识图谱补全方法</a></p>
+<h2 id="建模">建模<a class="post-anchor" href="#建模"></a></h2><p>建模就是将事物抽象化</p>
+<p>即：对事物进行概括化、下定义（我的理解）</p>
+<blockquote>
+<p>百度百科：</p>
+<p>建模，就是建立模型，就是为了理解事物而对事物做出的一种抽象，是对事物的一种无歧义的书面描述。建立系统模型的过程，又称模型化。建模是研究系统的重要手段和前提。凡是用模型描述系统的因果关系或相互关系的过程都属于建模。</p>
+<p>计算机建模，指借助于计算机建立数学模型、数值求解、定量研究某些现象或过程的研究方法。</p>
+</blockquote>
+<h2 id="语义分层">语义分层<a class="post-anchor" href="#语义分层"></a></h2><p>语义分层，英文：Semantic Hierarchies，语义层次，英文：semantic hierarchy，两者都差不多</p>
+<blockquote>
+<p>百度百科：</p>
+<p>语义层次模型是由柯林斯和奎利恩(Collins & Quillian, 1969)提出来的，是语义记忆研究领域中最著名的理论。</p>
+<p>这个模型的基本思想是，语义记忆是由概念之间的相互联系形成的一个巨大网络，而这个网络是有一定层次结构的，知识的提取就是这个层次网络作用的结果。</p>
+<p>在语义记忆中，概念被分层次地组织成有逻辑性的种属关系。</p>
+<p>例如，“金丝鸟”的上位概念是“鸟”，“鸟”的上位概念是“动物”。每一类事物的特征总是储存在对应于该类别的层次上。</p>
+<p>例如，“有翅膀”只储存在“鸟”这一层次，不会储存在“金丝鸟”等下位概念的层次，尽管“金丝鸟”也是有翅膀的。这样的安排可以体现“认知经济性原则”——各种特征或事实总是储存在尽可能最高的层次上，下属层次可以“共享”这些特征或事实而不必另外占用储存空间。</p>
+</blockquote>
+<p>这时，我们会发现语义分层现象可以抽象为树型（Tree）结构：</p>
+<ul>
+<li><p>处于最高语义层级的实体对应着树的根节点</p>
+</li>
+<li><p>拥有更高的语义层级的实体更加接近根节点</p>
+</li>
+<li><p>语义层级更低的实体更加接近叶子节点</p>
+</li>
+<li><p>处于相同语义层级的实体到根节点的距离相同</p>
+</li>
+</ul>
+<p>比如：</p>
+<p><a href="/2021/01/04/1133/3.png" data-caption="image-20201227114423373" data-fancybox="images"><img src="/2021/01/04/1133/3.png" alt="image-20201227114423373"></a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/01/12/1118/">java获取当前时间的前n天</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/01/02/null/">ARP协议</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/01/04/1133/">https://wakie01.github.io/2021/01/04/1133/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

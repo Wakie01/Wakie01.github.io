@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      JDBC的Statement与PrepareStatement - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二者区别"><span class="toc-text">二者区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择"><span class="toc-text">选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Statement"><span class="toc-text">Statement</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PrepareStatement"><span class="toc-text">PrepareStatement</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">JDBC的Statement与PrepareStatement</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2020/08/04</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2020/08/04/2243/" data-flag-title="JDBC的Statement与PrepareStatement">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/jdbc">jdbc</a>
+                
+              
+                
+                  <a href="/categories/BackEnd">BackEnd</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/jdbc">jdbc</a>
+                  
+                
+                  
+                    <a href="/tags/mysql">mysql</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h2 id="二者区别">二者区别<a class="post-anchor" href="#二者区别"></a></h2><p><code>Statement</code> 执行每一条SQL语句时，都是编译+执行，相当于静态SQL</p>
+<p><code>PrepareStatement</code> 执行的SQL语句，会进行预编译，SQL中可以包含动态参数，在执行时可以设置动态参数，当下次执行相同类型的SQL语句时，可以解析并直接执行编译好的SQL语句，从而减少编译次数提高数据库的性能，相当于动态SQL</p>
+<h2 id="选择">选择<a class="post-anchor" href="#选择"></a></h2><p>若只执行一次，或执行极少次的sql语句，一般会使用 <code>Statement</code> ，开销小</p>
+<p>若批量执行同类型sql语句，则会使用 <code>PrepareStatement</code> </p>
+<h2 id="Statement">Statement<a class="post-anchor" href="#Statement"></a></h2><p><strong><em>使用</em></strong> </p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java">Connection connection;<br><span class="hljs-keyword">try</span> {<br>    Class.forName(<span class="hljs-string">"com.mysql.cj.jdbc.Driver"</span>);<br>    String url=<span class="hljs-string">"jdbc:mysql://localhost:3306/job_spider?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai"</span>;<br>    connection=DriverManager.getConnection(url,<span class="hljs-string">"root"</span>,<span class="hljs-string">"wakie"</span>);<br>    Statement statement=connection.createStatement();<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i<<span class="hljs-number">1000</span>;i++){<br>        String sql=<span class="hljs-string">"update job_info set salary_min="</span>+(<span class="hljs-number">10000</span>+(<span class="hljs-keyword">new</span> Random().nextInt(<span class="hljs-number">10000</span>)))+<span class="hljs-string">" where id="</span>+(<span class="hljs-number">12026</span>+i);<br>        statement.execute(sql);<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br><br>}<span class="hljs-keyword">catch</span> (SQLException | ClassNotFoundException e) {<br>    e.printStackTrace();<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>更新1w条数据用时5166ms</p>
+<h2 id="PrepareStatement">PrepareStatement<a class="post-anchor" href="#PrepareStatement"></a></h2><p><strong><em>优点</em></strong></p>
+<ol>
+<li><p>预编译，执行多个同类型sql语句时快</p>
+</li>
+<li><p>安全，在一定程度上可以防止恶义SQL语法</p>
+<p> SQL语句每次都是 <em>重新编译</em> 执行的，这就导致你传进去的参数和SQL语句是有联系，可以改变原先SQL的 <em>功能结构</em> </p>
+</li>
+</ol>
+<p><strong><em>使用</em></strong></p>
+<p>批处理在url添加 <code>rewriteBatchedStatement=true</code> 使用效果更佳</p>
+<p>配置 <code>rewriteBatchedStatement=true</code> 的</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java">Connection connection;<br><span class="hljs-keyword">try</span> {<br>    Class.forName(<span class="hljs-string">"com.mysql.cj.jdbc.Driver"</span>);<br>    String url=<span class="hljs-string">"jdbc:mysql://localhost:3306/job_spider?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true"</span>;<br>    connection=DriverManager.getConnection(url,<span class="hljs-string">"root"</span>,<span class="hljs-string">"wakie"</span>);<br>    connection.setAutoCommit(<span class="hljs-keyword">false</span>);    <span class="hljs-comment">//关闭自动提交</span><br>    String sql=<span class="hljs-string">"update job_info set salary_min=? where id=?"</span>;<br>    PreparedStatement preparedStatement=connection.prepareStatement(sql);<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i<<span class="hljs-number">10000</span>;i++){<br>        preparedStatement.setInt(<span class="hljs-number">1</span>,<span class="hljs-number">10000</span>+(<span class="hljs-keyword">new</span> Random().nextInt(<span class="hljs-number">10000</span>)));<br>        preparedStatement.setInt(<span class="hljs-number">2</span>,(<span class="hljs-number">12020</span>+i));<br>        preparedStatement.addBatch();<br>    }<br><br>    <span class="hljs-keyword">int</span> [] result=preparedStatement.executeBatch();<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i < result.length;i++){<br>        <span class="hljs-keyword">if</span>(result[i]==<span class="hljs-number">0</span>){<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>}<span class="hljs-keyword">catch</span> (SQLException | ClassNotFoundException e) {<br>    e.printStackTrace();<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>更新1w条数据用时2587ms</p>
+<p>没有配置 <code>rewriteBatchedStatement=true</code> 的话，更新1w条数据用时3093ms</p>
+<br>
+
+<p>参考：<br>1.<a href="https://blog.csdn.net/qq_38605328/article/details/102676402" target="_blank" rel="noopener">~sky博文</a><br>2.<a href="https://blog.csdn.net/sinat_30397435/article/details/82320769" target="_blank" rel="noopener">sinat_30397435博文</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2020/08/07/1843/">Java中的抽象类与接口</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2020/08/03/1617/">华为班面试</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2020/08/04/2243/">https://wakie01.github.io/2020/08/04/2243/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
