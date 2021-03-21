@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      Mysql常用SQL语句 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#增"><span class="toc-text">增</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#INSERT语句"><span class="toc-text">INSERT语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REPLACE语句"><span class="toc-text">REPLACE语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#INSERT-IGNORE语句"><span class="toc-text">INSERT IGNORE语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#INSERT-SELECT语句"><span class="toc-text">INSERT SELECT语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#删"><span class="toc-text">删</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE语句"><span class="toc-text">DELETE语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TRUNCATE语句"><span class="toc-text">TRUNCATE语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#改"><span class="toc-text">改</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UPDATE语句"><span class="toc-text">UPDATE语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPDATE-JOIN语句"><span class="toc-text">UPDATE JOIN语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#查"><span class="toc-text">查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#普通查询"><span class="toc-text">普通查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四则运算查询"><span class="toc-text">四则运算查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件查询"><span class="toc-text">条件查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#排序和限制"><span class="toc-text">排序和限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#去重查询"><span class="toc-text">去重查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统变量查询"><span class="toc-text">系统变量查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子查询"><span class="toc-text">子查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数查询"><span class="toc-text">函数查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见函数"><span class="toc-text">常见函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#聚合函数"><span class="toc-text">聚合函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分组和过滤"><span class="toc-text">分组和过滤</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#条件字段"><span class="toc-text">条件字段</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WHERE"><span class="toc-text">WHERE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JOIN"><span class="toc-text">JOIN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#左、右、内连接"><span class="toc-text">左、右、内连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自连接"><span class="toc-text">自连接</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#事务-Transaction"><span class="toc-text">事务(Transaction)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#索引-Index"><span class="toc-text">索引(Index)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#范式"><span class="toc-text">范式</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Mysql常用SQL语句</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/01/11</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/01/11/1657/" data-flag-title="Mysql常用SQL语句">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/DB">DB</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Mysql">Mysql</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>这篇文章主要是想重温一下关于Mysql**<em>增删改查**</em>的SQL语句</p>
+<p>在这里首先假设几个表：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql">Menu(<br>	id,int(11) unsigned,primary key,auto increment;<br>    name,varchar(20),not null;<br>    quantity,int(10) unsigned,not null;<br>    price,double(10,2) unsigned,not null;<br>    description,varchar(100);<br>    image,varchar(50);<br>    typeId,int(10) unsigned,not null<br>)<br><br>Bill(<br>	id,int(11) unsigned,primary key,auto increment;<br>	deskId,int(11) unsigned,not null;<br>	orderTime,datetime;<br>	finish,bit(1),not null;<br>	userId,int(10) unsigned;<br>)<br><br>MenuBill(<br>	billId,int(11) unsigned,not null;<br>    menuId,int(11) unsigned,not null;<br>    quantity,int(11) unsigned,not null;<br>    finish,bit(1) not null;<br>    menuTime,datetime;<br>    userId,int(11)<br>)<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h1 id="增">增<a class="post-anchor" href="#增"></a></h1><h2 id="INSERT语句">INSERT语句<a class="post-anchor" href="#INSERT语句"></a></h2><p>INSERT语句有几种常用的用法：</p>
+<ol>
+<li><p>简写</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> Bill <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-keyword">NOW</span>(),<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+<p>这样写要按顺序，一一对应</p>
+</li>
+<li><p>完整一点</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> Bill(deskId,orderTime,<span class="hljs-keyword">finish</span>) <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-keyword">NOW</span>(),<span class="hljs-number">0</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+<p>直接表明插入到哪里</p>
+</li>
+<li><p>插入多个</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> Bill(deskId,orderTime,<span class="hljs-keyword">finish</span>) <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-keyword">NOW</span>(),<span class="hljs-number">0</span>),(<span class="hljs-number">2</span>,<span class="hljs-keyword">NOW</span>(),<span class="hljs-number">0</span>),(<span class="hljs-number">3</span>,<span class="hljs-keyword">NOW</span>(),<span class="hljs-number">1</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+<h2 id="REPLACE语句">REPLACE语句<a class="post-anchor" href="#REPLACE语句"></a></h2><ul>
+<li><p>作用：当我们在插入一条数据时，如果该数据已存在，则会替换掉旧的数据，没有的话就直接插入</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">replace</span> <span class="hljs-keyword">into</span> Bill(<span class="hljs-keyword">id</span>,deskId,<span class="hljs-keyword">finish</span>) <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+<p>注意：是通过主键来判断数据是否存在的</p>
+<p>REPLACE语句也是可以插入多个的，与INSERT语句的一样</p>
+</li>
+</ul>
+<h2 id="INSERT-IGNORE语句">INSERT IGNORE语句<a class="post-anchor" href="#INSERT-IGNORE语句"></a></h2><ul>
+<li><p>作用：与REPLACE语句相反，当我们在插入一条数据时，如果该数据已存在，则会跳过不插入，没有的话就直接插入</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">ignore</span> <span class="hljs-keyword">into</span> Bill(<span class="hljs-keyword">id</span>,deskId,<span class="hljs-keyword">finish</span>) <span class="hljs-keyword">values</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>),(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>);<br></code></pre></td></tr></tbody></table></figure>
+
+<p>也是通过主键来判断数据是否存在的</p>
+<p>也是可以插入多个的，与INSERT语句的一样</p>
+</li>
+</ul>
+<h2 id="INSERT-SELECT语句">INSERT SELECT语句<a class="post-anchor" href="#INSERT-SELECT语句"></a></h2><ul>
+<li><p>作用：将从A表查询到的数据插入到B表中，这样可以实现较快速的多个插入</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> B(<span class="hljs-keyword">name</span>,age,<span class="hljs-keyword">class</span>) <span class="hljs-keyword">select</span>(<span class="hljs-keyword">name</span>,age,<span class="hljs-keyword">class</span>) <span class="hljs-keyword">from</span> A;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>字段的类型对应上就行</p>
+</li>
+</ul>
+<h1 id="删">删<a class="post-anchor" href="#删"></a></h1><h2 id="DELETE语句">DELETE语句<a class="post-anchor" href="#DELETE语句"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">delete from bill;       -- 删除bill表中的所有数据<br>delete from bill where id=1;        -- 删除对应的数据<br>delete from bill order by orderTime limit 2;       -- 删除以orderTime从小到大排序的前2条数据<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="TRUNCATE语句">TRUNCATE语句<a class="post-anchor" href="#TRUNCATE语句"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">truncate table bill；    -- 清空bill表数据<br></code></pre></td></tr></tbody></table></figure>
+
+<p>二者对比：</p>
+<ul>
+<li><p>相同点：都可删除数据，都不会影响表结构 </p>
+</li>
+<li><p>区别：delete不会影响自增，而truncate会</p>
+</li>
+</ul>
+<h1 id="改">改<a class="post-anchor" href="#改"></a></h1><h2 id="UPDATE语句">UPDATE语句<a class="post-anchor" href="#UPDATE语句"></a></h2><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span> menubill <span class="hljs-keyword">set</span> <span class="hljs-keyword">finish</span>=<span class="hljs-number">1</span>,menuTime=<span class="hljs-keyword">NOW</span>(),userId=<span class="hljs-number">1</span> <span class="hljs-keyword">where</span> billId=<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> menuId=<span class="hljs-number">1</span>;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>用法：</p>
+<ul>
+<li>当更新多个列时，用逗号隔开</li>
+<li>若没有where子句，则表示更新表中的所有行</li>
+</ul>
+<h2 id="UPDATE-JOIN语句">UPDATE JOIN语句<a class="post-anchor" href="#UPDATE-JOIN语句"></a></h2><h1 id="查">查<a class="post-anchor" href="#查"></a></h1><p>select语法：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select [all | distinct]<br>{* | table.* | [table.field1 [as alias1] [,table.field2 [as alias2]] [,...]]}<br>from table_name [as table_alias]<br>	[left | right | inner join table_name2]  -- 联合查询<br>	[where ...]  -- 指定结果需满足的条件<br>	[group by ...]  -- 指定结果按照哪几个字段来分组<br>	[having ...]  -- 过滤分组的记录必须满足的次要条件<br>    [order by ...]  -- 指定查询记录按一个或多个条件排序<br>    [limit {[offset,] row_count | row_countOFFSET offset }]  -- 指定查询的记录从哪条至哪条<br>	;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>符号意思：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">[]   -- 可选<br>{}   -- 必选<br>|   -- 或<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h2 id="普通查询">普通查询<a class="post-anchor" href="#普通查询"></a></h2><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> * <span class="hljs-keyword">from</span> bill wehre orderTime><span class="hljs-number">20210101010101</span>;     //查询全部字段<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">id</span>,deskId,orderTime <span class="hljs-keyword">from</span> bill wehre orderTime><span class="hljs-number">20210101010101</span>;       //查询对应字段<br></code></pre></td></tr></tbody></table></figure>
+
+<p>在平常的开发中，都建议第二种写法</p>
+<ul>
+<li><p><strong>相似点：</strong> 在查询的列数相同的情况下，二者的速度是差不多的</p>
+</li>
+<li><p><strong>区别：</strong> 当查询的列数不一样时，速度是不一样的，尤其是当查询的列存在索引时。而且，第二种是明显方便他人读懂程序，方便合作对接。还有，当表结构修改时，第二种写法也会对代码的影响小很多</p>
+</li>
+</ul>
+<h2 id="四则运算查询">四则运算查询<a class="post-anchor" href="#四则运算查询"></a></h2><p>四则运算指：加减乘除</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">id</span>,<span class="hljs-keyword">name</span>,quantity,price,quantity * price <span class="hljs-keyword">as</span> benefit <span class="hljs-keyword">from</span> menu;<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="条件查询">条件查询<a class="post-anchor" href="#条件查询"></a></h2><p>就是使用<code>where</code>关键字</p>
+<p>where后面的条件可以用>、<、>=、<=、!=等多种比较运算符，多个条件之间可以用or、and等逻辑运算符</p>
+<h2 id="排序和限制">排序和限制<a class="post-anchor" href="#排序和限制"></a></h2><figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql">//对price升序排列，查询50条数据<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">id</span>,<span class="hljs-keyword">name</span>,quantity,price <span class="hljs-keyword">from</span> menu <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> price <span class="hljs-keyword">limit</span> <span class="hljs-number">50</span>;<br></code></pre></td></tr></tbody></table></figure>
+
+<p><code>order by</code> ：默认升序排列，也可以手动设置，asc：升序；desc：降序；</p>
+<p><code>limit 50</code> ：从0开始查询，限制（查询）50条数据</p>
+<p><code>limit 40 50</code> ：从40开始查询，限制（查询）50条数据</p>
+<p>例子1：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">/*<br>查询参加 数据库结构-1 考试的学生信息： 学号，学生姓名，科目名，分数<br>涉及到的表：学生表、成绩表、科目表<br>交叉点：studentNo、subjectNo<br>条件：subjectName<br>排序：studentResult，降序<br>*/<br>select s.studentNo,s.studentName,subjectName,studentResult<br>from student s<br>inner join result r on s.studentNo=r.studentNo<br>inner join subject sub on r.subjectNo=sub.subjectNo<br>where subjectName='数据库结构-1'<br>order by studentResult desc;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>例子2：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">/*<br>查询“Java第一学年”课程成绩排名前十，并且分数要大于80的学生信息：学号，学生姓名，科目名，分数<br>涉及到的表：学生表、成绩表、科目表<br>交叉点：studentNo、subjectNo<br>条件：subjectName，subjectresult<br>排序：studentResult，降序<br>限制：10<br>*/<br>select s.studentNo,s.studentName,subjectName,studentResult<br>from student s<br>inner join result r on s.studentNo=r.studentNo<br>inner join subject sub on r.subjectNo=sub.subjectNo<br>where subjectName='Java第一学年' and studentResult>80<br>order by studentResult desc<br>limit 10;<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="去重查询">去重查询<a class="post-anchor" href="#去重查询"></a></h2><p>这里用到了<code>distinct</code>关键字</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 对查询结果进行去重<br>select distinct billId,finish from `menubill`;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>当<code>distinct</code>应用到多个字段的时候，其应用的范围是其后面的所有字段，而不只是紧挨着它的一个字段，而且<code>distinct</code>只能放到所有字段的前面</p>
+<p>与<code>distinct</code>对反的就是<code>all</code>关键字，当然默认是<code>all</code></p>
+<h2 id="系统变量查询">系统变量查询<a class="post-anchor" href="#系统变量查询"></a></h2><figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select @@auto_increment_increment   -- 查询自增步长<br></code></pre></td></tr></tbody></table></figure>
+
+<p>常见系统变量：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">@@auto_increment_increment      -- 自增步长<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="子查询">子查询<a class="post-anchor" href="#子查询"></a></h2><p> 对于子查询，它的查询顺序是由里及外，先执行里面的，再执行外面的</p>
+<p>例子一：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select studentNo,subjectNo,studentResult <br>from result<br>where subjectNo=(<br>	select subjectNo from subject <br>    where subjectName='数据库结构-1'<br>)<br>order by studentResult desc;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>例子二：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 子查询<br>select distinct s.studentNo,studentName,studentResult<br>from student s<br>inner join result r on r.studentNo=s.studentNo<br>where studentResult>=80 and subjectNo=(<br>	select subjectNo from subject<br>    where subjectName='高等数学-2'<br>);<br><br>-- 子查询<br>select studentNo,studentName <br>from student<br>where studentNo in (<br>	select studentNo from result<br>    where studentResult>=80 and subjectNo=(<br>    	select subjectNo from subject <br>        where subjectName='高等数学-2'<br>    )<br>);<br><br>-- 连表查询<br>select distinct s.studentNo,studentName,studentResult<br>from student s<br>inner join result r on s.studentNo=r.studentNo<br>inner join subject sub on sub.subjectNo=result.subjectNo<br>where subjectName='高等数学-2' and studentResult>=80;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>一般来说，JOIN连表查询比子查询快。</p>
+<h2 id="函数查询">函数查询<a class="post-anchor" href="#函数查询"></a></h2><p>具体函数可到<a href="https://dev.mysql.com/doc/refman/8.0/en/sql-function-reference.html" target="_blank" rel="noopener">mysql官网</a>上看</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select version();    -- 查询mysql版本号<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="常见函数">常见函数<a class="post-anchor" href="#常见函数"></a></h3><figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 系统<br>select version();    -- 查询mysql版本号<br>select user()   -- 获取当前用户<br><br>-- 数学函数<br>select celling(9.4)  -- 向上取整<br>select floor(9.4)   -- 向下取整<br>select rand()    -- 返回一个0~1之间的随机数<br>select sign(10)   -- 判断一个数的符号，0返回0，负数返回-1，正数返回1<br><br>-- 字符串函数<br>select char_length('hello world')   -- 字符串长度<br>select concat('hello','world','!!!')   -- 拼接字符串<br>select lower('Hello World')  -- 转小写<br>select upper('hello world')   -- 转大写<br><br>-- 时间日期函数<br>select current_date()    -- 获取当前日期<br>select now()     -- 获取当前时间<br>select localtime()    -- 获取本地时间<br>select year(now())  -- 获取当前时间的年<br>select month(now())   -- 获取当前时间的月<br>select day(now())  -- 获取当前时间的日<br>select hour(now())  -- 获取当前时间的时<br>select minute(now())  -- 获取当前时间的分<br>select second(now())  -- 获取当前时间的秒<br><br>-- 加密函数<br>MD5('123456')  -- 将123456加密成MD5<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h3 id="聚合函数">聚合函数<a class="post-anchor" href="#聚合函数"></a></h3><p><strong>count()函数</strong></p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 获取表中数据的个数<br>select count(bornDate) from student;<br>select count(*) from student;<br>select count(1) from student;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>区别：</p>
+<ul>
+<li><p>count(字段) ，会忽略所有的null值</p>
+</li>
+<li><p>count(*) ，count(1)，都不会忽略null值，都差不多，其本质都在计算行数</p>
+</li>
+</ul>
+<p><strong>sum()函数</strong></p>
+<p>总和函数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select sum(studentResult) as '总和' from student;<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>avg()函数</strong></p>
+<p>平均值函数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select avg(studentResult) as '平均分' from student;<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>max()函数</strong></p>
+<p>最大值函数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select max(studentResult) as '最高分' from student;<br></code></pre></td></tr></tbody></table></figure>
+
+<p><strong>min()函数</strong></p>
+<p>最小值函数</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select min(studentResult) as '最低分' from student;<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="分组和过滤">分组和过滤<a class="post-anchor" href="#分组和过滤"></a></h2><p>分组：group by…… </p>
+<p>过滤：having ……</p>
+<p>注意：<code>where</code>不能放在<code>group by</code> 后，对于分组的过滤只能用<code>having</code></p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">/*<br>查询各个科目的最低分，最高分，平均分，并且平均分要大于80<br>涉及到表：result,subject<br>关联点：subjectNo<br>分组点：subjectNo<br>过滤点：studentResult<br>*/<br>select subjectName,min(studentResult) as '最低分',avg(studentResult) as '最高分',avg(studentResult) as '平均分'<br>from result r<br>inner join subject sub on r.subjectNo=sub.subjectNo<br>group by subjectNo<br>having '平均分'>80;<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h1 id="条件字段">条件字段<a class="post-anchor" href="#条件字段"></a></h1><h2 id="WHERE">WHERE<a class="post-anchor" href="#WHERE"></a></h2><p>常用条件有：</p>
+<ul>
+<li><p>=、>、>=、<、<=、!=（不等于）、<>（不等于）、between A and B（[A，B]）</p>
+<p>between 例子：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select name,quantity,price,description from menu WHERE price BETWEEN 0 and 20;<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>is null、is not null、like、in、 </p>
+<p><strong>like：</strong> %，代表通配0到多个字符            _，代表通配一个字符</p>
+<p>like例子：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 查询name字段的第一个字为大的数据<br>select name,quantity,price,description from menu WHERE name like '大%';<br><br>-- 查询name字段中有奶的数据<br>select name,quantity,price,description from menu WHERE name like '%奶%';<br><br>-- 查询name字段中的头两个字为瘦肉，并且数据长度为3的数据<br>select name,quantity,price,description from menu WHERE name like '瘦肉_';<br><br>select name,quantity,price,description from menu WHERE name like '_奶%';<br></code></pre></td></tr></tbody></table></figure>
+
+<p>in例子：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 查询typeId为1or2or3的数据 <br>select name,quantity,price,description from menu WHERE typeId in(1,2,3);<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>and、&&、or、</p>
+</li>
+</ul>
+<h2 id="JOIN">JOIN<a class="post-anchor" href="#JOIN"></a></h2><p>join关键字是用来连接两张表的，比如内连接、外连接、左连接、外连接、自然连接</p>
+<p><a href="/2021/01/11/1657/.%5CMysql%E5%B8%B8%E7%94%A8SQL%E8%AF%AD%E5%8F%A5%5C1.jpg" data-caption="img" data-fancybox="images"><img src="/2021/01/11/1657/.%5CMysql%E5%B8%B8%E7%94%A8SQL%E8%AF%AD%E5%8F%A5%5C1.jpg" alt="img"></a></p>
+<h3 id="左、右、内连接">左、右、内连接<a class="post-anchor" href="#左、右、内连接"></a></h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>inner join</td>
+<td>如果表中至少有一个匹配，就返回行</td>
+</tr>
+<tr>
+<td>left join</td>
+<td>会从左表中返回所有的值，即使右表中没有匹配</td>
+</tr>
+<tr>
+<td>right join</td>
+<td>会从右表中返回所有的值，即使左表中没有匹配</td>
+</tr>
+</tbody></table>
+<p>例子1：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">/*<br>student、result、subject表连接查询，<br>交叉点：studentNo，subjectNo<br>*/<br>select s.studentNo,studentName,subjectName,studentResult<br>from student s<br>right join result r on r.studentNo=s.studentNo   <br>inner join subject sub on r.subjectNo=sub.subjectNo<br>;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>例子2：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">/*<br>查询参加 数据库结构-1 考试的学生信息： 学号，学生姓名，科目名，分数<br>涉及到的表：学生表、成绩表、科目表<br>交叉点：studentNo、subjectNo<br>条件：subjectName<br>*/<br>select s.studentNo,s.studentName,subjectName,studentResult<br>from student s<br>inner join result r on s.studentNo=r.studentNo<br>inner join subject sub on r.subjectNo=sub.subjectNo<br>where subjectName='数据库结构-1';<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<p>对于多张表的查询，慢慢来，先查询两张表，然后再慢慢增加</p>
+<h3 id="自连接">自连接<a class="post-anchor" href="#自连接"></a></h3><p>自连接就是自己的表和自己的表连接，核心：一张表拆为两张一样的表</p>
+<p><strong>例子：</strong></p>
+<p>有一个这样的表：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">CREATE TABLE category (<br>	`categoryid` INT ( 3 ) NOT NULL COMMENT 'id',<br>	`pid` INT ( 3 ) NOT NULL COMMENT '父id 没有父则为1',<br>	`categoryname` VARCHAR ( 10 ) NOT NULL COMMENT '种类名字',<br>	PRIMARY KEY ( `categoryid` ) <br>) ENGINE = INNODB CHARSET = utf8 COLLATE = utf8_general_ci;<br><br>INSERT INTO `school`.`category` ( `categoryid`, `pid`, `categoryname` )<br>VALUES<br>	( '2', '1', '信息技术' ),<br>	( '3', '1', '软件开发' ),<br>	( '5', '1', '美术设计' ),<br>	( '4', '3', '数据库' ),<br>	( '8', '2', '办公信息' ),<br>	( '6', '3', 'web开发' ),<br>	( '7', '5', 'ps技术' );<br></code></pre></td></tr></tbody></table></figure>
+
+<p>父类：</p>
+<table>
+<thead>
+<tr>
+<th>类型ID（categoryid）</th>
+<th>类型名（categoryName）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>信息技术</td>
+</tr>
+<tr>
+<td>3</td>
+<td>软件开发</td>
+</tr>
+<tr>
+<td>5</td>
+<td>美术设计</td>
+</tr>
+</tbody></table>
+<p>子类：</p>
+<table>
+<thead>
+<tr>
+<th>父ID（pid）</th>
+<th>类型ID（categoryid）</th>
+<th>类型名（categoryName）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>4</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8</td>
+<td>办公信息</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>web开发</td>
+</tr>
+<tr>
+<td>5</td>
+<td>7</td>
+<td>ps技术</td>
+</tr>
+</tbody></table>
+<p>操作：查询父类对应的子类关系，即：</p>
+<table>
+<thead>
+<tr>
+<th>父类</th>
+<th>子类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>信息技术</td>
+<td>办公信息</td>
+</tr>
+<tr>
+<td>软件开发</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>软件开发</td>
+<td>web开发</td>
+</tr>
+<tr>
+<td>美术设计</td>
+<td>ps技术</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">select a.categoryName as '父栏目',b.categoryName as '子栏目'<br>from category as a,category as b<br>where a.categoryid=b.pid;<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+<h1 id="事务-Transaction">事务(Transaction)<a class="post-anchor" href="#事务-Transaction"></a></h1><p><strong>事务</strong>：将一组SQL放在一个批次中去执行，这一组SQL要么都执行成功，要么都执行失败</p>
+<p><strong>事务原则：</strong>ACID</p>
+<ul>
+<li><p>A，atomicity，原子性，事务中的所有操作作为一个整体像原子一样不可分割，要么全部成功,要么全部失败</p>
+</li>
+<li><p>C，consistency，一致性，事务的执行结果必须使数据库从一个一致性状态到另一个一致性状态</p>
+</li>
+<li><p>I，isolation，隔离性，并发执行的事务不会相互影响</p>
+</li>
+<li><p>D，durability，持久性，事务一旦提交,其对数据库的更新就是持久的</p>
+</li>
+</ul>
+<p><strong>脏读：</strong> 指一个事务读取了另一个事务未提交的数据</p>
+<p><strong>幻读（虚读）：</strong> 指在一个事务内读取到了别的事务插入的数据，导致前后读取不一致</p>
+<p><strong>不可重复读：</strong> 指在一个事务内读取表中的某一行数据，多次读取结果不同</p>
+<p>跟事务相关的SQL：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- mysql是默认开启事务自动提交的<br>set autocommit=0   -- 关闭事务自动提交<br>set autocommit=1   -- 开启事务自动提交（default）<br><br>-- 手动处理事务<br>set autocommit=0;<br><br>-- 事务开启<br>start transaction   -- 标记一个事务的开始，从此之后的sql都在同一个事务内<br><br>insert……<br>update……<br><br>-- 提交：持久化（成功）<br>commit<br><br>-- 回滚：回到原来的样子（失败）<br>rollback<br><br>-- 事务结束，重启事务自动提交<br>set autocommit=1;<br><br>-- 了解<br>savepoint 保存点名   -- 设置一个事务的保存点<br>rollback to savepoint 保存点名   -- 回滚到保存点<br>release savepoint 保存点名   -- 撤销保存点<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<p>例子：转账</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 创建表<br>create database shop character set utf8 collate utf8_general_ci;<br><br>use shop;<br><br>create table account(<br>	id int(3) not null auto_increment,<br>    name varchar(30) not null,<br>    money decimal(9,2) not null,<br>    primary key(id)<br>)engine=innodb default charset=utf8;<br><br>insert into account(name,money) values<br>('A',2000.00),('B',10000,00);<br><br>-- 模拟转帐，转账是一个事务<br>set autocommit=0;  -- 关闭自动提交<br>start transaction;  -- 开启一个事务<br><br>update account set=money=money-500 where name='A';  -- A减500<br>update account set=money=money+500 where name='B';  -- B加500<br><br>commit;  -- 提交事务<br><br>set autocommit=1;  -- 事务结束，重启事务自动提交<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h1 id="索引-Index">索引(Index)<a class="post-anchor" href="#索引-Index"></a></h1><p> 索引(Index)是帮助Mysql高效获取数据的数据结构，（即索引是数据结构）</p>
+<p>常见的索引有：</p>
+<ul>
+<li>主键索引（Primary Key）：唯一的标识，主键不可重复，只能有一个列作为主键</li>
+<li>唯一索引（Unique Key）：避免重复的列出现，唯一索引可以有多个，可以让多个列都标识为唯一索引</li>
+<li>常规索引（Key/Index）：</li>
+<li>全文索引（FullText Index）：用来快速定位数据，不过要在特定的数据库引擎下才有，不过现在InnoDB引擎也支持了</li>
+</ul>
+<p>关于索引的SQL：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 显示所有的索引信息<br>show index from student;   -- 显示student表的索引信息<br><br>-- 增加全文索引<br>alter table menu add fulltext index 'menuName'(name) using btree;  -- 在menu表中以name列增加一个全文索引，全文索引名字为menuName<br><br>-- explain 分析sql执行的状况<br>explain select * from student;  -- 非全文索引<br>explain select * from student where match(studentName) against('刘');   -- 全文索引<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<p>例子一：测试索引</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 创建表<br>CREATE TABLE `app_user` (<br>`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,<br>`name` VARCHAR(50) DEFAULT'' COMMENT'用户昵称',<br>`email` VARCHAR(50) NOT NULL COMMENT'用户邮箱',<br>`phone` VARCHAR(20) DEFAULT'' COMMENT'手机号',<br>`gender` TINYINT(4) UNSIGNED DEFAULT '0'COMMENT '性别（0：男;1:女）',<br>`password` VARCHAR(100) NOT NULL COMMENT '密码',<br>`age` TINYINT(4) DEFAULT'0'  COMMENT '年龄',<br>`create_time` DATETIME DEFAULT CURRENT_TIMESTAMP,<br>`update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,<br>PRIMARY KEY (`id`)<br>) ENGINE=INNODB DEFAULT CHARSET=utf8 COMMENT = 'app用户表';<br><br>-- 插入100万条数据<br>delimiter $$  -- 写函数之前必须要写，作为函数开头的标志<br>create function mock_data()  -- 创建一个函数，函数名为mock_data()<br>returns int   -- 函数返回类型为int<br>begin  -- 函数的开始<br>	-- 函数体<br>	declare num int default 1000000;   -- 声明变量，声明num=1000000<br>	declare i int default 0;   -- 声明i=0<br>	while i<num do   -- while循环<br>		insert into app_user(name,email,phone,gender,password,age) values<br>             (concat('用户',i),<br>             '947067507@qq.com',<br>             concat('18',floor(rand()*999999999)+100000000),<br>             floor(rand()*2),<br>             uuid(),<br>             floor(rand()*100));<br>        set i=i+1;<br>	end while;   -- 结束while循环<br>	return i; <br>end;  -- 函数结束<br><br>select mock_data();   -- 执行mock_data()函数<br></code></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs mysql">-- 有了数据后进行查询<br>explain select * from app_user WHERE name='用户999';  -- 没索引，结果显示查询了992465条数据<br><br>EXPLAIN select * from app_user WHERE id='999';   -- 主键索引，结果显示查询了1条数据<br><br>-- 创建索引<br>-- 常见的索引命名习惯：id_表名_字段名<br>create index id_app_user_name on app_user(name);   -- 对app_user表的name创建索引，索引名为id_app_user_name<br><br>EXPLAIN select * from app_user WHERE name='用户999';  -- name有了索引，结果显示查询了1条数据<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<p>索引原则：</p>
+<ul>
+<li>索引不是越多越好</li>
+<li>不要对经常变动的数据加索引</li>
+<li>小数据量的表不需要加索引</li>
+<li>索引一般加在常用来查询的字段上</li>
+</ul>
+<p>索引的数据结构：</p>
+<ul>
+<li><p>Hash</p>
+</li>
+<li><p>Btree</p>
+</li>
+</ul>
+<h1 id="范式">范式<a class="post-anchor" href="#范式"></a></h1><p> 目前关系数据库有六种反射：第一范式（1NF）、第二范式（2NF）、第三范式（3NF）、第四范式（4NF）、第五范式（5NF）、第六范式（6NF），其中常用的就是前三种范式，即三大范式</p>
+<p><strong>第一范式（1NF）</strong></p>
+<p>要求数据库表的每一列都是不可分割的原子数据项</p>
+<p><strong>第二范式（2NF）</strong></p>
+<p>在1NF的基础上，非码属性必须完全依赖于候选码（在1NF基础上消除非主属性对主码的部分函数依赖）</p>
+<p>通俗一点：2NF需要确保数据库表中的每一列都和主键相关，而不能只与主键的某一部分相关</p>
+<p>目的：每张表只描述一件事情</p>
+<p><strong>第三范式（3NF）</strong></p>
+<p>在2NF的基础上，任何非主属性不依赖于其他非主属性（在2NF基础上消除传递依赖）</p>
+<p>即：3NF需要确保数据表中的每一列数据都和主键直接相关，而不能间接相关</p>
+<br>
+
+<br>
+
+<p>参考：</p>
+<p>1.<a href="https://blog.csdn.net/qq_40087415/article/details/87397402" target="_blank" rel="noopener">使用SQL语句插入当前系统时间</a></p>
+<p>2.<a href="https://blog.csdn.net/qq_40194399/article/details/94554191" target="_blank" rel="noopener">MySQL中添加或插入语句(Insert)的几种使用方式</a></p>
+<p>3.<a href="https://www.cnblogs.com/fudashi/p/7491039.html" target="_blank" rel="noopener">MySQL的JOIN（一）：用法</a></p>
+<p>4.<a href="https://blog.csdn.net/zjt980452483/article/details/82945663" target="_blank" rel="noopener">Mysql—— 内连接、左连接、右连接以及全连接查询</a></p>
+<p><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="noopener">MySQL索引背后的数据结构及算法原理</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/01/12/1118/">java获取当前时间的前n天</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/01/04/1133/">Learning Hierarchy-Aware Knowledge Graph Embeddings for Link Prediction论文学习笔记</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/01/11/1657/">https://wakie01.github.io/2021/01/11/1657/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

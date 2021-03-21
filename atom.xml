@@ -109,6 +109,32 @@
   </entry>
   
   <entry>
+    <title>Mysql常用SQL语句</title>
+    <link href="https://wakie01.github.io/2021/01/11/1657/"/>
+    <id>https://wakie01.github.io/2021/01/11/1657/</id>
+    <published>2021-01-11T13:16:33.000Z</published>
+    <updated>2021-03-21T09:00:35.656Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;这篇文章主要是想重温一下关于Mysql**&lt;em&gt;增删改查**&lt;/em&gt;的SQL语句&lt;/p&gt;
+&lt;p&gt;在这里首先假设几个表：&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;t
+      
+    
+    </summary>
+    
+    
+      <category term="DB" scheme="https://wakie01.github.io/categories/DB/"/>
+    
+    
+      <category term="Mysql" scheme="https://wakie01.github.io/tags/Mysql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Learning Hierarchy-Aware Knowledge Graph Embeddings for Link Prediction论文学习笔记</title>
     <link href="https://wakie01.github.io/2021/01/04/1133/"/>
     <id>https://wakie01.github.io/2021/01/04/1133/</id>
@@ -492,33 +518,6 @@
     
     
       <category term="CORS" scheme="https://wakie01.github.io/tags/CORS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java解析和编辑Excel文件</title>
-    <link href="https://wakie01.github.io/2020/08/21/2242/"/>
-    <id>https://wakie01.github.io/2020/08/21/2242/</id>
-    <published>2020-08-21T14:40:25.000Z</published>
-    <updated>2021-01-08T05:15:22.993Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Java解析Excel文件常用&lt;a href=&quot;http://poi.apache.org/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apache的POI&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;Maven导
-      
-    
-    </summary>
-    
-    
-      <category term="Java" scheme="https://wakie01.github.io/categories/Java/"/>
-    
-      <category term="BackEnd" scheme="https://wakie01.github.io/categories/Java/BackEnd/"/>
-    
-    
-      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
     
   </entry>
   
