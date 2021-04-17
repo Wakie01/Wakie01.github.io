@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      使用剪贴蒙版和图层蒙版合成图像 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#做法"><span class="toc-text">做法</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">使用剪贴蒙版和图层蒙版合成图像</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/04/16</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/04/16/1121/" data-flag-title="使用剪贴蒙版和图层蒙版合成图像">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/PS">PS</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/PS">PS</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="题目">题目<a class="post-anchor" href="#题目"></a></h1><a href="/2021/04/16/1121/使用剪贴蒙版和图层蒙版合成图像\1.png" data-caption="image-20210416193017043" data-fancybox="images"><img src="/2021/04/16/1121/使用剪贴蒙版和图层蒙版合成图像\1.png" alt="image-20210416193017043"></a>
+
+
+
+<h1 id="做法">做法<a class="post-anchor" href="#做法"></a></h1><ol>
+<li><p>选择<code>新增图层</code>，然后将图层填充为白色，然后将图层1设置为不可见</p>
+</li>
+<li><p>使用<code>快速选择工具</code>，选择瓶子，然后鼠标右击点击<code>反选</code></p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C2.png" data-caption="image-20210417091842289" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C2.png" alt="image-20210417091842289"></a></p>
+</li>
+<li><p>选择图层1，并将图层1设置为可见，然后选择<code>填充工具</code>，将选择区域填充为黑色</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C3.png" data-caption="image-20210417092333765" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C3.png" alt="image-20210417092333765"></a></p>
+</li>
+<li><p>快捷键<code>Ctrl+D</code> 取消选择，并将图层1设置为不可见，选择背景图层</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C4.png" data-caption="image-20210417092541225" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C4.png" alt="image-20210417092541225"></a></p>
+</li>
+<li><p>将校园图片拖进PS中，然后对其适当的自由拉伸</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C5.png" data-caption="image-20210417092754711" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C5.png" alt="image-20210417092754711"></a></p>
+</li>
+<li><p>点击上方的<code>✔</code>，然后将该图层命名为<code>校园</code>，然后右击该图层，点击<code>转换为图层</code></p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C6.png" data-caption="image-20210417093115209" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C6.png" alt="image-20210417093115209"></a></p>
+</li>
+<li><p>将校园图层设置为不可见，选择图层1，将图层1设置为可见，选择<code>快速选择工具</code>，将白色区域选中</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C7.png" data-caption="image-20210417100026339" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C7.png" alt="image-20210417100026339"></a></p>
+</li>
+<li><p>选择校园图层，并点击<code>图层工具栏</code>下方的<code>添加图层蒙版</code></p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C8.png" data-caption="image-20210417100308954" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C8.png" alt="image-20210417100308954"></a></p>
+</li>
+<li><p>将校园图层设置为可见，删除图层1</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C9.png" data-caption="image-20210417100411934" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C9.png" alt="image-20210417100411934"></a></p>
+</li>
+<li><p>将校园图层的<code>不透明度</code>设置为70%</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C10.png" data-caption="image-20210417100801655" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C10.png" alt="image-20210417100801655"></a></p>
+</li>
+<li><p>快捷键<code>Ctrl+T</code>将校园图片进行适当的自由拉伸</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C11.png" data-caption="image-20210417101231923" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C11.png" alt="image-20210417101231923"></a></p>
+</li>
+<li><p>选择蒙版图层，然后选择<code>画笔工具</code>，然后将<code>前景色</code>设置为黑色，然后对露出来的校园图层进行涂黑</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C12.png" data-caption="image-20210417101639755" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C12.png" alt="image-20210417101639755"></a></p>
+</li>
+<li><p>调整画笔<code>不透明度</code>，对蒙版图层的水瓶和风景图片的边缘进行适当的涂黑</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C13.png" data-caption="image-20210417102143688" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C13.png" alt="image-20210417102143688"></a></p>
+</li>
+<li><p>将背景图层设置为非锁定，选择背景图层和校园图层，快捷键<code>Alt+Ctrl+E</code>将这两个图层盖印图层，并将盖印图层命名为<code>倒影</code></p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C14.png" data-caption="image-20210417102441773" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C14.png" alt="image-20210417102441773"></a></p>
+</li>
+<li><p>快捷键<code>Ctrl+t</code>自由变换倒影图层，右击选择<code>垂直翻转</code>，设置<code>不透明度</code>为30%，拖动倒影图层成水瓶的倒影</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C15.png" data-caption="image-20210417103838439" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C15.png" alt="image-20210417103838439"></a></p>
+</li>
+<li><p>对倒影图层添加蒙版，选择蒙版图层，选择<code>矩形选择工具</code>，将倒影中间线往上的地方选中，选择<code>填充工具</code>，对选取填充为黑色</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C16.png" data-caption="image-20210417104148693" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C16.png" alt="image-20210417104148693"></a></p>
+</li>
+<li><p>快捷键<code>Ctrl+D</code>取消选择，然后选择倒影中间线往下的地方，选择<code>渐变工具</code>，对选区进行渐变，然后取消选择</p>
+<p><a href="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C17.png" data-caption="image-20210417104705089" data-fancybox="images"><img src="/2021/04/16/1121/.%5C%E4%BD%BF%E7%94%A8%E5%89%AA%E8%B4%B4%E8%92%99%E7%89%88%E5%92%8C%E5%9B%BE%E5%B1%82%E8%92%99%E7%89%88%E5%90%88%E6%88%90%E5%9B%BE%E5%83%8F%5C17.png" alt="image-20210417104705089"></a></p>
+</li>
+</ol>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/03/05/1608/">Java注解和反射</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/04/16/1121/">https://wakie01.github.io/2021/04/16/1121/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2021
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

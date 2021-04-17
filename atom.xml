@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wakie01.github.io/"/>
-  <updated>2021-03-10T08:11:21.327Z</updated>
+  <updated>2021-04-17T03:24:04.064Z</updated>
   <id>https://wakie01.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用剪贴蒙版和图层蒙版合成图像</title>
+    <link href="https://wakie01.github.io/2021/04/16/1121/"/>
+    <id>https://wakie01.github.io/2021/04/16/1121/</id>
+    <published>2021-04-16T11:29:23.000Z</published>
+    <updated>2021-04-17T03:24:04.064Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;题目&quot;&gt;题目&lt;a class=&quot;post-anchor&quot; href=&quot;#题目&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;a href=&quot;/2021/04/16/1121/使用剪贴蒙版和图层蒙版合成图像\1.png&quot; data-capt
+      
+    
+    </summary>
+    
+    
+      <category term="PS" scheme="https://wakie01.github.io/categories/PS/"/>
+    
+    
+      <category term="PS" scheme="https://wakie01.github.io/tags/PS/"/>
+    
+  </entry>
   
   <entry>
     <title>Java注解和反射</title>
@@ -492,32 +516,6 @@
     
     
       <category term="Cache" scheme="https://wakie01.github.io/tags/Cache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Chrome跨域时的Cookie问题</title>
-    <link href="https://wakie01.github.io/2020/08/23/1137/"/>
-    <id>https://wakie01.github.io/2020/08/23/1137/</id>
-    <published>2020-08-23T03:36:05.000Z</published>
-    <updated>2021-01-08T05:15:22.948Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;最近突然发现一个问题，之前前端访问后端时都没问题，最近突然出问题了！！&lt;/p&gt;
-&lt;p&gt;一开始我还想是跨域问题吗？是Cookie跨域？每次访问后端时，所获取的Session ID都不一样，可是这些CORS我都配置好了&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="CORS" scheme="https://wakie01.github.io/categories/CORS/"/>
-    
-    
-      <category term="CORS" scheme="https://wakie01.github.io/tags/CORS/"/>
     
   </entry>
   
