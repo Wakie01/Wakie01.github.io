@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wakie01.github.io/"/>
-  <updated>2021-04-17T03:24:04.064Z</updated>
+  <updated>2021-04-17T07:10:24.771Z</updated>
   <id>https://wakie01.github.io/</id>
   
   <author>
@@ -17,17 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>使用剪贴蒙版和图层蒙版合成图像</title>
-    <link href="https://wakie01.github.io/2021/04/16/1121/"/>
-    <id>https://wakie01.github.io/2021/04/16/1121/</id>
-    <published>2021-04-16T11:29:23.000Z</published>
-    <updated>2021-04-17T03:24:04.064Z</updated>
+    <title>重温PhotoShop</title>
+    <link href="https://wakie01.github.io/2021/04/17/1443/"/>
+    <id>https://wakie01.github.io/2021/04/17/1443/</id>
+    <published>2021-04-17T01:05:14.000Z</published>
+    <updated>2021-04-17T07:10:24.771Z</updated>
     
     <summary type="html">
     
       
       
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;题目&quot;&gt;题目&lt;a class=&quot;post-anchor&quot; href=&quot;#题目&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;a href=&quot;/2021/04/16/1121/使用剪贴蒙版和图层蒙版合成图像\1.png&quot; data-capt
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;PS快捷键&quot;&gt;PS快捷键&lt;a class=&quot;post-anchor&quot; href=&quot;#PS快捷键&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Ctrl+j&lt;/code&gt; ：拷贝图层&lt;/li&gt;
+&lt;li&gt;&lt;code
+      
+    
+    </summary>
+    
+    
+      <category term="PS" scheme="https://wakie01.github.io/categories/PS/"/>
+    
+    
+      <category term="PS" scheme="https://wakie01.github.io/tags/PS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用剪贴蒙版和图层蒙版合成图像</title>
+    <link href="https://wakie01.github.io/2021/04/16/1121/"/>
+    <id>https://wakie01.github.io/2021/04/16/1121/</id>
+    <published>2021-04-16T11:29:23.000Z</published>
+    <updated>2021-04-17T07:59:25.736Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;题目&quot;&gt;题目&lt;a class=&quot;post-anchor&quot; href=&quot;#题目&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;a href=&quot;/2021/04/16/1121/1.png&quot; data-caption=&quot;image-20210
       
     
     </summary>
@@ -486,36 +512,6 @@
     
     
       <category term="ML" scheme="https://wakie01.github.io/tags/ML/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端常用缓存技术</title>
-    <link href="https://wakie01.github.io/2020/09/10/1625/"/>
-    <id>https://wakie01.github.io/2020/09/10/1625/</id>
-    <published>2020-09-10T08:23:00.000Z</published>
-    <updated>2021-01-08T05:15:23.005Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;之前在弄记住密码时接触到部分前端缓存的皮毛，大为震惊！！没想到还有这东西！！当时就想一定要记录一下&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;前端常用的缓存技术有，如下图所示：(或许我这个称呼不太对)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;str
-      
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="Cache" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/Cache/"/>
-    
-    
-      <category term="Cache" scheme="https://wakie01.github.io/tags/Cache/"/>
     
   </entry>
   
