@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wakie01.github.io/"/>
-  <updated>2021-04-17T07:10:24.771Z</updated>
+  <updated>2021-04-18T01:37:52.328Z</updated>
   <id>https://wakie01.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PS制作金属字</title>
+    <link href="https://wakie01.github.io/2021/04/17/0935/"/>
+    <id>https://wakie01.github.io/2021/04/17/0935/</id>
+    <published>2021-04-17T07:54:15.000Z</published>
+    <updated>2021-04-18T01:37:52.328Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1 id=&quot;题目&quot;&gt;题目&lt;a class=&quot;post-anchor&quot; href=&quot;#题目&quot;&gt;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;制作类似这样的金属字&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;/2021/04/17/0935/1.png&quot; data
+      
+    
+    </summary>
+    
+    
+      <category term="PS" scheme="https://wakie01.github.io/categories/PS/"/>
+    
+    
+      <category term="PS" scheme="https://wakie01.github.io/tags/PS/"/>
+    
+  </entry>
   
   <entry>
     <title>重温PhotoShop</title>
@@ -486,32 +511,6 @@
     
     
       <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>机器学习基础</title>
-    <link href="https://wakie01.github.io/2020/09/19/1957/"/>
-    <id>https://wakie01.github.io/2020/09/19/1957/</id>
-    <published>2020-09-19T11:57:36.000Z</published>
-    <updated>2021-01-08T05:15:23.018Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;在我的理解中，机器学习就是用数据训练出一个模型，然后用这个模型去预测新的数据。&lt;/p&gt;
-&lt;h2 id=&quot;基本术语&quot;&gt;基本术语&lt;a class=&quot;post-anchor&quot; href=&quot;#基本术语&quot;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="ML" scheme="https://wakie01.github.io/categories/ML/"/>
-    
-    
-      <category term="ML" scheme="https://wakie01.github.io/tags/ML/"/>
     
   </entry>
   
