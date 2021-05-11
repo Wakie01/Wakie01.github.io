@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wakie01.github.io/"/>
-  <updated>2021-04-18T01:37:52.328Z</updated>
+  <updated>2021-05-11T11:39:36.874Z</updated>
   <id>https://wakie01.github.io/</id>
   
   <author>
@@ -15,6 +15,85 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ubuntu安装与配置JDK8</title>
+    <link href="https://wakie01.github.io/2021/05/11/1938/"/>
+    <id>https://wakie01.github.io/2021/05/11/1938/</id>
+    <published>2021-05-11T09:19:08.000Z</published>
+    <updated>2021-05-11T11:39:36.874Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;先去&lt;a href=&quot;https://www.oracle.com/cn/java/technologies/javase/javase-jdk8-downloads.html&quot; target=&quot;_blank&quot; rel=&quot;n
+      
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="https://wakie01.github.io/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="https://wakie01.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ubuntu安装mysql8</title>
+    <link href="https://wakie01.github.io/2021/05/11/1709/"/>
+    <id>https://wakie01.github.io/2021/05/11/1709/</id>
+    <published>2021-05-11T08:37:55.000Z</published>
+    <updated>2021-05-11T09:09:51.043Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;去mysql官网上获取apt安装包&lt;/p&gt;
+&lt;p&gt;复制下载地址，比如：&lt;a href=&quot;https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb&quot; target=
+      
+    
+    </summary>
+    
+    
+      <category term="linxu" scheme="https://wakie01.github.io/categories/linxu/"/>
+    
+    
+      <category term="linux" scheme="https://wakie01.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java不常见运算符</title>
+    <link href="https://wakie01.github.io/2021/04/18/2127/"/>
+    <id>https://wakie01.github.io/2021/04/18/2127/</id>
+    <published>2021-04-18T13:04:40.000Z</published>
+    <updated>2021-04-19T13:28:40.594Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;最近碰到了一些奇奇怪怪的运算符，不认识，结果被吐槽基础太差了&lt;/p&gt;
+&lt;p&gt;Java运算符主要分为以下几大类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;算术运算符&lt;/li&gt;
+&lt;li&gt;关系运算符&lt;/li&gt;
+&lt;li&gt;位运算符&lt;/li&gt;
+&lt;li
+      
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://wakie01.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>PS制作金属字</title>
@@ -432,85 +511,6 @@
       <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
       <category term="跨域" scheme="https://wakie01.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>html+css+js实现验证码</title>
-    <link href="https://wakie01.github.io/2020/10/03/1302/"/>
-    <id>https://wakie01.github.io/2020/10/03/1302/</id>
-    <published>2020-10-03T05:02:37.000Z</published>
-    <updated>2021-01-08T05:15:22.986Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;我这个验证码的实现主要用的是canvas标签，然后获取canvas的CanvasRenderingContext2D，然后用它来手动绘画&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;&lt;/p&gt;
-&lt;figure clas
-      
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Typescript Map使用</title>
-    <link href="https://wakie01.github.io/2020/09/30/1037/"/>
-    <id>https://wakie01.github.io/2020/09/30/1037/</id>
-    <published>2020-09-30T02:36:50.000Z</published>
-    <updated>2021-01-08T05:15:22.982Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Typescript中的Map类型类似于Java中的Hashset&lt;/p&gt;
-&lt;p&gt;今天认识到了关于Typescript的Map的一种不知道叫什么名字的用法，直接来吧&lt;/p&gt;
-&lt;figure class=&quot;highlight 
-      
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="Typescript" scheme="https://wakie01.github.io/tags/Typescript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端export default跟export的区别</title>
-    <link href="https://wakie01.github.io/2020/09/28/1507/"/>
-    <id>https://wakie01.github.io/2020/09/28/1507/</id>
-    <published>2020-09-28T07:05:58.000Z</published>
-    <updated>2021-01-08T05:15:23.003Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;之前在弄Ionic4时，还有现在在弄的Vue中，都多次接触到&lt;code&gt;export default&lt;/code&gt;与&lt;code&gt;export&lt;/code&gt;的字样，如：&lt;/p&gt;
-&lt;div style=&quot;margin:auto;
-      
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
