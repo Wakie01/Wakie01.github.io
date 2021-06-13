@@ -28,6 +28,11 @@
   <body>
     <canvas id='pagemap'></canvas>
     
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol>
+    </div>
+    
     <div id="fixed-menu-wrap">
       <span class="iconfont icon-sousuo search-box menu-reset"></span>
       <span class="icon-toc menu-reset">Toc</span>
@@ -248,14 +253,22 @@
 
 
 
-
-
-
-
-
-
 </li>
 </ol>
+<h1 id="问题">问题<a class="post-anchor" href="#问题"></a></h1><p><strong>问题一：</strong></p>
+<p>刚安装好mysql8时，用ip地址连接mysql时，可能会有如下问题：</p>
+<a href="/2021/05/11/1709/2.png" data-caption="image-20210511194349352" data-fancybox="images"><img src="/2021/05/11/1709/2.png" alt="image-20210511194349352"></a>
+
+<p>解决：修改<code>mysq</code>l数据库中的<code>user</code>表</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql">mysql -uroot -p  <span class="hljs-comment">-- 登录</span><br><br><span class="hljs-keyword">use</span> mysql;   <span class="hljs-comment">-- 连接mysql scheme</span><br><br><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,host <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span>; <br><br><span class="hljs-keyword">update</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">set</span> host=<span class="hljs-string">'%'</span> <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span>=<span class="hljs-string">'root'</span>;    <span class="hljs-comment">-- 原来host字段是localhost,root用户只能被本地连接</span><br><br><span class="hljs-keyword">flush</span> <span class="hljs-keyword">privileges</span>;   <span class="hljs-comment">-- 刷新</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>再不行的话就重启mysql</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">sudo service mysql restart<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+
 </body></html>
 
   

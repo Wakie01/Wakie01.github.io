@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://wakie01.github.io/"/>
-  <updated>2021-05-11T11:39:36.874Z</updated>
+  <updated>2021-06-13T09:54:24.115Z</updated>
   <id>https://wakie01.github.io/</id>
   
   <author>
@@ -17,11 +17,59 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Ubuntu18.04装载硬盘</title>
+    <link href="https://wakie01.github.io/2021/06/13/1747/"/>
+    <id>https://wakie01.github.io/2021/06/13/1747/</id>
+    <published>2021-06-13T08:38:52.000Z</published>
+    <updated>2021-06-13T09:54:24.115Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;最近服务器又崩了，连接服务器运行jar包，一直显示&lt;code&gt;no space&lt;/code&gt;没空间的错误，打开Ubuntu图形化界面才发现，硬盘空间爆了，available空间为0。&lt;/p&gt;
+&lt;p&gt;于是删了很多10个G的东西
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://wakie01.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="https://wakie01.github.io/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WinSCP连接Ubuntu服务器网络错误</title>
+    <link href="https://wakie01.github.io/2021/05/14/null/"/>
+    <id>https://wakie01.github.io/2021/05/14/null/</id>
+    <published>2021-05-14T03:08:54.000Z</published>
+    <updated>2021-05-14T03:11:03.023Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;今天用WinSCP连接Ubuntu服务器网络错误，就卡在第一步，都没验证用户名是否正确&lt;/p&gt;
+&lt;p&gt;查了一下，才发现原来Ubuntu太干净了，都没装SSH服务&lt;/p&gt;
+&lt;p&gt;所以需要安装和配置SSH服务&lt;/p&gt;
+&lt;/bod
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>ubuntu安装与配置JDK8</title>
     <link href="https://wakie01.github.io/2021/05/11/1938/"/>
     <id>https://wakie01.github.io/2021/05/11/1938/</id>
     <published>2021-05-11T09:19:08.000Z</published>
-    <updated>2021-05-11T11:39:36.874Z</updated>
+    <updated>2021-05-14T03:52:37.057Z</updated>
     
     <summary type="html">
     
@@ -45,7 +93,7 @@
     <link href="https://wakie01.github.io/2021/05/11/1709/"/>
     <id>https://wakie01.github.io/2021/05/11/1709/</id>
     <published>2021-05-11T08:37:55.000Z</published>
-    <updated>2021-05-11T09:09:51.043Z</updated>
+    <updated>2021-05-11T11:57:38.809Z</updated>
     
     <summary type="html">
     
@@ -223,7 +271,7 @@
     <link href="https://wakie01.github.io/2021/01/12/null/"/>
     <id>https://wakie01.github.io/2021/01/12/null/</id>
     <published>2021-01-12T03:22:06.000Z</published>
-    <updated>2021-01-12T06:36:35.687Z</updated>
+    <updated>2021-05-19T06:40:00.702Z</updated>
     
     <summary type="html">
     
@@ -267,7 +315,7 @@
     <link href="https://wakie01.github.io/2021/01/11/1657/"/>
     <id>https://wakie01.github.io/2021/01/11/1657/</id>
     <published>2021-01-11T13:16:33.000Z</published>
-    <updated>2021-04-19T02:33:09.670Z</updated>
+    <updated>2021-06-07T07:54:09.363Z</updated>
     
     <summary type="html">
     
@@ -462,55 +510,6 @@
       <category term="Nginx" scheme="https://wakie01.github.io/tags/Nginx/"/>
     
       <category term="代理" scheme="https://wakie01.github.io/tags/%E4%BB%A3%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git fetch不了</title>
-    <link href="https://wakie01.github.io/2020/10/12/null/"/>
-    <id>https://wakie01.github.io/2020/10/12/null/</id>
-    <published>2020-10-12T12:19:20.000Z</published>
-    <updated>2021-01-08T05:15:22.983Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs plain&quot;&gt;fatal: early EOF&lt;b
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>前端跨域问题</title>
-    <link href="https://wakie01.github.io/2020/10/04/1534/"/>
-    <id>https://wakie01.github.io/2020/10/04/1534/</id>
-    <published>2020-10-04T07:33:24.000Z</published>
-    <updated>2021-01-08T05:15:23.007Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;记得在弄毕业设计时，遇到一个问题，至今我都印象深刻：&lt;/p&gt;
-&lt;div style=&quot;margin:auto;&quot;&gt;
-
-&lt;p&gt;&lt;a href=&quot;/2020/10/04/1534/1.png&quot; data-caption=&quot;img
-      
-    
-    </summary>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-    
-      <category term="前端" scheme="https://wakie01.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="跨域" scheme="https://wakie01.github.io/tags/%E8%B7%A8%E5%9F%9F/"/>
     
   </entry>
   
