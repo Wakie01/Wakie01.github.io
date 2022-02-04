@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      JWT学习 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JWT结构"><span class="toc-text">JWT结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Payload"><span class="toc-text">Payload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Signature"><span class="toc-text">Signature</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用原理"><span class="toc-text">使用原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java使用"><span class="toc-text">Java使用</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">JWT学习</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/08/13</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/08/13/2018/" data-flag-title="JWT学习">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/BackEnd">BackEnd</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Security">Security</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>JWT：Json Web Token，它是一种基于JSON的开放标准。它常用于身份认证。</p>
+<h1 id="JWT结构">JWT结构<a class="post-anchor" href="#JWT结构"></a></h1><p>JWT由三段信息组成：</p>
+<ol>
+<li>头部（Header）</li>
+<li>载荷（Payload）</li>
+<li>签名（Signature）</li>
+</ol>
+<p>这三段信息用<code>.</code>连接。比如：</p>
+<figure class="highlight tex"><table><tbody><tr><td class="code"><pre><code class="hljs tex">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mjg5NDYxMDYsInVzZXJuYW1lIjoiMTU1MTMwNzkwNzEifQ.avx6OqyeCcganSICqy4KdGsMJ1_0YjUN5m2mSgUONPs<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="Header">Header<a class="post-anchor" href="#Header"></a></h2><p>Header通常由两部分组成：</p>
+<ol>
+<li>令牌类型（即：JWT）</li>
+<li>签名算法，如HS256</li>
+</ol>
+<p>比如：</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><code class="hljs json">{<br>    <span class="hljs-attr">"typ"</span>: <span class="hljs-string">"JWT"</span>,<br>    <span class="hljs-attr">"alg"</span>: <span class="hljs-string">"HS256"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>然后它对Header信息进行Base64编码，最后就成了：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs plain">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="Payload">Payload<a class="post-anchor" href="#Payload"></a></h2><p>Payload中的内容由声明（Claim）组成。</p>
+<p>Claim是由用户自定义的一些数据，如：</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><code class="hljs json">{<br>    <span class="hljs-attr">"exp"</span>:<span class="hljs-number">1628946106</span>,<br>    <span class="hljs-attr">"username"</span>:<span class="hljs-string">"15513079071"</span><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>然后对Payload进行Base64编码，就成了：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs plain">eyJleHAiOjE2Mjg5NDYxMDYsInVzZXJuYW1lIjoiMTU1MTMwNzkwNzEifQ<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="Signature">Signature<a class="post-anchor" href="#Signature"></a></h2><p>Signature的部分是：对前两个部分的内容进行加密后得到的密文。</p>
+<p>加密算法为第一部分中的<code>alg</code>，比如这里为HS256。</p>
+<p>当然还有密钥，这是服务端提供的。</p>
+<p>这部分的作用就是：保证JWT没有被纂改过。</p>
+<p>这里的Signature为：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs plain">avx6OqyeCcganSICqy4KdGsMJ1_0YjUN5m2mSgUONPs<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="总结">总结<a class="post-anchor" href="#总结"></a></h2><p>由于Base64只是一种编码，是可逆的，所以在JWT中，不应该在Claim中加入任何敏感的数据。</p>
+<p>其实JWT的作用主要就是：认证来源。</p>
+<h1 id="使用">使用<a class="post-anchor" href="#使用"></a></h1><h2 id="使用原理">使用原理<a class="post-anchor" href="#使用原理"></a></h2><p><a href="/2021/08/13/2018/.%5CJWT%E5%AD%A6%E4%B9%A0%5C1.png" data-caption="img" data-fancybox="images"><img src="/2021/08/13/2018/.%5CJWT%E5%AD%A6%E4%B9%A0%5C1.png" alt="img"></a></p>
+<h2 id="Java使用">Java使用<a class="post-anchor" href="#Java使用"></a></h2><ol>
+<li><p>导入依赖</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><code class="hljs xml"><span class="hljs-tag"><<span class="hljs-name">dependency</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">groupId</span>></span>com.auth0<span class="hljs-tag"></<span class="hljs-name">groupId</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">artifactId</span>></span>java-jwt<span class="hljs-tag"></<span class="hljs-name">artifactId</span>></span><br>    <span class="hljs-tag"><<span class="hljs-name">version</span>></span>3.4.0<span class="hljs-tag"></<span class="hljs-name">version</span>></span><br><span class="hljs-tag"></<span class="hljs-name">dependency</span>></span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>编写工具类</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.my.ourapp.service.impl;<br><br><span class="hljs-keyword">import</span> com.auth0.jwt.JWT;<br><span class="hljs-keyword">import</span> com.auth0.jwt.JWTCreator;<br><span class="hljs-keyword">import</span> com.auth0.jwt.JWTVerifier;<br><span class="hljs-keyword">import</span> com.auth0.jwt.algorithms.Algorithm;<br><span class="hljs-keyword">import</span> com.auth0.jwt.exceptions.*;<br><span class="hljs-keyword">import</span> com.auth0.jwt.interfaces.Claim;<br><span class="hljs-keyword">import</span> com.auth0.jwt.interfaces.DecodedJWT;<br><span class="hljs-keyword">import</span> com.my.ourapp.common.Result;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Service;<br><br><span class="hljs-keyword">import</span> java.io.UnsupportedEncodingException;<br><span class="hljs-keyword">import</span> java.util.Calendar;<br><span class="hljs-keyword">import</span> java.util.Date;<br><span class="hljs-keyword">import</span> java.util.Map;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * JWT工具类,其主要作用：</span><br><span class="hljs-comment"> * 定义token过期时间，创建token的密钥（自定义）,自定义存放token的请求头的名称</span><br><span class="hljs-comment"> * 1. 签发token</span><br><span class="hljs-comment"> * 2. 判断过期时间</span><br><span class="hljs-comment"> * 3. 刷新token</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JwtServiceImpl</span> </span>{<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 过期时间，以毫秒为单位，一天</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> EXPIRE_TIME=<span class="hljs-number">1000</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">24</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 自定义密钥</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String SECRET=<span class="hljs-string">"SECRET_VALUE"</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 请求头</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String AUTH_HEADER=<span class="hljs-string">"X-Authorization-With"</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 存储在Redis中的Key</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String redisKey=<span class="hljs-string">"token"</span>;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> StringRedisTemplate stringRedisTemplate;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 生成token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> username</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> secret 密钥</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">sign</span><span class="hljs-params">(String username,String secret)</span> <span class="hljs-keyword">throws</span> UnsupportedEncodingException,JWTCreationException</span>{<br>        <span class="hljs-comment">//过期时间</span><br>        Date date=<span class="hljs-keyword">new</span> Date(System.currentTimeMillis()+EXPIRE_TIME);<br>        <span class="hljs-comment">//使用HMAC-SHA256算法对secret进行加密</span><br>        Algorithm algorithm=Algorithm.HMAC256(secret);<br>        <span class="hljs-comment">//附带username信息,过期信息,然后生成token</span><br>        String token = JWT.create().withClaim(<span class="hljs-string">"username"</span>, username).withExpiresAt(date).sign(algorithm);<br>        <span class="hljs-comment">//保存到Redis中</span><br>        stringRedisTemplate.opsForSet().add(redisKey,token);<br>        <span class="hljs-keyword">return</span> token;<br>    }<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 验证token是否正确</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token JWT Token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> username</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> secret 用户提供来解析token的密钥</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">verify</span><span class="hljs-params">(String token,String username,String secret)</span> </span>{<br>        <span class="hljs-comment">//判断Redis中是否存在该Token，若不存在，则直接返回False</span><br>        <span class="hljs-keyword">if</span>(Boolean.FALSE.equals(stringRedisTemplate.opsForSet().isMember(redisKey, token))){<br>            System.out.println(<span class="hljs-string">"Redis不存在此Token"</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        }<br><br>        <span class="hljs-comment">//删除Redis中的Token</span><br>        stringRedisTemplate.opsForSet().remove(redisKey,token);<br><br>        <span class="hljs-keyword">if</span>(isTokenExpired(token)) {<br>            System.out.println(<span class="hljs-string">"Jwt Token时间过期了"</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        }<br><br>        <span class="hljs-keyword">try</span> {<br>            Algorithm algorithm=Algorithm.HMAC256(secret);<br>            JWTVerifier verifier=JWT.require(algorithm).withClaim(<span class="hljs-string">"username"</span>,username).build();<br>            <span class="hljs-comment">//当验证失败时，会抛出JWTVerificationException异常</span><br>            verifier.verify(token);<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        } <span class="hljs-keyword">catch</span> (UnsupportedEncodingException| JWTVerificationException e) {<br>            e.printStackTrace();<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        }<br>    }<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获得token中的自定义信息,无需secret解密也能获得</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> field</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">getClaimField</span><span class="hljs-params">(String token,String field)</span></span>{<br>        DecodedJWT decodedJWT=JWT.decode(token);<br>        <span class="hljs-keyword">return</span> decodedJWT.getClaim(field).asString();<br>    }<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 获取token的签发时间</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 当解析token失败时，返回 null，否则返回token签发时间</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Date <span class="hljs-title">getIssueTime</span><span class="hljs-params">(String token)</span></span>{<br>        DecodedJWT decodedJWT=JWT.decode(token);<br>        <span class="hljs-keyword">return</span> decodedJWT.getIssuedAt();<br>    }<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 验证token是否过期</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 过期：true    未过期：false</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isTokenExpired</span><span class="hljs-params">(String token)</span></span>{<br>        <span class="hljs-keyword">try</span>{<br>            Date now= Calendar.getInstance().getTime();<br>            DecodedJWT decodedJWT=JWT.decode(token);<br>            <span class="hljs-keyword">return</span> decodedJWT.getExpiresAt().before(now);<br>        }<span class="hljs-keyword">catch</span> (Exception e){<br>            e.printStackTrace();<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        }<br>    }<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 刷新token的有效期</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> token</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> secret 密钥</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">refreshTokenExpired</span><span class="hljs-params">(String token,String secret)</span> <span class="hljs-keyword">throws</span> UnsupportedEncodingException, JWTCreationException </span>{<br>        <span class="hljs-comment">//解析token</span><br>        DecodedJWT decodedJWT=JWT.decode(token);<br>        <span class="hljs-comment">//获取token的参数信息</span><br>        Map<String, Claim> claims = decodedJWT.getClaims();<br><br>        Date date=<span class="hljs-keyword">new</span> Date(System.currentTimeMillis()+EXPIRE_TIME);<br>        Algorithm algorithm=Algorithm.HMAC256(secret);<br>        JWTCreator.Builder builder = JWT.create();<br>        <span class="hljs-keyword">for</span> (Map.Entry<String, Claim> entry : claims.entrySet()) {<br>            builder.withClaim(entry.getKey(), entry.getValue().asString());<br>        }<br>        token = builder.withExpiresAt(date).sign(algorithm);<br>        <span class="hljs-comment">//对Redis的Token进行更新</span><br>        stringRedisTemplate.opsForSet().add(redisKey,token);<br>        <span class="hljs-keyword">return</span> token;<br>    }<br><br>}<br></code></pre></td></tr></tbody></table></figure>
+
+</li>
+</ol>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/08/30/1512/">Tracking without bells and whistles</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/08/07/null/">JVM学习之Java内存区域与内存溢出异常</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/08/13/2018/">https://wakie01.github.io/2021/08/13/2018/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

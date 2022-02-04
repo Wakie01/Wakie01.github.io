@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      论文阅读-实现图像缩放功能的Matlab插值算法研究与比较 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法原理"><span class="toc-text">算法原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#最近邻插值算法"><span class="toc-text">最近邻插值算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双线性插值算法"><span class="toc-text">双线性插值算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三次插值算法"><span class="toc-text">三次插值算法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">论文阅读-实现图像缩放功能的Matlab插值算法研究与比较</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/10/25</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/10/25/2018/" data-flag-title="论文阅读-实现图像缩放功能的Matlab插值算法研究与比较">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Paper">Paper</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Paper">Paper</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>目前主流的图像缩放算法有：最近邻插值算法、双线性插值算法、三次插值算法。</p>
+<h1 id="算法原理">算法原理<a class="post-anchor" href="#算法原理"></a></h1><p>设，==源图像A==大小为：m*n，缩放后的==目标图像B==大小为：a*b</p>
+<p>可见其缩放比例分别为： $\frac m a$ 、 $\frac n b$</p>
+<p>所以，==目标图像B==中的任意一点： $B(x,y)$ ，对于==源图像A==的坐标为：$A(x * \frac m a, y* \frac n b)$ </p>
+<p><strong>需要注意的是：$A(x * \frac m a, y* \frac n b)$ 的值通常为float类型。</strong></p>
+<h2 id="最近邻插值算法">最近邻插值算法<a class="post-anchor" href="#最近邻插值算法"></a></h2><p>最近邻插值算法就是：取距离最近的点。</p>
+<p>方法：将 $x * \frac m a$ 与 $y* \frac n b$ 四舍五入。</p>
+<h2 id="双线性插值算法">双线性插值算法<a class="post-anchor" href="#双线性插值算法"></a></h2><p>A点的值通常是float类型，而需要对于的点的值是int类型，所以就有：A点的值在4个整数的中间。</p>
+<p><a href="/2021/10/25/2018/.%5C%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E7%BC%A9%E6%94%BE%E5%8A%9F%E8%83%BD%E7%9A%84Matlab%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%E4%B8%8E%E6%AF%94%E8%BE%83%5C1.png" data-caption="image-20211025171910694" data-fancybox="images"><img src="/2021/10/25/2018/.%5C%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E7%BC%A9%E6%94%BE%E5%8A%9F%E8%83%BD%E7%9A%84Matlab%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95%E7%A0%94%E7%A9%B6%E4%B8%8E%E6%AF%94%E8%BE%83%5C1.png" alt="image-20211025171910694"></a></p>
+<p>所以，双线性插值算法，就是利用4个点来进行估计。</p>
+<p>如上图所示，用P表示A点，P点坐标值：$(i+u,j+v)$ 。</p>
+<p>其中：</p>
+<ul>
+<li>$i$ 与 $j$ 表示整数部分</li>
+<li>$u$ 与 $v$ 表示小数部分</li>
+</ul>
+<p>该方法的思想：利用P周围的4个点来进行估计，距P 点较近，则影响因子较大，距P 点较远，则影响因子较小</p>
+<p>计算：<br>$$<br>\begin{align}<br>最终值 = & A(i,j)<em>(1-u)</em>(1-v) ;+ \<br>        & A(i+1,j)<em>u</em>(1-v) ;+   \<br>        & A(i,j+1)<em>(1-u)*v ;+   \<br>        & A(i+1,j+1)*u</em>v<br>\end{align}<br>$$</p>
+<h2 id="三次插值算法">三次插值算法<a class="post-anchor" href="#三次插值算法"></a></h2><p>该算法又称：立方卷积插值</p>
+<p>同样，用P点表示A点。该算法利用P周围的16个点进行估计，并使用插值基函数对影响因子进行优化。</p>
+<p>插值基函数有多种，其中最常用的是：<br>$$<br>f(x)=<br>    \begin{cases}<br>        1-2|x|^2+x^3 , & |x| <1  \<br>        4- |x| +5 |x| ^2 - |x| ^3 , & 1 \leq |x| <2  \<br>        0 , & |x| \geq 2<br>    \end{cases}<br>$$<br>其中： $x$ 表示距离，$f(x)$ 表示影响因子</p>
+<p>上述的插值基函数图形为：</p>
+<a href="/2021/10/25/2018/论文阅读-实现图像缩放功能的Matlab插值算法研究与比较\2.png" data-caption="image-20211025200005354" data-fancybox="images"><img src="/2021/10/25/2018/论文阅读-实现图像缩放功能的Matlab插值算法研究与比较\2.png" alt="image-20211025200005354"></a>
+
+<p>接下来就是P点周围的16个点了：</p>
+<a href="/2021/10/25/2018/论文阅读-实现图像缩放功能的Matlab插值算法研究与比较\3.png" data-caption="image-20211025200126811" data-fancybox="images"><img src="/2021/10/25/2018/论文阅读-实现图像缩放功能的Matlab插值算法研究与比较\3.png" alt="image-20211025200126811"></a>
+
+<p>然后就计算每个点的影响因子，然后将该点的影响因子与该点的值进行相乘，最后将每个点的结果加起来。</p>
+<p>每个点的影响因子： $K_{i,j}$ ，$i$ 为行， $j$ 为列。<br>$$<br>\begin{align}<br>    & K_{0,0}= f(1+u)*f(1+v), \qquad K_{1,0}=f(u)*f(1+v)   \<br>    & K_{2,0}=f(1-u)*f(1+v), \qquad K_{3,0}=f(2-u)*f(1+v)  \<br>    \<br>    & K_{0,1}=f(1+u)*f(v), \qquad K_{1,1}=f(u)*f(v)   \<br>    & K_{2,1}=f(1-u)*f(v), \qquad K_{3,1}=f(2-u)*f(v)  \<br>    \<br>    & K_{0,2}=f(1+u)*f(1-v), \qquad K_{1,2}=f(u)*f(1-v)   \<br>    & K_{2,2}=f(1-u)*f(1-v), \qquad K_{3,2}=f(2-u)*f(1-v)  \<br>    \<br>    & K_{0,3}=f(1+u)*f(2-v), \qquad K_{1,3}=f(u)*f(2-v)   \<br>    & K_{2,3}=f(1-u)*f(2-v), \qquad K_{3,3}=f(2-u)*f(2-v)  \<br>\end{align}<br>$$<br>最后结果为：<br>$$<br>最终值=\sum _{i=0} ^3 \sum <em>{j=0} ^3 K</em>{i,j} * A(i,j)<br>$$</p>
+<h1 id="总结">总结<a class="post-anchor" href="#总结"></a></h1><p>在以上的三种方法中，三次插值算法效果是最好的。</p>
+<p>然而，基于插值的上采样方法，仅基于其自身的图像信号来提高图像分辨率，并不会带来任何更多信息。</p>
+<p>相反，它们通常会带来一些副作用，例如计算复杂度、噪声放大、结果模糊。因此，当前的趋势是用可学习的上采样层取代基于插值的方法。</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/11/09/1130/">论文阅读-Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/10/19/1534/">pytorch多gpu训练</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/10/25/2018/">https://wakie01.github.io/2021/10/25/2018/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

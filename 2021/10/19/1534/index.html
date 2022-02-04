@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      pytorch多gpu训练 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#运行流程"><span class="toc-text">运行流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#单卡训练"><span class="toc-text">单卡训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多卡训练"><span class="toc-text">多卡训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Apex进行混合混合精度训练"><span class="toc-text">使用Apex进行混合混合精度训练</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">pytorch多gpu训练</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/10/19</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/10/19/1534/" data-flag-title="pytorch多gpu训练">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/DL">DL</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/pytorch">pytorch</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>pytorch多gpu训练的方法主要有2个：<code>DataParallel</code> 与 <code>DistributedDataParallel</code></p>
+<p>都说<code>DistributedDataParallel</code> 比 <code>DataParallel</code> 好，所以这里只整理前者。</p>
+<h1 id="运行流程">运行流程<a class="post-anchor" href="#运行流程"></a></h1><h2 id="单卡训练">单卡训练<a class="post-anchor" href="#单卡训练"></a></h2><ol>
+<li>初始化模型</li>
+<li>配置训练的GPU</li>
+<li>将模型及其相关参数转移到GPU上</li>
+<li>配置损失函数和优化器</li>
+<li>加载数据集</li>
+<li>配置训练代码</li>
+<li>训练</li>
+</ol>
+<h2 id="多卡训练">多卡训练<a class="post-anchor" href="#多卡训练"></a></h2><ol>
+<li><p>配置使用的GPU，节点数，以及每个节点的GPU数，然后计算world_size</p>
+</li>
+<li><p>配置rank</p>
+</li>
+<li><p>初始化进程组</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">torch.distributed.init_process_group(backend=dist_backend,  init_method=<span class="hljs-string">"env://"</span>, world_size=world_size, rank=rank)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>dist_backend：GPU环境默认值nccl, NPU环境默认值hccl</li>
+<li>world_size：取值1,2,4,8。8p训练参数配置为8</li>
+<li>rank：进程id，每个进程对应一个id</li>
+</ul>
+</li>
+<li><p>初始化模型</p>
+</li>
+<li><p>将模型及其相关参数转移到GPU上</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">model.cuda(gpu)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>配置损失函数和优化器</p>
+</li>
+<li><p>将模型封装成一个torch.nn.parallel.DistributedDataParallel模型，把模型复制到GPU上进行处理</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">model = nn.parallel.DistributedDataParallel(model, device_ids=[gpu])<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>加载数据集</p>
+</li>
+<li><p>将数据集分配到各个GPU上</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">train_sampler = torch.utils.data.distributed.DistributedSampler(<br>    train_dataset,<br>    num_replicas=args.world_size,<br>    rank=rank<br>)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>修改DataLoader</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">train_loader = torch.utils.data.DataLoader(<br>    dataset=train_dataset,<br>    batch_size=batch_size,<br>    shuffle=<span class="hljs-literal">False</span>,<br>    num_workers=<span class="hljs-number">0</span>,<br>    pin_memory=<span class="hljs-literal">True</span>,<br>    sampler=train_sampler<br>)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>配置训练代码</p>
+</li>
+<li><p>配置进程间通信所需的环境变量</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">os.environ[<span class="hljs-string">'MASTER_ADDR'</span>] = <span class="hljs-string">'127.0.0.1'</span><br>os.environ[<span class="hljs-string">'MASTER_PORT'</span>] = <span class="hljs-string">'8888'</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>多GPU训练</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">torch.multiprocessing.spawn(fn=train, nprocs=args.gpus, args=(args,))<br></code></pre></td></tr></tbody></table></figure>
+
+<p>该函数会生成args.gpus个进程，每个进程都运行train(i,args)，其中i从0到args.gpus-1</p>
+<p>参数说明：</p>
+<ul>
+<li>fn：需要多进程运行的函数，函数格式：<code>fn(i,*args)</code> ，其中i是进程索引</li>
+<li>nprocs：总的进程数</li>
+<li>args：传给fn函数的参数</li>
+</ul>
+</li>
+</ol>
+<h2 id="使用Apex进行混合混合精度训练">使用Apex进行混合混合精度训练<a class="post-anchor" href="#使用Apex进行混合混合精度训练"></a></h2><ol>
+<li><p>配置使用的GPU，节点数，以及每个节点的GPU数，然后计算world_size</p>
+</li>
+<li><p>配置rank。rank：进程在所有进程中的阶序</p>
+</li>
+<li><p>初始化进程组</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">torch.distributed.init_process_group(backend=dist_backend,  init_method=<span class="hljs-string">"env://"</span>, world_size=world_size, rank=rank)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>dist_backend：GPU环境默认值nccl, NPU环境默认值hccl</li>
+<li>world_size：总的进程数，等于总的gpu数，取值1,2,4,8。8p训练参数配置为8</li>
+<li>rank：进程id，每个进程对应一个id</li>
+</ul>
+</li>
+<li><p>初始化模型</p>
+</li>
+<li><p>将模型及其相关参数转移到GPU上</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">model.cuda(gpu)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>配置损失函数和优化器</p>
+</li>
+<li><p>将模型和优化器为了进行后续混合精度训练而进行封装</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 注意，amp.initialize必须在DDP(DistributedDataParallel)之前，否则多卡时会有报错提示</span><br><span class="hljs-comment"># 还有，在调用 amp.initialize 之前，模型必须已经部署在GPU上</span><br>model, optimizer = amp.initialize(<br>    model, <br>    optimizer,<br>    opt_level=<span class="hljs-string">'O2'</span>,<br>    loss_scale=<span class="hljs-number">128.0</span><br>)<br></code></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>推荐优先使用 <code>opt_level='O2', loss_scale=128.0</code> 的配置进行amp.initialize<br>若无法收敛推荐使用 <code>opt_level='O1', loss_scale=128.0</code> 的配置进行amp.initialize<br>若依然无法收敛推荐使用 <code>opt_level='O1', loss_scale=None</code> 的配置进行amp.initialize</p>
+</blockquote>
+</li>
+</ol>
+<ol start="8">
+<li><p>将模型封装成一个apex.parallel.DistributedDataParallel模型，把模型复制到GPU上进行处理</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">model = apex.parallel.DistributedDataParallel(model)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>apex.parallel.DistributedDataParallel是一个nn.DistributedDataParallel的替换版本，不需要指定GPU，因为Apex在一个进程中只允许用一个GPU</p>
+</li>
+<li><p>加载数据集</p>
+</li>
+<li><p>将数据集分配到各个GPU上</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">train_sampler = torch.utils.data.distributed.DistributedSampler(<br>    dataset=train_dataset,<br>    num_replicas=args.world_size,<br>    rank=rank<br>)<br></code></pre></td></tr></tbody></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>dataset：用于采样的数据集</li>
+<li>num_replicas：将数据集划分多少份</li>
+<li>rank：当前进程的索引号</li>
+</ul>
+</li>
+<li><p>修改DataLoader</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">train_loader = torch.utils.data.DataLoader(<br>    dataset=train_dataset,<br>    batch_size=batch_size,<br>    shuffle=<span class="hljs-literal">False</span>,<br>    num_workers=<span class="hljs-number">0</span>,<br>    pin_memory=<span class="hljs-literal">True</span>,<br>    sampler=train_sampler<br>)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>配置训练代码</p>
+<p>在训练代码中，需要修改：</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">...<br><span class="hljs-comment"># loss.backward() becomes:</span><br><span class="hljs-keyword">with</span> amp.scale_loss(loss, optimizer) <span class="hljs-keyword">as</span> scaled_loss:<br>    scaled_loss.backward()<br>...<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="13">
+<li><p>配置进程间通信所需的环境变量</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">os.environ[<span class="hljs-string">'MASTER_ADDR'</span>] = <span class="hljs-string">'127.0.0.1'</span><br>os.environ[<span class="hljs-string">'MASTER_PORT'</span>] = <span class="hljs-string">'8888'</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li><p>多GPU训练</p>
+<figure class="highlight python"><table><tbody><tr><td class="code"><pre><code class="hljs python">torch.multiprocessing.spawn(fn=train, nprocs=args.gpus, args=(args,))<br></code></pre></td></tr></tbody></table></figure>
+
+<p>该函数会生成args.gpus个进程，每个进程都运行train(i,args)，其中i从0到args.gpus-1</p>
+<p>一般来说，一个gpu就一个进程。</p>
+<p>参数说明：</p>
+<ul>
+<li>fn：需要多进程运行的函数，函数格式：<code>fn(i,*args)</code> ，其中i是进程索引</li>
+<li>nprocs：总的进程数</li>
+<li>args：传给fn函数的参数</li>
+</ul>
+</li>
+</ol>
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/105755472" target="_blank" rel="noopener">Pytorch中的Distributed Data Parallel与混合精度训练(Apex)</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/10/25/2018/">论文阅读-实现图像缩放功能的Matlab插值算法研究与比较</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/10/12/1536/">论文阅读Aggregated Residual Transformations for Deep Neural Networks</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/10/19/1534/">https://wakie01.github.io/2021/10/19/1534/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

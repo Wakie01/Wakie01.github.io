@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      B树与B+树学习 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B树"><span class="toc-text">B树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#B树的阶"><span class="toc-text">B树的阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#根节点"><span class="toc-text">根节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部节点"><span class="toc-text">内部节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#叶子节点"><span class="toc-text">叶子节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树的操作"><span class="toc-text">B树的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#插入"><span class="toc-text">插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘IO与预读"><span class="toc-text">磁盘IO与预读</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B树的高度"><span class="toc-text">B树的高度</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#B-树"><span class="toc-text">B+树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#B-树的定义"><span class="toc-text">B+树的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-树的操作"><span class="toc-text">B+树的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#单元素查询"><span class="toc-text">单元素查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#范围查询"><span class="toc-text">范围查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对比B树"><span class="toc-text">对比B树</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">B树与B+树学习</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2022/01/27</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2022/01/27/1140/" data-flag-title="B树与B+树学习">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/面试">面试</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/算法">算法</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="前言">前言<a class="post-anchor" href="#前言"></a></h1><p>除了 <strong>B树</strong> 与 <strong>B+树</strong> ，还会听到一种叫 <strong>B-树</strong> 。其实，B-树，即为B树。因为B树的原英文名称为 B-tree ，而国内很多人喜欢把 B-tree 译作 B-树，而事实上是，B-tree 就是指的B树，目前理解B的意思为平衡。</p>
+<p>B树的出现是为了弥合不同的存储级别之间的访问速度上的巨大差异，实现高效的 I/O。</p>
+<p>平衡二叉树的查找效率是非常高的，并可以通过降低树的深度来提高查找的效率。但是当数据量非常大，树的存储的元素数量是有限的，这样会导致二叉查找树结构由于树的深度过大而造成磁盘I/O读写过于频繁，进而导致查询效率低下。另外数据量过大会导致内存空间不够容纳平衡二叉树所有结点的情况。</p>
+<p>而B树就是解决这个问题的很好的数据结构。</p>
+<h1 id="B树">B树<a class="post-anchor" href="#B树"></a></h1><h2 id="定义">定义<a class="post-anchor" href="#定义"></a></h2><p>B树是一种平衡的多分树，通常我们说m阶的B树，指的是：</p>
+<ul>
+<li>每个节点最多只有m个子节点</li>
+<li>每个非叶子节点（除了根）具有至少 $⌈ m/2⌉$ 子节点。</li>
+<li>如果根不是叶节点，则根至少有两个子节点。</li>
+<li>具有<em>k</em>个子节点的非叶节点包含<em>k</em> -1个键。</li>
+<li>所有叶子都出现在同一水平，没有任何信息（高度一致）。</li>
+</ul>
+<p>下面以下图来分别说明一下。</p>
+<p><a href="/2022/01/27/1140/1.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/1.png" alt="img"></a></p>
+<h3 id="B树的阶">B树的阶<a class="post-anchor" href="#B树的阶"></a></h3><p>B树的阶指：B树中一个节点的子节点数目的最大值，用m表示，假如最大值为10，则为10阶</p>
+<p>在上图中，所有节点中，节点【13,16,19】拥有的子节点数目最多，四个子节点（灰色节点），所以可以定义上面的图片为4阶B树。</p>
+<h3 id="根节点">根节点<a class="post-anchor" href="#根节点"></a></h3><p>在上图中，节点【10】即为根节点</p>
+<p>即，第一层的节点叫根节点。</p>
+<p>特征：根节点拥有的子节点数量的上限和内部节点相同。</p>
+<p><strong>在m阶B树中（根节点非树中唯一节点），根节点的子节点数量M满足 $2 \leq M \leq m$ 关系式，而根节点包含的元素数量K满足 $1 \leq K \leq m-1$ 关系式</strong></p>
+<h3 id="内部节点">内部节点<a class="post-anchor" href="#内部节点"></a></h3><p>在上图中，节点【13,16,19】、节点【3,6】都为内部节点</p>
+<p>即，除叶子节点和根节点之外，中间的所有节点都叫内部节点。</p>
+<p><strong>在m阶B树中，某个内部节点的子节点数量M满足 $\lceil m/2 \rceil \leq M \leq m$ 关系式，而其包含的元素数量K，满足  $\lceil m/2 \rceil -1 \leq K \leq m-1$ 关系式</strong> </p>
+<h3 id="叶子节点">叶子节点<a class="post-anchor" href="#叶子节点"></a></h3><p>在上图中，节点【1,2】、节点【11,12】等最后一层都为叶子节点。</p>
+<p>叶子节点对元素数量的限制与内部节点的相同，但它没有子节点，也没有指向子节点的指针。</p>
+<p><strong>在m阶B树中，某个叶子节点的元素数量K满足 $\lceil m/2 \rceil -1 \leq K \leq m-1$ 关系式</strong></p>
+<h2 id="B树的操作">B树的操作<a class="post-anchor" href="#B树的操作"></a></h2><h3 id="插入">插入<a class="post-anchor" href="#插入"></a></h3><p>针对m阶高度h的B树，插入一个元素时，首先会查找该元素在B树中是否存在，如果不存在，则该查找会在某个叶子节点处结束，然后就在该叶子节点中插入该新的元素。</p>
+<ul>
+<li><strong>若该节点元素个数小于m-1，直接插入；</strong></li>
+<li><strong>若该节点元素个数等于m-1，引起节点分裂；以该节点中间元素为分界，取中间元素（元素个数为偶数时，中间两个随机选取）插入到父节点中；</strong></li>
+<li><strong>重复上面动作，直到所有节点符合B树的规则；最坏的情况一直分裂到根节点，生成新的根节点，高度增加1；</strong></li>
+</ul>
+<p>上面三段话为插入动作的核心，接下来以5阶B树为例，详细讲解插入的动作；</p>
+<p>5阶B树关键点：</p>
+<ul>
+<li>2<=根节点子节点个数<=5</li>
+<li>3<=内部节点子节点个数<=5</li>
+<li>1<=根节点元素个数<=4</li>
+<li>2<=非根节点元素个数<=4</li>
+</ul>
+<ol>
+<li>图（1）插入元素【8】后变为图（2），此时根节点元素个数为5，不符合 1<=根节点元素个数<=4，进行分裂，取节点中间元素【7】，加入到父节点，左右分裂为2个节点，如图（3）</li>
+</ol>
+<p>   <a href="/2022/01/27/1140/2.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/2.png" alt="img"></a>                   <a href="/2022/01/27/1140/3.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/3.png" alt="img"></a></p>
+<p>   <a href="/2022/01/27/1140/4.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/4.png" alt="img"></a></p>
+<blockquote>
+<p>真实情况是先分裂，然后插入元素，这里是为了直观而先插入元素，下面的操作都一样，不再赘述</p>
+</blockquote>
+<ol start="2">
+<li><p>接着插入元素【5】，【11】，【17】时，不需要任何分裂操作，如图（4）</p>
+<p><a href="/2022/01/27/1140/5.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/5.png" alt="img"></a></p>
+</li>
+<li><p>插入元素【13】</p>
+<p><a href="/2022/01/27/1140/6.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/6.png" alt="img"></a></p>
+</li>
+<li><p>接着插入元素【6】，【12】，【20】，【23】时，不需要任何分裂操作，如图（7）</p>
+<p><a href="/2022/01/27/1140/7.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/7.png" alt="img"></a></p>
+</li>
+<li><p>插入【26】时，最右的叶子结点空间满了，需要进行分裂操作，中间元素【20】上移到父节点中，注意通过上移中间元素，树最终还是保持平衡，分裂结果的结点存在2个关键字元素。</p>
+<p><a href="/2022/01/27/1140/8.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/8.png" alt="img"></a></p>
+</li>
+<li><p>插入【4】时，导致最左边的叶子结点被分裂，【4】恰好也是中间元素，上移到父节点中，然后元素【16】,【18】,【24】,【25】陆续插入不需要任何分裂操作</p>
+<p><a href="/2022/01/27/1140/9.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/9.png" alt="img"></a></p>
+</li>
+<li><p>最后，当插入【19】时，含有【14】,【16】,【17】,【18】的结点需要分裂，把中间元素【17】上移到父节点中，但是情况来了，父节点中空间已经满了，所以也要进行分裂，将父节点中的中间元素【13】上移到新形成的根结点中。</p>
+<p><a href="/2022/01/27/1140/10.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/10.png" alt="img"></a></p>
+</li>
+</ol>
+<h3 id="删除">删除<a class="post-anchor" href="#删除"></a></h3><p>删除一个元素时，</p>
+<ol>
+<li><p>首先查找B树中需删除的元素，如果该元素在B树中存在，则将该元素在其结点中进行删除，</p>
+</li>
+<li><p>删除该元素时，首先判断该元素是否有左右孩子结点，</p>
+<p>如果有，则上移孩子结点中的某相近元素(“左孩子最右边的节点”或“右孩子最左边的节点”)到父节点中，然后是移动之后的情况；</p>
+<ul>
+<li><strong>某结点中元素数目小于 $\lceil m/2 \rceil -1$ ，则需要看其某相邻兄弟结点是否丰满；</strong> </li>
+<li><strong>如果丰满（节点中元素个数大于 $\lceil m/2 \rceil -1$ ），则父节点先给不满足条件的节点一个元素，然后丰满的节点再给父节点一个元素，从而满足条件；</strong> </li>
+<li><strong>如果其相邻兄弟都不丰满，即其结点数目等于 $\lceil m/2 \rceil -1$ ，则该结点与其相邻的某一兄弟结点，和父节点的某一个元素进行“合并”成一个结点；</strong>  </li>
+<li><strong>重复上面动作，直到所有节点符合B树的规则；最坏的情况一直“合并”到根节点，高度减一；</strong> </li>
+</ul>
+<p>如果没有，直接删除。</p>
+</li>
+</ol>
+<p>接下来还以5阶B树为例，详细讲解删除的动作；</p>
+<blockquote>
+<p>关键要领，元素个数小于 2（ $\lceil m/2 \rceil -1 $ ）就合并，大于4（ $m-1$ ）就分裂</p>
+</blockquote>
+<p>如图依次删除依次删除【8】,【20】,【18】,【5】</p>
+<p><a href="/2022/01/27/1140/11.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/11.png" alt="img"></a></p>
+<ol>
+<li><p>首先删除元素【8】，当然首先查找【8】，【8】在一个叶子结点中，删除后该叶子结点元素个数为2，符合B树规则，操作很简单，咱们只需要移动【11】至原来【8】的位置，移动【12】至【11】的位置（也就是结点中删除元素后面的元素向前移动）</p>
+<p><a href="/2022/01/27/1140/12.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/12.png" alt="img"></a></p>
+</li>
+<li><p>下一步，删除【20】,因为【20】没有在叶子结点中，而是在中间结点中找到，咱们发现他的继承者【23】(字母升序的下个元素)，将【23】上移到【20】的位置，然后将孩子结点中的【23】进行删除，这里恰好删除后，该孩子结点中元素个数符合B树规则，无需进行合并操作。</p>
+<p><a href="/2022/01/27/1140/13.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/13.png" alt="img"></a></p>
+</li>
+<li><p>下一步删除【18】，【18】在叶子结点中,但是该结点中元素数目为2，删除导致只有1个元素，已经小于最小元素数目2。</p>
+<p>而由前面我们已经知道：如果其某个相邻兄弟结点中比较丰满（元素个数大于$\lceil 5/2 \rceil -1=2$ ），则可以向父结点借一个元素，然后将最丰满的相邻兄弟结点中上移最后或最前一个元素到父节点中。</p>
+<p>在这个实例中，右相邻兄弟结点中比较丰满（3个元素大于2），所以先向父节点借一个元素【23】下移到该叶子结点中，代替原来【19】的位置，【19】前移；然后【24】在相邻右兄弟结点中上移到父结点中，最后在相邻右兄弟结点中删除【24】，后面元素前移。</p>
+<p><a href="/2022/01/27/1140/14.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/14.png" alt="img"></a></p>
+</li>
+<li><p>最后一步删除【5】， 删除后会导致很多问题，因为【5】所在的结点数目刚好达标，刚好满足最小元素个数2，而相邻的兄弟结点也是同样的情况，删除一个元素都不能满足条件，所以需要该节点与某相邻兄弟结点进行合并操作；</p>
+<p>首先移动父结点中的元素（该元素在两个需要合并的两个结点元素之间），下移到其子结点中，然后将这两个结点进行合并成一个结点。</p>
+<p>所以在该实例中，咱们首先将父节点中的元素【4】下移到已经删除【5】而只有【6】的结点中，然后将含有【4】和【6】的结点和含有【1】,【3】的相邻兄弟结点进行合并成一个结点。</p>
+<p><a href="/2022/01/27/1140/15.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/15.png" alt="img"></a></p>
+<p>接着会发现内部节点【7】只有一个元素，不符合B树要求。这时候如果该节点的相邻兄弟比较丰满，则可以借给父结点一个元素，然后该节点又向父节点借一个元素。而此时兄弟节点元素刚好为2个，只能进行合并，根结点中的唯一元素【13】下移到子结点，这样，树的高度减少一层。</p>
+<p><a href="/2022/01/27/1140/16.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/16.png" alt="img"></a></p>
+</li>
+</ol>
+<h2 id="磁盘IO与预读">磁盘IO与预读<a class="post-anchor" href="#磁盘IO与预读"></a></h2><p>计算机存储设备一般分为两种：内存储器（main memory） 和外存储器（external memory）。 </p>
+<p><strong>内存储器</strong> 为内存，内存存取速度快，但容量小，价格昂贵，而且不能长期保存数据(在不通电情况下数据会消失)。</p>
+<p><strong>外存储器</strong> 即为磁盘读取，磁盘读取数据靠的是机械运动，每次读取数据花费的时间可以分为==寻道时间==、==旋转延迟==、==传输时间==三个部分：</p>
+<ol>
+<li>寻道时间，指的是磁臂移动到指定磁道所需要的时间，主流磁盘一般在5ms以下</li>
+<li>旋转延迟，就是我们经常听说的磁盘转速，比如一个磁盘7200转，表示每分钟能转7200次，也就是说1秒钟能转120次，旋转延迟就是 1/120/2 = 4.17ms；</li>
+<li>传输时间，指的是从磁盘读出或将数据写入磁盘的时间，一般在零点几毫秒，相对于前两个时间可以忽略不计</li>
+</ol>
+<p>那么访问一次磁盘的时间，即一次磁盘IO的时间约等于5+4.17 = 9ms左右，听起来还挺不错的，但要知道一台500 -MIPS的机器每秒可以执行5亿条指令，因为指令依靠的是电的性质，换句话说执行一次IO的时间可以执行40万条指令，数据库动辄十万百万乃至千万级数据，每次9毫秒的时间，显然是个灾难。</p>
+<p>考虑到磁盘IO是非常高昂的操作，计算机操作系统做了一些优化，当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</p>
+<p>事实1 ： 不同容量的存储器，访问速度差异悬殊。</p>
+<ul>
+<li>磁盘(ms级别) << 内存(ns级别)， 100000倍</li>
+<li>若内存访问需要1s，则一次外存访问需要一天</li>
+<li>为了避免1次外存访问，宁愿访问内存100次…所以将最常用的数据存储在最快的存储器中</li>
+</ul>
+<p>事实2 ： 从磁盘中读 1 B，与读写 1KB 的时间成本几乎一样</p>
+<p><strong>从以上数据中可以总结出一个道理，索引查询的数据主要受限于硬盘的I/O速度，查询I/O次数越少，速度越快，所以B树的结构才应需求而生；</strong></p>
+<p><strong>B树的每个节点的元素可以视为一次I/O读取，树的高度表示最多的I/O次数，在相同数量的总元素个数下，每个节点的元素个数越多，高度越低，查询所需的I/O次数越少；假设，一次硬盘一次I/O数据为8K，索引用int(4字节)类型数据建立，理论上一个节点最多可以为2000个元素，2000*2000*2000=8000000000，80亿条的数据只需3次I/O（理论值），可想而知，B树做为索引的查询效率有多高；</strong> </p>
+<h2 id="B树的高度">B树的高度<a class="post-anchor" href="#B树的高度"></a></h2><p>一棵含有K个元素的m阶B树的最大高度为（m>1）：<br>$$<br>log_{\lceil m/2 \rceil}\frac{K+1}2 +1<br>$$<br>最小高度为：<br>$$<br>log_m(K+1)<br>$$</p>
+<h1 id="B-树">B+树<a class="post-anchor" href="#B-树"></a></h1><p>B+树是应文件系统所需而产生的B树的变形树，那么可能一定会想到，既然有了B树，又出一个B+树，那B+树必然是有很多优点的</p>
+<h2 id="B-树的定义">B+树的定义<a class="post-anchor" href="#B-树的定义"></a></h2><p>对于m阶的B+树，满足以下条件：</p>
+<ol>
+<li><p>非叶的根节点的子节点数M： $2 \leq M \leq m$ ，每个内部节点的子节点数M： $\lceil m/2 \rceil \leq M \leq m$  </p>
+</li>
+<li><p>内部节点中的每个元素只用来索引，不保存数据</p>
+</li>
+<li><p>节点的子节点个数与元素个数相等</p>
+<blockquote>
+<p>B树中，每个节点元素个数比其子节点数少一。</p>
+</blockquote>
+</li>
+<li><p>所有叶节点包含了全部的元素，以及指向这些元素的指针，且叶子节点中的元素按大小顺序链接</p>
+<blockquote>
+<p>B树中，叶子节点并没有包括全部需要查找的信息</p>
+</blockquote>
+</li>
+<li><p>所有非叶子节点都可看成是索引，且节点中仅含有其子节点中最大（或最小）的元素。</p>
+<blockquote>
+<p>B树中，非叶节点也包含需要查找的有效信息</p>
+</blockquote>
+</li>
+</ol>
+<p>举个例子说明一下B+树：</p>
+<p>下图为一棵B+树</p>
+<p><a href="/2022/01/27/1140/17.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/17.png" alt="img"></a></p>
+<p>可以直观地看出节点之间含有重复元素，叶子节点还用指针连在了一起，每个父节点中的元素都出现在了子节点中，是子节点中的最大（或最小）元素。</p>
+<p><a href="/2022/01/27/1140/18.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/18.png" alt="img"></a></p>
+<p>需要注意的是，根节点的最大元素（此处是15）等同于整个B+树的最大元素。无论插入或删除多少元素，始终要保持最大元素在根节点当中。至于叶子节点，由于父节点的元素都出现在了子节点，所以叶子节点包含了全部元素信息。并且每个叶子节点都带有指向下一个节点的指针，形成了一个有序链表。</p>
+<p><a href="/2022/01/27/1140/19.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/19.png" alt="img"></a></p>
+<p>B+树还有一个至关重要的特点，那就是”卫星数据“的位置，所谓”卫星数据“，指的是索引元素所指向的数据记录（比如数据库中的某一行），而在B树中，无论中间节点还是叶子节点都带有卫星数据。</p>
+<p><a href="/2022/01/27/1140/20.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/20.png" alt="img"></a></p>
+<p>而在B+树中，只有叶子节点带有卫星数据，其余中间节点仅仅是索引，没有任何数据关联。</p>
+<p><a href="/2022/01/27/1140/21.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/21.png" alt="img"></a></p>
+<h2 id="B-树的操作">B+树的操作<a class="post-anchor" href="#B-树的操作"></a></h2><h3 id="单元素查询">单元素查询<a class="post-anchor" href="#单元素查询"></a></h3><p>单元素查询的时候，B+树会自顶向下逐层查找节点，最终找到匹配的叶子节点，比如我们查找元素3：</p>
+<ol>
+<li><p>第一次磁盘IO</p>
+<p><a href="/2022/01/27/1140/22.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/22.png" alt="img"></a></p>
+</li>
+<li><p>第二次磁盘IO</p>
+<p><a href="/2022/01/27/1140/23.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/23.png" alt="img"></a></p>
+</li>
+<li><p>第三次磁盘IO</p>
+<p><a href="/2022/01/27/1140/24.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/24.png" alt="img"></a></p>
+</li>
+</ol>
+<p>查询过程看上去跟B树差不多，但还是有两点不同的：</p>
+<p>首先，B+树中间节点没有卫星数据，只存索引数据，所以同样大小的磁盘页可以容纳更多的节点元素，这就意味着，数据量相同的情况下B+树比B树更加的“矮胖”，相应会减小IO次数。</p>
+<p>其次，B+树的查询必须最终查找到叶子节点，而B树只要找到匹配元素即可，无论匹配元素处于中间节点还是叶子节点。因此，B树的查找性能并不稳定，最好的情况是只查根节点即可，最坏的情况是要查到叶子节点，而B+树每一次查找都是稳定的。</p>
+<h3 id="范围查询">范围查询<a class="post-anchor" href="#范围查询"></a></h3><p>先看看B树如何做范围查询的呢？B树只能依靠中序遍历，以查询3到11范围的元素为例：</p>
+<ol>
+<li><p>先自顶向下查找到下限3</p>
+<p><a href="/2022/01/27/1140/25.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/25.png" alt="img"></a></p>
+</li>
+<li><p>然后开始从3中序遍历到元素6</p>
+<p><a href="/2022/01/27/1140/26.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/26.png" alt="img"></a></p>
+</li>
+<li><p>中序遍历到9</p>
+<p><a href="/2022/01/27/1140/27.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/27.png" alt="img"></a></p>
+</li>
+<li><p>中序遍历到11，遍历结束</p>
+<p><a href="/2022/01/27/1140/28.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/28.png" alt="img"></a></p>
+</li>
+</ol>
+<p>可见B树的范围查询确实有点繁琐，反观B+树的范围查询则简单的多，只需在链表上做遍历即可：</p>
+<ol>
+<li><p>自顶向下，查找到范围下限3</p>
+<p><a href="/2022/01/27/1140/29.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/29.png" alt="img"></a></p>
+</li>
+<li><p>通过链表指针，遍历到元素6，8</p>
+<p><a href="/2022/01/27/1140/30.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/30.png" alt="img"></a></p>
+</li>
+<li><p>通过链表指针，遍历到元素9，11，遍历结束</p>
+<p><a href="/2022/01/27/1140/31.png" data-caption="img" data-fancybox="images"><img src="/2022/01/27/1140/31.png" alt="img"></a></p>
+</li>
+</ol>
+<p>如此看来B+树的链表遍历要比B树的中序遍历简单很多的</p>
+<h2 id="对比B树">对比B树<a class="post-anchor" href="#对比B树"></a></h2><p>为什么说B+树比B树更适合数据库索引？ </p>
+<p>综合起来，B+树对比B树有三个优势：</p>
+<ol>
+<li><p><strong>B+树的单一节点存储更多的元素，使得查询的IO次数减少，磁盘读写代价更低。</strong></p>
+<p>B+树的内部结点并没有指向关键字具体信息的指针。因此其内部结点相对B 树更小。如果把所有同一内部结点的关键字存放在同一盘块中，那么盘块所能容纳的关键字数量也越多。一次性读入内存中的需要查找的关键字也就越多。相对来说IO读写次数也就降低了；</p>
+</li>
+<li><p><strong>B+树的所有查询都要查找到叶子节点，查询效率更加稳定。</strong> </p>
+<p>由于非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当；</p>
+</li>
+<li><p><strong>B+树所有叶子节点形成有序链表，更便于范围查询（最重要的原因，范围查找是数据库的常态）。</strong></p>
+<p>B树在提高了IO性能的同时并没有解决元素遍历的我效率低下的问题，正是为了解决这个问题，B+树应用而生。B+树只需要去遍历叶子节点就可以实现整棵树的遍历。而且在数据库中基于范围的查询是非常频繁的，而B树的范围查找用的是中序遍历，效率太低。</p>
+</li>
+</ol>
+<h1 id="参考">参考<a class="post-anchor" href="#参考"></a></h1><ol>
+<li><a href="https://www.jianshu.com/p/58562aec3d1c" target="_blank" rel="noopener">B+树原理详解</a></li>
+<li><a href="https://www.cnblogs.com/lianzhilei/p/11250589.html" target="_blank" rel="noopener">B树、B+树详解</a></li>
+</ol>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/11/16/1112/">大顶堆与小顶堆学习</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2022/01/27/1140/">https://wakie01.github.io/2022/01/27/1140/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

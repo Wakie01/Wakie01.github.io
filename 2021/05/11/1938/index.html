@@ -219,7 +219,7 @@
 
 
 <p>然后解压到该目录下：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">sudo tar -zxvf jdk-8u291-linux-x64.tar.gz /usr/<span class="hljs-built_in">local</span>/java<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">sudo tar -zxvf jdk-8u291-linux-x64.tar.gz -C /usr/<span class="hljs-built_in">local</span>/java<br></code></pre></td></tr></tbody></table></figure>
 
 <p>这时解压后得到的文件夹是<code>jdk1.8_291</code></p>
 <p>打开环境变量文件：</p>
@@ -233,7 +233,7 @@
 
 
 <p>在该文件的最后添加以下内容：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#Jdk Config</span><br>JAVA_HOME=/usr/<span class="hljs-built_in">local</span>/java/jdk1.8_291<br>JAVA_BIN=/usr/<span class="hljs-built_in">local</span>/java/jdk1.8_291/bin<br>PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_BIN</span><br>CLASSPATH=<span class="hljs-variable">$JAVA_HOME</span>/lib/dt.jar:<span class="hljs-variable">$JAVA_HOME</span>/lib/tools.jar<br><span class="hljs-built_in">export</span> JAVA_HOME JAVA_BIN PATH CLASSPATH<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#Jdk Config</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/<span class="hljs-built_in">local</span>/java/jdk1.8.0_291<br><span class="hljs-built_in">export</span> JRE_HOME=<span class="hljs-variable">$JAVA_HOME</span>/jre<br><span class="hljs-built_in">export</span> CLASSPATH=.:<span class="hljs-variable">$JAVA_HOME</span>/lib:<span class="hljs-variable">$JRE_HOME</span>/lib:<span class="hljs-variable">$CLASSPATH</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$JRE_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br></code></pre></td></tr></tbody></table></figure>
 
 
 
@@ -299,7 +299,7 @@
 </article>
         <footer>
           <div class="copyright">
-            ©2021
+            ©2022
             <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
             <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
           </div>

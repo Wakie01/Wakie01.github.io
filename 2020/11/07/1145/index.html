@@ -30,7 +30,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx介绍"><span class="toc-text">Nginx介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代理"><span class="toc-text">代理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正向代理"><span class="toc-text">正向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx安装"><span class="toc-text">Nginx安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker安装"><span class="toc-text">Docker安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非Docker安装"><span class="toc-text">非Docker安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx配置文件"><span class="toc-text">Nginx配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx常用配置"><span class="toc-text">Nginx常用配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理配置"><span class="toc-text">反向代理配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location路径映射配置"><span class="toc-text">location路径映射配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡策略"><span class="toc-text">负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动静分离配置"><span class="toc-text">动静分离配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#动态资源代理"><span class="toc-text">动态资源代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态资源代理"><span class="toc-text">静态资源代理</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx介绍"><span class="toc-text">Nginx介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代理"><span class="toc-text">代理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正向代理"><span class="toc-text">正向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx安装"><span class="toc-text">Nginx安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker安装"><span class="toc-text">Docker安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非Docker安装"><span class="toc-text">非Docker安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#离线安装"><span class="toc-text">离线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx配置文件"><span class="toc-text">Nginx配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx常用配置"><span class="toc-text">Nginx常用配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理配置"><span class="toc-text">反向代理配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location路径映射配置"><span class="toc-text">location路径映射配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负载均衡策略"><span class="toc-text">负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动静分离配置"><span class="toc-text">动静分离配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#动态资源代理"><span class="toc-text">动态资源代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#静态资源代理"><span class="toc-text">静态资源代理</span></a></li></ol></li></ol></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -277,6 +277,40 @@
 
 
 
+<h2 id="离线安装">离线安装<a class="post-anchor" href="#离线安装"></a></h2><p>离线安装nginx需要先安装：</p>
+<ul>
+<li>gcc</li>
+<li>pcre</li>
+<li>zlib</li>
+<li>openssl</li>
+</ul>
+<p>比如我，在这里已经安装好了gcc和openssl，所以就不用再安装了</p>
+<p>先下载好pcre、zlib、nginx的tar.gz包</p>
+<p>pcre：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">tar -zxvf pcre/pcre-8.45.tar.gz<br>./configure<br>make<br>make install<br></code></pre></td></tr></tbody></table></figure>
+
+<p>zlib：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">tar -zxvf zlib/zlib-1.2.11.tar.gz<br>./configure<br>make<br>make install<br></code></pre></td></tr></tbody></table></figure>
+
+<p>nginx：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">tar -zxvf nginx-1.20.1.tar.gz<br>./configure<br>make<br>make install<br></code></pre></td></tr></tbody></table></figure>
+
+<p>启动nginx：</p>
+<p>运行nginx安装目录下的<code>sbin/nginx</code>，在启动时最好指定配置文件，如：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">root@ubuntu:/usr/<span class="hljs-built_in">local</span>/nginx<span class="hljs-comment"># ./sbin/nginx -c ./conf/nginx.conf</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>重启nginx：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">./nginx -s reload -c ../conf/nginx.conf<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<p>nginx常用命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">root@ubuntu:/usr/<span class="hljs-built_in">local</span>/nginx<span class="hljs-comment"># ./sbin/nginx -help</span><br>nginx version: nginx/1.20.1<br>Usage: nginx [-?hvVtTq] [-s signal] [-p prefix]<br>             [-e filename] [-c filename] [-g directives]<br><br>Options:<br>  -?,-h         : this <span class="hljs-built_in">help</span><br>  -s signal     : send signal to a master process: stop, quit, reopen, reload<br>  -p prefix     : <span class="hljs-built_in">set</span> prefix path (default: /usr/<span class="hljs-built_in">local</span>/nginx/)<br>  -e filename   : <span class="hljs-built_in">set</span> error <span class="hljs-built_in">log</span> file (default: logs/error.log)<br>  -c filename   : <span class="hljs-built_in">set</span> configuration file (default: conf/nginx.conf)<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+
 <h2 id="Nginx配置文件">Nginx配置文件<a class="post-anchor" href="#Nginx配置文件"></a></h2><ul>
 <li><p>Nginx的核心配置文件是<code>nginx.conf</code></p>
 <figure class="highlight yml"><table><tbody><tr><td class="code"><pre><code class="hljs yml"><span class="hljs-string">user</span> <span class="hljs-string">www-data;</span><br><span class="hljs-string">worker_processes</span> <span class="hljs-string">auto;</span><br><span class="hljs-string">pid</span> <span class="hljs-string">/run/nginx.pid;</span><br><span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/modules-enabled/*.conf;</span><br><br><span class="hljs-comment"># 以上是全局块</span><br><span class="hljs-comment"># worker_processes的数值越大，Nginx的并发能力越强</span><br><span class="hljs-comment"># pid：nginx运行的一个标识</span><br><span class="hljs-comment"># include：引入该目录下的全部.conf文件配置</span><br><span class="hljs-comment"># 有的还会有error_log /var/log/nginx/error.log; 指nginx错误日志的存放位置</span><br><br><span class="hljs-string">events</span> <span class="hljs-string">{</span><br>	<span class="hljs-string">worker_connections</span> <span class="hljs-number">768</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># multi_accept on;</span><br><span class="hljs-string">}</span><br><br><span class="hljs-comment"># 以上是events块</span><br><span class="hljs-comment"># worker_connections值越大，nginx并发能力越强</span><br><br><span class="hljs-string">http</span> <span class="hljs-string">{</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/mime.types;</span><br>	<span class="hljs-string">default_type</span> <span class="hljs-string">application/octet-stream;</span><br><br>	<br>	<span class="hljs-comment"># Logging Settings</span><br>	<span class="hljs-string">access_log</span> <span class="hljs-string">/var/log/nginx/access.log;</span><br>	<span class="hljs-string">error_log</span> <span class="hljs-string">/var/log/nginx/error.log;</span><br><br><br>	<span class="hljs-string">server</span> <span class="hljs-string">{</span><br>        <span class="hljs-string">listen</span>       <span class="hljs-number">80</span><span class="hljs-string">;</span><br>        <span class="hljs-string">server_name</span>  <span class="hljs-string">localhost;</span><br><br>        <span class="hljs-string">location</span> <span class="hljs-string">/</span> <span class="hljs-string">{</span><br>           <span class="hljs-string">root</span>   <span class="hljs-string">/home/Documents/nginx_html;</span><br>           <span class="hljs-string">index</span>  <span class="hljs-string">index.html</span> <span class="hljs-string">index.htm;</span><br>        <span class="hljs-string">}</span><br>        <span class="hljs-comment"># location块</span><br>        <span class="hljs-comment"># root：将接收到的请求根据/home/Documents/nginx_html去查找静态资源</span><br>        <span class="hljs-comment"># index：默认去上述的路径中找index.html或index.htm</span><br>	<br>	<span class="hljs-string">}</span><br>	<span class="hljs-comment"># server块</span><br>	<span class="hljs-comment"># listen：代表Nginx监听的端口号</span><br>	<span class="hljs-comment"># server_name：代表Nginx接收请求的ip</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/conf.d/*.conf;</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/sites-enabled/*;</span><br><span class="hljs-string">}</span> <br><br><span class="hljs-comment"># Http块</span><br><span class="hljs-comment"># include代表引入一个外部的文件 ->mime.type中放着大量的媒体类型</span><br><span class="hljs-comment"># include /etc/nginx/conf.d/*.conf; ->引入conf.d目录下的以.conf结尾的配置文件</span><br></code></pre></td></tr></tbody></table></figure>
@@ -423,7 +457,7 @@
 </article>
         <footer>
           <div class="copyright">
-            ©2021
+            ©2022
             <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
             <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
           </div>

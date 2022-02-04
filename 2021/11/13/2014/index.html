@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      论文阅读-A guide to convolution arithmetic for deep learning - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#论文介绍"><span class="toc-text">论文介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#卷积"><span class="toc-text">卷积</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#转置卷积"><span class="toc-text">转置卷积</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">论文阅读-A guide to convolution arithmetic for deep learning</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/11/13</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/11/13/2014/" data-flag-title="论文阅读-A guide to convolution arithmetic for deep learning">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Paper">Paper</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/CNN">CNN</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="论文介绍">论文介绍<a class="post-anchor" href="#论文介绍"></a></h1><p>Dumoulin V, Visin F. A guide to convolution arithmetic for deep learning[J]. arXiv preprint arXiv:1603.07285, 2016.</p>
+<p>引用量：1268</p>
+<p>藉此文章来了解一下<strong>卷积</strong> </p>
+<h1 id="卷积">卷积<a class="post-anchor" href="#卷积"></a></h1><table style="width:100%; table-layout:fixed;">
+  <tbody><tr>
+    <td style="text-align:center"><a href="/2021/11/13/2014/no_padding_no_strides.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/no_padding_no_strides.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/arbitrary_padding_no_strides.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/arbitrary_padding_no_strides.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/same_padding_no_strides.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/same_padding_no_strides.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/full_padding_no_strides.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/full_padding_no_strides.gif" alt></a></td>
+  </tr>
+  <tr>
+    <td style="text-align:center">No padding, no strides</td>
+    <td style="text-align:center">Arbitrary padding, no strides</td>
+    <td style="text-align:center">Half padding, no strides</td>
+    <td style="text-align:center">Full padding, no strides</td>
+  </tr>
+  <tr>
+    <td style="text-align:center"><a href="/2021/11/13/2014/no_padding_strides.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/no_padding_strides.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/padding_strides.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/padding_strides.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/padding_strides_odd.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/padding_strides_odd.gif" alt></a></td>
+    <td style="text-align:center"></td>
+  </tr>
+  <tr>
+    <td style="text-align:center">No padding, strides</td>
+    <td style="text-align:center">Padding, strides</td>
+    <td style="text-align:center">Padding, strides (odd)</td>
+    <td style="text-align:center"></td>
+  </tr>
+</tbody></table>
+
+
+
+
+<p>卷积输出结果尺寸计算：<br>$$<br>o= \lfloor \frac {i+2p-k} s \rfloor +1<br>$$<br>其中：</p>
+<ul>
+<li>$o$ ：输出矩阵尺寸（output）</li>
+<li>$i$ ：输入矩阵尺寸（input）</li>
+<li>$p$ ：在四周填充数（padding）</li>
+<li>$k$ ：卷积核尺寸（kernel）</li>
+<li>$s$ ：步长（stride）</li>
+</ul>
+<p>关于padding，可分为：</p>
+<ol>
+<li>Zero padding：对填充数没定死</li>
+<li>Half（same） padding：填充数为 $\lfloor k/2 \rfloor$ ，其中 $k$ 为卷积核尺寸，且 $k$ 为奇数</li>
+<li>full padding：填充数为 $k-1$ </li>
+</ol>
+<p>一般来说，padding填充的值为0</p>
+<p>关于步长，指每次移动卷积核的步长。</p>
+<p>在CNN中，常用到多卷积核对输入进行卷积操作，所以，常定义一组卷积核：</p>
+<p>$$<br>(n,m,k_1, \dots ,k_N)<br>$$<br>其中：</p>
+<ul>
+<li>$n$ ：输出特征矩阵的个数</li>
+<li>$m$ ：输入特征矩阵的个数</li>
+<li>$N$ ：输入特征矩阵的维度（通道数）</li>
+<li>$k_j$ ：某个维度的卷积核（ $1 \leq j \leq N$ ）</li>
+</ul>
+<h1 id="转置卷积">转置卷积<a class="post-anchor" href="#转置卷积"></a></h1><table style="width:100%; table-layout:fixed;">
+  <tbody><tr>
+    <td style="text-align:center"><a href="/2021/11/13/2014/no_padding_no_strides_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/no_padding_no_strides_transposed.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/arbitrary_padding_no_strides_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/arbitrary_padding_no_strides_transposed.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/same_padding_no_strides_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/same_padding_no_strides_transposed.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/full_padding_no_strides_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/full_padding_no_strides_transposed.gif" alt></a></td>
+  </tr>
+  <tr>
+    <td style="text-align:center">No padding, no strides, transposed</td>
+    <td style="text-align:center">Arbitrary padding, no strides, transposed</td>
+    <td style="text-align:center">Half padding, no strides, transposed</td>
+    <td style="text-align:center">Full padding, no strides, transposed</td>
+  </tr>
+  <tr>
+    <td style="text-align:center"><a href="/2021/11/13/2014/no_padding_strides_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/no_padding_strides_transposed.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/padding_strides_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/padding_strides_transposed.gif" alt></a></td>
+    <td style="text-align:center"><a href="/2021/11/13/2014/padding_strides_odd_transposed.gif" data-caption data-fancybox="images"><img src="/2021/11/13/2014/padding_strides_odd_transposed.gif" alt></a></td>
+    <td style="text-align:center"></td>
+  </tr>
+  <tr>
+    <td style="text-align:center">No padding, strides, transposed</td>
+    <td style="text-align:center">Padding, strides, transposed</td>
+    <td style="text-align:center">Padding, strides, transposed (odd)</td>
+    <td style="text-align:center"></td>
+  </tr>
+</tbody></table>
+
+<p>这些padding是比较常见的，不限死。</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/11/15/1846/">幂等性</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/11/09/1130/">论文阅读-Deep Laplacian Pyramid Networks for Fast and Accurate Super-Resolution</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/11/13/2014/">https://wakie01.github.io/2021/11/13/2014/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

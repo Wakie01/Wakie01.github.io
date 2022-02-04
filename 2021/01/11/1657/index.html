@@ -596,24 +596,9 @@
 <p>即：3NF需要确保数据表中的每一列数据都和主键直接相关，而不能间接相关</p>
 <h1 id="常用命令">常用命令<a class="post-anchor" href="#常用命令"></a></h1><ul>
 <li><p><strong>运行SQL文件</strong></p>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># source 命令</span><br><br><span class="hljs-keyword">use</span> pim;   <span class="hljs-comment">-- 先进入数据库</span><br>source works/pim/databases/pim.sql;    <span class="hljs-comment">-- 执行sql文件</span><br></code></pre></td></tr></tbody></table></figure>
-
-
-
-
-
-</li>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><code class="hljs sql"><span class="hljs-comment"># source 命令</span><br><br><span class="hljs-keyword">use</span> pim;   <span class="hljs-comment">-- 先进入数据库</span><br><span class="hljs-keyword">set</span> <span class="hljs-keyword">names</span> utf8mb4;     <span class="hljs-comment">-- 设定sql文件编码方式</span><br>source works/pim/databases/pim.sql;    <span class="hljs-comment">-- 执行sql文件</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><code class="hljs plain">  <br>  <br><br><br><br><br/><br><br><br/><br><br>参考：<br><br>1.[使用SQL语句插入当前系统时间](https://blog.csdn.net/qq_40087415/article/details/87397402)<br><br>2.[MySQL中添加或插入语句(Insert)的几种使用方式](https://blog.csdn.net/qq_40194399/article/details/94554191)<br><br>3.[MySQL的JOIN（一）：用法](https://www.cnblogs.com/fudashi/p/7491039.html)<br><br>4.[Mysql—— 内连接、左连接、右连接以及全连接查询](https://blog.csdn.net/zjt980452483/article/details/82945663)<br><br>[MySQL索引背后的数据结构及算法原理](http://blog.codinglabs.org/articles/theory-of-mysql-index.html)<br></code></pre></td></tr></tbody></table></figure></li>
 </ul>
-<br>
-
-<br>
-
-<p>参考：</p>
-<p>1.<a href="https://blog.csdn.net/qq_40087415/article/details/87397402" target="_blank" rel="noopener">使用SQL语句插入当前系统时间</a></p>
-<p>2.<a href="https://blog.csdn.net/qq_40194399/article/details/94554191" target="_blank" rel="noopener">MySQL中添加或插入语句(Insert)的几种使用方式</a></p>
-<p>3.<a href="https://www.cnblogs.com/fudashi/p/7491039.html" target="_blank" rel="noopener">MySQL的JOIN（一）：用法</a></p>
-<p>4.<a href="https://blog.csdn.net/zjt980452483/article/details/82945663" target="_blank" rel="noopener">Mysql—— 内连接、左连接、右连接以及全连接查询</a></p>
-<p><a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="noopener">MySQL索引背后的数据结构及算法原理</a></p>
 </body></html>
 
   
@@ -671,7 +656,7 @@
 </article>
         <footer>
           <div class="copyright">
-            ©2021
+            ©2022
             <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
             <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
           </div>

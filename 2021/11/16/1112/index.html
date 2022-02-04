@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      大顶堆与小顶堆学习 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#堆"><span class="toc-text">堆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#大顶堆"><span class="toc-text">大顶堆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小顶堆"><span class="toc-text">小顶堆</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">大顶堆与小顶堆学习</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/11/16</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/11/16/1112/" data-flag-title="大顶堆与小顶堆学习">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/Heap">Heap</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="堆">堆<a class="post-anchor" href="#堆"></a></h1><p>堆：一棵顺序存储的完全二叉树，其逻辑结构是完全二叉树，存储结构是一维数组。</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C1.jpg" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C1.jpg" alt="img"></a></p>
+<p>头结点在一维数组中的索引为0，从头结点开始，设一结点在一维数组中的索引为 $i$ ，则其左右子结点的索引分别为： $2i+1$ 、 $2i+2$ 。</p>
+<p>因此，可以得知，假设一结点在一维数组中的索引为 $i$ ，则其父节点的索引为：<br>$$<br>\lfloor \frac {i-1} 2 \rfloor<br>$$</p>
+<h1 id="大顶堆">大顶堆<a class="post-anchor" href="#大顶堆"></a></h1><p>大顶堆：每个结点都==不小于==其孩子结点，即：<br>$$<br>arr[i] \geq arr[2i+1] \quad && \quad arr[i] \geq arr[2i+2]<br>$$</p>
+<p>构建大顶堆的基本思想：</p>
+<ol>
+<li>从最后一个非叶子节点开始，逐一比较非叶子节点和其左右孩子节点</li>
+<li>根据比较结果交换节点</li>
+<li>因为交换可能导致孩子节点不再满足大顶堆的性质，所以需要对孩子节点进行调整。</li>
+</ol>
+<p><strong>例子：</strong></p>
+<ol>
+<li><p>初始化</p>
+<a href="/2021/11/16/1112/大顶堆与小顶堆学习\2.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/大顶堆与小顶堆学习\2.png" alt="img"></a>
+</li>
+<li><p>从最后一个非叶子结点开始，分别比较非叶结点和其左右孩子节点的大小</p>
+<p>此处无需调整</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C3.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C3.png" alt="img"></a></p>
+</li>
+<li><p>无需调整</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C4.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C4.png" alt="img"></a></p>
+</li>
+<li><p>无需调整</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C5.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C5.png" alt="img"></a></p>
+</li>
+<li><p>需要交换元素</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C6.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C6.png" alt="img"></a></p>
+</li>
+<li><p>无需调整</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C7.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C7.png" alt="img"></a></p>
+</li>
+<li><p>交换元素位置</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C8.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C8.png" alt="img"></a></p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C9.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C9.png" alt="img"></a></p>
+</li>
+<li><p>交换后可能造成被交换的孩子节点不满足堆的性质，因此每次交换后需要重新对交换的孩子节点进行调整</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C10.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C10.png" alt="img"></a></p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C11.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C11.png" alt="img"></a></p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C12.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C12.png" alt="img"></a></p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C13.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C13.png" alt="img"></a></p>
+</li>
+<li><p>下一个非子结点</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C14.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C14.png" alt="img"></a></p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C15.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C15.png" alt="img"></a></p>
+</li>
+<li><p>大顶堆建立完成</p>
+<p><a href="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C16.png" data-caption="img" data-fancybox="images"><img src="/2021/11/16/1112/.%5C%E5%A4%A7%E9%A1%B6%E5%A0%86%E4%B8%8E%E5%B0%8F%E9%A1%B6%E5%A0%86%E5%AD%A6%E4%B9%A0%5C16.png" alt="img"></a></p>
+</li>
+</ol>
+<p>大顶堆构建代码：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 构建大顶堆</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> from 从哪个节点开始</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> to 到哪个节点结束</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMaxHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to)</span></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=(to-<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>; i>=from; i--){<br>        <span class="hljs-comment">//交换左子树结点</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span><=to && nums[i]<nums[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>]){<br>            swap(nums,i,<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>);<br>            <span class="hljs-comment">// 判断是否需要调整子树</span><br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] || <span class="hljs-number">2</span>*j+<span class="hljs-number">2</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">2</span>]){<br>                buildMaxHeap(nums,j,to);    <span class="hljs-comment">//调整子树</span><br>            }<br>        }<br>        <span class="hljs-comment">//交换右子树结点</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span><=to && nums[i]<nums[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>]){<br>            swap(nums,i,<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>);<br>            <span class="hljs-comment">// 判断是否需要调整子树</span><br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] || <span class="hljs-number">2</span>*j+<span class="hljs-number">2</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">2</span>]){<br>                buildMaxHeap(nums,j,to);    <span class="hljs-comment">//调整子树</span><br>            }<br>        }<br>    }<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> j)</span></span>{<br>    <span class="hljs-keyword">int</span> n=nums[i];<br>    nums[i]=nums[j];<br>    nums[j]=n;<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>通过大顶堆进行排序：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 构建大顶堆</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> from 从哪个节点开始</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> to 到哪个节点结束</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMaxHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to)</span></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=(to-<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>; i>=from; i--){<br>        <span class="hljs-comment">//交换左子树结点</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span><=to && nums[i]<nums[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>]){<br>            swap(nums,i,<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>);<br>            <span class="hljs-comment">// 判断是否需要调整子树</span><br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] || <span class="hljs-number">2</span>*j+<span class="hljs-number">2</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">2</span>]){<br>                buildMaxHeap(nums,j,to);    <span class="hljs-comment">//调整子树</span><br>            }<br>        }<br>        <span class="hljs-comment">//交换右子树结点</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span><=to && nums[i]<nums[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>]){<br>            swap(nums,i,<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>);<br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] || <span class="hljs-number">2</span>*j+<span class="hljs-number">2</span><=to && nums[j]<nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">2</span>]){<br>                buildMaxHeap(nums,j,to);    <span class="hljs-comment">//调整子树</span><br>            }<br>        }<br>    }<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> j)</span></span>{<br>    <span class="hljs-keyword">int</span> n=nums[i];<br>    nums[i]=nums[j];<br>    nums[j]=n;<br>}<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 通过大顶堆进行排序</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> nums</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sortWithMaxHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=nums.length-<span class="hljs-number">1</span>;i><span class="hljs-number">0</span>;i--){<br>        buildMaxHeap(nums,<span class="hljs-number">0</span>,i);<br>        swap(nums,<span class="hljs-number">0</span>,i);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h1 id="小顶堆">小顶堆<a class="post-anchor" href="#小顶堆"></a></h1><p>小顶堆：每个结点都==不大于==其孩子结点，即：<br>$$<br>arr[i] \leq arr[2i+1] \quad && \quad arr[i] \leq arr[2i+2]<br>$$</p>
+<p>小顶堆同理。</p>
+<p>小顶堆构建及排序代码：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 构建小顶堆</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> from 从哪个节点开始</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> to 到哪个节点结束</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildMinHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> from,<span class="hljs-keyword">int</span> to)</span></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=(to-<span class="hljs-number">1</span>)/<span class="hljs-number">2</span>;i>=<span class="hljs-number">0</span>;i--){<br>        <span class="hljs-comment">//交换左孩子结点</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span><=to && nums[i]>nums[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>]){<br>            swap(nums,i,<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//判断是否需要调整子树</span><br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span><=to && nums[j]>nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] || <span class="hljs-number">2</span>*j+<span class="hljs-number">2</span><=to && nums[j]>nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">2</span>]){<br>                buildMinHeap(nums,j,to);    <span class="hljs-comment">//调整子树</span><br>            }<br>        }<br>        <span class="hljs-comment">//交换右孩子结点</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span><=to && nums[i]>nums[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>]){<br>            swap(nums,i,<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>);<br>            <span class="hljs-comment">//判断是否需要调整子树</span><br>            <span class="hljs-keyword">int</span> j=<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span><=to && nums[j]>nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">1</span>] || <span class="hljs-number">2</span>*j+<span class="hljs-number">2</span><=to && nums[j]>nums[<span class="hljs-number">2</span>*j+<span class="hljs-number">2</span>]){<br>                buildMinHeap(nums,j,to);    <span class="hljs-comment">//调整子树</span><br>            }<br>        }<br>    }<br>}<br><br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums,<span class="hljs-keyword">int</span> i,<span class="hljs-keyword">int</span> j)</span></span>{<br>    <span class="hljs-keyword">int</span> n=nums[i];<br>    nums[i]=nums[j];<br>    nums[j]=n;<br>}<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 通过小顶堆进行排序</span><br><span class="hljs-comment">* <span class="hljs-doctag">@param</span> nums</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sortWithMinHeap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums)</span></span>{<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=nums.length-<span class="hljs-number">1</span>;i><span class="hljs-number">0</span>;i--){<br>        buildMinHeap(nums,<span class="hljs-number">0</span>,i);<br>        swap(nums,<span class="hljs-number">0</span>,i);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<p>值得注意的是，据说，大顶堆排序一般是作升序排序，而小顶堆排序则是作降序排序。</p>
+<h1 id="参考">参考<a class="post-anchor" href="#参考"></a></h1><p><a href="https://www.cnblogs.com/lanhaicode/p/10546257.html" target="_blank" rel="noopener">堆排序（大顶堆、小顶堆）—-C语言</a></p>
+<p><a href="https://www.cnblogs.com/XiaoZhengYu/p/12492445.html" target="_blank" rel="noopener">大顶堆构造过程</a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2022/01/27/1140/">B树与B+树学习</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/11/15/1728/">论文阅读-Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/11/16/1112/">https://wakie01.github.io/2021/11/16/1112/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

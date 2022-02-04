@@ -30,7 +30,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般命令"><span class="toc-text">一般命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Package"><span class="toc-text">安装Package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-install常见后缀"><span class="toc-text">npm install常见后缀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除Package"><span class="toc-text">删除Package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-install常见后缀-1"><span class="toc-text">npm install常见后缀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装package-json文件的依赖"><span class="toc-text">安装package.json文件的依赖</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一般命令"><span class="toc-text">一般命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Package"><span class="toc-text">安装Package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-install常见后缀"><span class="toc-text">npm install常见后缀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除Package"><span class="toc-text">删除Package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#npm-install常见后缀-1"><span class="toc-text">npm install常见后缀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装package-json文件的依赖"><span class="toc-text">安装package.json文件的依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看已安装的依赖"><span class="toc-text">查看已安装的依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检查模块是否过时"><span class="toc-text">检查模块是否过时</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -316,6 +316,14 @@
 <h3 id="安装package-json文件的依赖">安装package.json文件的依赖<a class="post-anchor" href="#安装package-json文件的依赖"></a></h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">$ npm install<br></code></pre></td></tr></tbody></table></figure>
 
 <p>当有了package.json文件，执行上面命令将自动下载项目的各种依赖。</p>
+<h2 id="查看已安装的依赖">查看已安装的依赖<a class="post-anchor" href="#查看已安装的依赖"></a></h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 语法</span><br>npm ls [[<@scope>/]<pkg> ...]<br><br>aliases: list, la, ll<br><br>$ npm ls       <span class="hljs-comment"># 查看该目录下安装的依赖</span><br>$ npm ls -g    <span class="hljs-comment"># 查看全局安装的依赖</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
+<h2 id="检查模块是否过时">检查模块是否过时<a class="post-anchor" href="#检查模块是否过时"></a></h2><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 语法</span><br>npm outdated [[<@scope>/]<pkg> ...]<br><br>$ npm outdated -g  <span class="hljs-comment"># 列出过时的全局依赖</span><br></code></pre></td></tr></tbody></table></figure>
+
+
+
 </body></html>
 
   
@@ -373,7 +381,7 @@
 </article>
         <footer>
           <div class="copyright">
-            ©2021
+            ©2022
             <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
             <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
           </div>

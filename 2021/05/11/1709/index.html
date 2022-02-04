@@ -30,7 +30,7 @@
     
     <div id="post-toc" class="animated hiddenToc hide">
       <span class="title">Toc</span>
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在线安装"><span class="toc-text">在线安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#离线安装"><span class="toc-text">离线安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#问题"><span class="toc-text">问题</span></a></li></ol>
     </div>
     
     <div id="fixed-menu-wrap">
@@ -215,7 +215,7 @@
       <div>
       </div>
     </div>
-    <html><head></head><body><p>去mysql官网上获取apt安装包</p>
+    <html><head></head><body><h1 id="在线安装">在线安装<a class="post-anchor" href="#在线安装"></a></h1><p>去mysql官网上获取apt安装包</p>
 <p>复制下载地址，比如：<a href="https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb</a></p>
 <p>运行下面命令：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">wget https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb<br></code></pre></td></tr></tbody></table></figure>
@@ -255,6 +255,16 @@
 
 </li>
 </ol>
+<h1 id="离线安装">离线安装<a class="post-anchor" href="#离线安装"></a></h1><p>下载Mysql Community Server压缩包</p>
+<p>解压：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">tar -xvf mysql-server_8.0.24-1ubuntu16.04_amd64.deb-bundle.tar<br></code></pre></td></tr></tbody></table></figure>
+
+<p>然后按下面顺序安装包</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">dpkg -i mysql-community-client-plugins_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i mysql-community-client-core_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i mysql-common_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i mysql-community-client_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i libmysqlclient21_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i libmysqlclient-dev_8.0.24-1ubuntu16.04_amd64.deb<br><br>dpkg -i libaio1_0.3.110-5_amd64.deb<br>dpkg -i libmecab2_0.996-5_amd64.deb<br><br>dpkg -i mysql-client_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i mysql-community-server-core_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i mysql-community-server_8.0.24-1ubuntu16.04_amd64.deb<br>dpkg -i mysql-server_8.0.24-1ubuntu16.04_amd64.deb<br></code></pre></td></tr></tbody></table></figure>
+
+<p>部分可能会缺少<code>libaio1</code>和<code>libmecab2</code>包，需要自行下载</p>
+<p>比如我：</p>
+<p><a href="/2021/05/11/1709/blog\source_posts\ubuntu安装mysql8\3.png" data-caption="image-20210719152714917" data-fancybox="images"><img src="/2021/05/11/1709/blog\source_posts\ubuntu安装mysql8\3.png" alt="image-20210719152714917"></a></p>
 <h1 id="问题">问题<a class="post-anchor" href="#问题"></a></h1><p><strong>问题一：</strong></p>
 <p>刚安装好mysql8时，用ip地址连接mysql时，可能会有如下问题：</p>
 <a href="/2021/05/11/1709/2.png" data-caption="image-20210511194349352" data-fancybox="images"><img src="/2021/05/11/1709/2.png" alt="image-20210511194349352"></a>
@@ -264,6 +274,8 @@
 
 <p>再不行的话就重启mysql</p>
 <figure class="highlight bash"><table><tbody><tr><td class="code"><pre><code class="hljs bash">sudo service mysql restart<br></code></pre></td></tr></tbody></table></figure>
+
+
 
 
 
@@ -326,7 +338,7 @@
 </article>
         <footer>
           <div class="copyright">
-            ©2021
+            ©2022
             <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
             <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
           </div>

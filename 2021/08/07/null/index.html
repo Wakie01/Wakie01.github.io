@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      JVM学习之Java内存区域与内存溢出异常 - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运行时数据区域"><span class="toc-text">运行时数据区域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#程序计数器"><span class="toc-text">程序计数器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java程序的执行过程"><span class="toc-text">Java程序的执行过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java虚拟机栈"><span class="toc-text">Java虚拟机栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地方法栈"><span class="toc-text">本地方法栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java堆"><span class="toc-text">Java堆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法区"><span class="toc-text">方法区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行时常量池"><span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#直接内存"><span class="toc-text">直接内存</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HotSpot虚拟机对象探秘"><span class="toc-text">HotSpot虚拟机对象探秘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-text">对象的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的内存布局"><span class="toc-text">对象的内存布局</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的访问定位"><span class="toc-text">对象的访问定位</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用句柄访问"><span class="toc-text">使用句柄访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用直接指针访问"><span class="toc-text">使用直接指针访问</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">JVM学习之Java内存区域与内存溢出异常</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/08/07</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/08/07/null/" data-flag-title="JVM学习之Java内存区域与内存溢出异常">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+        
+        
+        
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="概述">概述<a class="post-anchor" href="#概述"></a></h1><p>与C不同，在Java中，变量的内存管理是由JVM管理的，程序员不用为每个New操作去写delete/free代码</p>
+<h1 id="运行时数据区域">运行时数据区域<a class="post-anchor" href="#运行时数据区域"></a></h1><p>JVM在执行Java程序时，会把它所管理的内存划分为多个不同的==<strong><em>数据区域</em></strong>==</p>
+<a href="/2021/08/07/null/JVM学习之Java内存区域与内存溢出异常\1.jpg" data-caption="查看源图像" data-fancybox="images"><img src="/2021/08/07/null/JVM学习之Java内存区域与内存溢出异常\1.jpg" alt="查看源图像"></a>
+
+
+
+<h2 id="程序计数器">程序计数器<a class="post-anchor" href="#程序计数器"></a></h2><p>程序计数器，Program Counter Register，是一块==较小==的**<em>内存空间**</em></p>
+<p><strong>作用：</strong> 指挥当前线程执行字节码文件的哪一行，相当于一个==行号指示器==</p>
+<blockquote>
+<p><strong>字节码解释器</strong>工作时就是，通过改变这个计数器的值，来选取下一条需要执行的字节码指令。</p>
+</blockquote>
+<p>在这里或许要插入了解一下Java程序的执行过程。</p>
+<p>回到程序计数器。</p>
+<p>在JVM中，为了保证各个线程正确的执行，每个线程都会有一个==独立==的程序计数器，各个线程间的计数器互不影响，==独立存储==。所以，它是<strong>线程私有</strong>的内存，即：<strong>线程隔离的数据区</strong>。</p>
+<p>由此可见，程序计数器的生命周期与线程相同。</p>
+<p>值得注意的是，程序计数器是唯一一个没有<code>OutOfMemoryError</code>情况的内存区域</p>
+<h3 id="Java程序的执行过程">Java程序的执行过程<a class="post-anchor" href="#Java程序的执行过程"></a></h3><p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C2.jpg" data-caption="preview" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C2.jpg" alt="preview"></a></p>
+<ol>
+<li><strong>编写：</strong> 编写Java源代码，形成<code>.java</code>的Java源文件</li>
+<li><strong>编译：</strong> Java编译器将Java源文件编译成<code>.class</code>的字节码文件，在这过程中，Java编译器会对Java源文件进行基本的语法错误排查</li>
+<li><strong>运行：</strong> JVM将字节码文件翻译成机器代码，然后执行。在这过程中：<ul>
+<li>首先是JVM中的<strong>类加载器（Class Loader）</strong>加载字节码文件</li>
+<li>然后是JVM中的<strong>执行引擎（Execution Engine）</strong>找到入口方法<code>main()</code>，并执行其中的方法</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Java解释器是JVM的一部分</p>
+</blockquote>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C3.png" data-caption="image-20210807172133674" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C3.png" alt="image-20210807172133674"></a></p>
+<h2 id="Java虚拟机栈">Java虚拟机栈<a class="post-anchor" href="#Java虚拟机栈"></a></h2><p>Java虚拟机栈，Java Virtual Machine Stack。</p>
+<p>它也是<strong>线程私有</strong>的，它的<strong>生命周期与线程相同</strong>，即：与线程共生死。</p>
+<p>JVM栈，描述的是Java方法执行的<strong>线程内存模型</strong>：每个方法被执行时，JVM都会创建一个<strong>栈帧（Stack Frame）</strong>，用于存储该方法的一系列基本信息，而这个栈帧就存储在JVM栈中。</p>
+<p>每个方法从调用到结束的过程，就对应着一个栈帧在JVM栈中从入栈到出栈的过程。</p>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C4.png" data-caption="img" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C4.png" alt="img"></a></p>
+<p>在一个栈帧中，它存储了该方法的一系列基本信息，如：局部变量表、操作数栈、动态连接、方法出口等。</p>
+<p>关于局部变量表。</p>
+<p>局部变量表存放了基本数据类型、对象引用（<code>reference</code>类型）和<code>returnAddress</code>类型。</p>
+<ul>
+<li>基本数据类型：boolean、byte、char、short、int、float、long、double</li>
+<li>对象引用：指向对象起始地址的引用指针，或者是指向与该对象相关的位置</li>
+<li>returnAddress：指向下一条字节码指令的地址</li>
+</ul>
+<p>局部变量表所存放的数据，在==编译==时就可确定下来，所以，局部变量表所需要的内存空间是在编译期间完成分配的。</p>
+<p>此外，局部变量表的存储空间是以<strong>局部变量槽（Slot）</strong>为单位的。</p>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C5.png" data-caption="img" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C5.png" alt="img"></a></p>
+<p>JVM栈有两个异常：<code>StackOverflowError</code>与<code>OutOfMemoryError</code></p>
+<ul>
+<li>当线程请求JVM栈的深度，大于JVM所允许的深度，则抛出<code>StackOverflowError</code></li>
+<li>若JVM栈的容量可以动态扩展，当JVM栈扩展时无法申请到足够的内存时，则抛出<code>OutOfMemoryError</code></li>
+</ul>
+<p>值得注意的是，HotSpot虚拟机的栈容量的不可以动态扩展的</p>
+<h2 id="本地方法栈">本地方法栈<a class="post-anchor" href="#本地方法栈"></a></h2><p>本地方法栈，Native Method Stacks</p>
+<p>它与JVM栈非常类似。其区别只是：</p>
+<ul>
+<li>JVM栈：为Java方法（字节码）服务</li>
+<li>本地方法栈：为本地（Native）方法服务</li>
+</ul>
+<blockquote>
+<p>在Java中，有两种方法：</p>
+<ul>
+<li>Java方法：由Java编写，编译成字节码文件</li>
+<li>本地方法：由其他语言编写，编译成和处理器相关的机器代码</li>
+</ul>
+<p>本地方法保存在动态链接库中，其文件格式跟平台系统相关，比如Windows系统则是<code>.dll</code>文件</p>
+<p>Java方法则是与平台无关</p>
+<p><strong>为什么要使用Native Method呢？</strong></p>
+<p>因为Java虽然使用方便，但是有些层次的任务用Java不容易实现，或者Java实现时的效率比较低。而且有时Java应用需要与Java外部的环境交互。</p>
+<p><strong>Native Method是怎样的呢？</strong></p>
+<p>Native Method就是一个java调用非java代码的接口。示例：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//Native Method接口</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">native1</span><span class="hljs-params">()</span></span>{<br>    ……<br>}<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">native2</span><span class="hljs-params">()</span></span>{<br>    ……<br>}<br></code></pre></td></tr></tbody></table></figure>
+
+<p>标识符<code>native</code>可以与所有其它的Java标识符连用，但是<code>abstract</code>除外，因为<code>native</code>意味着这些方法是有实现体的，只不过这些实现体是非Java的，而<code>abstract</code>则代表这些方法没有实现体，这是相互矛盾的。</p>
+<p>还有，一个Native Method可以返回任何Java类型，包括非基本类型，而且同样可以进行异常控制。</p>
+<p>此外，Native Method的存在并不会对其他类调用这些本地方法产生任何影响，实际上调用这些方法的其他类甚至不知道它所调用的是一个本地方法。</p>
+</blockquote>
+<p>然而，《Java虚拟机规范》对本地方法栈中方法使用的==语言==、==使用方式==与==数据结构==并没有任何强制规定，因此，具体的JVM可以根据自己的需要来实现它。</p>
+<p>当然也有的JVM直接==把本地方法栈和JVM栈合二为一==，比如Hot-Spot虚拟机。</p>
+<h2 id="Java堆">Java堆<a class="post-anchor" href="#Java堆"></a></h2><p>Java堆，Java Heap，是这5块内存区域中==最大==的一块，而且它是==线程共享==的</p>
+<p>它在JVM启动时创建</p>
+<p>它的作用就是：存放对象实例。几乎所有的对象实例都是在这里分配内存的。</p>
+<p>从分配内存的角度看，Java堆可以划分出多个==线程私有==的==分配缓冲区（Thread Local Allocation Buffer，TLAB）==，这样有助于提升给对象分配内存的效率。</p>
+<p>Java堆是垃圾收集器管理的内存区域，所以它也叫“GC堆”，Garbage Collected Heap。</p>
+<p>从回收内存的角度看，由于现代垃圾收集器大部分都是基于==分代收集理论==设计，所以Java堆中又可划分为<code>新生代</code>、<code>老年代</code>、<code>永久代</code>、<code>Eden空间</code>、<code>From Survivor空间</code>、<code>To Survivor空间</code>等等。</p>
+<p>根据《Java虚拟机规范》的规定，Java堆的内存空间在物理上可以不连续，但在逻辑上应是连续的。</p>
+<p>但对于大对象，JVM为了简单高效，往往会要求连续的内存空间。</p>
+<p>目前主流的JVM的Java堆都是可扩展的。</p>
+<p>当Java堆中没有内存完成实例分配，且Java堆也无法再扩展时，就会出现<code>OutOfMemoryError</code>异常。</p>
+<h2 id="方法区">方法区<a class="post-anchor" href="#方法区"></a></h2><p>方法区，Method Area，线程共享。</p>
+<p>用于存储已被JVM加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。</p>
+<blockquote>
+<p>对象里的方法也是存储在方法区中的</p>
+</blockquote>
+<p>值得注意的是，垃圾收集行为在方法区中比较少出现，因为比较难。</p>
+<p>根据《Java虚拟机规范》的规定，如果方法区无法满足新的内存分配需求时，将抛出<code>OutOfMemoryError</code>异常。</p>
+<h3 id="运行时常量池">运行时常量池<a class="post-anchor" href="#运行时常量池"></a></h3><p>运行时常量池，Runtime Constant Pool，是方法区的一部分。</p>
+<p><code>.class</code>文件中除了有类的版本、字段、方法、接口等信息外，还有一项信息是<strong>常量池表（Constant Pool Table）</strong>，它用于存放编译期生成的各自字面量与符号引用。</p>
+<p>常量池表会在类加载后存放到方法区的运行时常量池中。</p>
+<p>《Java虚拟机规范》对运行时常量池并没有做任何细节的要求。人们可以根据自己的需要来实现这个内存区域。</p>
+<p>运行时常量池，相对于==Class文件常量池==的一个重要区别是：它具有==动态性==。常量池表在运行期间可以动态改变，在运行期间可以将新的常量放入池中，比如<code>String</code>类的<code>intern()</code>方法。</p>
+<blockquote>
+<p><code>intern()</code>语法：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">intern</span><span class="hljs-params">()</span></span>;<br></code></pre></td></tr></tbody></table></figure>
+
+<p>它返回字符串对象的规范化表示形式。</p>
+<p>它遵循以下规则：对于任意两个字符串 s 和 t，当且仅当 s.equals(t) 为 true 时，s.intern() == t.intern() 才为 true。</p>
+<p>值得注意的是，它是一个Native方法。查看源码可见：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span>, <span class="hljs-title">Comparable</span><<span class="hljs-title">String</span>>, <span class="hljs-title">CharSequence</span></span>{<br>    ……<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> String <span class="hljs-title">intern</span><span class="hljs-params">()</span></span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>既然运行时常量池是方法区的一部分，自然受到方法区内存的限制</p>
+<p>当常量池无法再申请到内存时会抛出<code>OutOfMemoryError</code>异常。</p>
+<h2 id="直接内存">直接内存<a class="post-anchor" href="#直接内存"></a></h2><p>直接内存，Direct Memory，它==不是==JVM运行时数据区的一部分，也==不是==《Java虚拟机规范》中定义的内存区域。</p>
+<p>但，这部分内存被频繁低使用。</p>
+<p>它常用于为==Native方法==直接分配==堆外内存==。也就是说，它是为Native方法服务的。这样能避免在Java堆和Native堆中来回复制数据，从而提高性能。</p>
+<blockquote>
+<p>堆外内存：指的是Java堆外的内存</p>
+</blockquote>
+<p>当直接内存申请内存失败时，就会报<code>OutOfMemoryError</code>异常。</p>
+<h1 id="HotSpot虚拟机对象探秘">HotSpot虚拟机对象探秘<a class="post-anchor" href="#HotSpot虚拟机对象探秘"></a></h1><p>在这里会深入探讨一下，最常用的HotSpot虚拟机，在Java堆中，对象分配、布局和访问的全过程。</p>
+<h2 id="对象的创建">对象的创建<a class="post-anchor" href="#对象的创建"></a></h2><p>当JVM遇到一条字节码<code>new</code>指令时，</p>
+<ol>
+<li>首先要，检查<code>new</code>指令的参数是否能在==常量池==（属于==方法区==）中找到该类的==符号引用==</li>
+<li>接着，检查该符号引用所代表的类，是否已被==加载==、==解析==和==初始化==，若没有，则进行类加载</li>
+<li>最后，就是给新生对象分配内存了</li>
+</ol>
+<p>对象所需内存的大小，在类加载完成后就可完全确定。</p>
+<p>给对象分配空间，相当于把一块确定大小的内存块从==Java堆==中划分出来。</p>
+<p>那么划分呢？这就得看Java堆中的内部结构了：<strong>绝对规整</strong>和<strong>不规整</strong>。</p>
+<ol>
+<li><p><strong>绝对规整</strong></p>
+<ul>
+<li><p>绝对规整指：所有使用过的内存和空闲的内存各放一边，中间放一个指针作为分界点。</p>
+</li>
+<li><p>分配内存的过程就是：将指针，往空闲内存方向，挪动一段，与对象大小相等的距离。这种分配方式叫：==指针碰撞（Bump The Pointer）==。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>不规整</strong></p>
+<ul>
+<li>不规整指：已被使用的内存和空闲的内存相互交错在一起。</li>
+<li>这时就无法进行指针碰撞了。</li>
+<li>JVM得维护一个列表，记录哪些内存块是可用的。在分配时，就从该列表中找一块足够大的空间划分给对象实例，并对该列表进行更新。这种分配方式叫：==空闲列表（Free List）==。</li>
+</ul>
+</li>
+</ol>
+<p>可见，选择哪种分配方式，由Java堆是否规整来决定；而Java堆是否规整则是由所采用的==垃圾收集器==是否带有==空间压缩整理==的能力来决定。</p>
+<p>此外，还有一个问题：如何保证划分内存的动作在并发情况下是线程安全的？</p>
+<p>解决这个问题有两种可选方案：</p>
+<ol>
+<li><p>对分配内存空间的动作进行同步处理</p>
+<p>JVM采用CAS+失败重试的方式可保证更新操作的原子性</p>
+<blockquote>
+<p>CAS：Compare And Swap，比较交换。</p>
+<p>其执行函数为：<code>CAS(V,E,N)</code>，其中参数含义：</p>
+<ul>
+<li>V：要更新的变量的值</li>
+<li>E：预期值</li>
+<li>N：新值</li>
+</ul>
+<p>函数的具体操作：</p>
+<ol>
+<li>若<code>V=E</code>，则将V的值设为N。</li>
+<li>若<code>V!=E</code>，则说明已经有其他线程做了更新，这时当前线程什么都不做。</li>
+</ol>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C7.png" data-caption="img" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C7.png" alt="img"></a></p>
+<p>CAS+失败重试：当更新操作失败后，选择重新读取该变量值，尝试再次修改该变量，直至成功。</p>
+</blockquote>
+</li>
+<li><p>把内存分配的动作，按照线程划分在不同的空间之中进行</p>
+<p>即每个线程在Java堆中预先分配一小块内存，称：==本地线程分配缓冲（Thread Local Allocation Buffer，TLAB）==。</p>
+<p>哪个线程要分配内存，就从自己的本地线程分配缓冲区中分配。</p>
+<p>当TLAB用完之后，就继续分配新的缓冲区，这时候才需要==同步锁定==。</p>
+</li>
+</ol>
+<p>好了，划分内存完成后，JVM还要对对象进行必要的设置，设置的信息会存放在对象的==对象头（Object Header）==中。</p>
+<p>这时候，从JVM的视角来看，一个新的对象已经产生了。</p>
+<p>但从Java程序的视角来看，对象的创建才刚刚开始，构造函数还没有执行，即<code>.class</code>文件中的<code><init>()</code>方法还没执行，当然<code>new</code>指令之后会紧接着执行<code><init>()</code>方法的。这时候，从Java程序的视角来看，一个真正可用的对象才算完全被构造出来。</p>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C10.png" data-caption="img" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C10.png" alt="img"></a></p>
+<p>总的来说，对象创建的过程，就是内存分配的过程。</p>
+<h2 id="对象的内存布局">对象的内存布局<a class="post-anchor" href="#对象的内存布局"></a></h2><p>首先再次声明，这一部分的讨论对象是==HotSpot虚拟机==。</p>
+<p>对象在Java堆中的存储布局可以划分为三个部分：</p>
+<ol>
+<li><p><strong><em>对象头（Header）</em></strong></p>
+<p>其中对象头中又包括两类信息：</p>
+<ul>
+<li><p><em>对象自身的运行时数据</em>，也叫<code>Mark Word</code>：</p>
+<p>这部分的数据长度与JVM的位数相同，在32位和64位的JVM中分别为32位和64位。</p>
+<p>由于对象需要存储的运行时数据很多，存储空间又有限，所以Mark Word被设计成一个==有着动态定义的数据结构==。</p>
+</li>
+<li><p><em>类型指针</em>：</p>
+<p>即对象指向它的类型元数据的指针，JVM通过类型指针来确定该对象是哪个类的实例。</p>
+<p>当然并不是所有JVM都有类型指针，因为查找对象的元数据不一定要经过对象本身。</p>
+<p>此外，若对象是一个数组，那么对象头中还得有一块用于记录数组长度的数据。</p>
+</li>
+</ul>
+</li>
+<li><p><strong><em>实例数据（Instance Data）</em></strong></p>
+<p>存储对象真正有效的信息</p>
+</li>
+<li><p><strong><em>对齐填充（Padding）</em></strong></p>
+<p>对齐填充不是必然存在的，也没有特别含义，它仅起着==占位符==的作用。</p>
+<p>在HotSpot虚拟机中，对象的大小都是8Byte的整数倍。</p>
+<p>因此，如果对象实例数据部分没有对齐的话，就要通过对齐填充来补全。</p>
+</li>
+</ol>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C11.png" data-caption="img" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C11.png" alt="img"></a></p>
+<h2 id="对象的访问定位">对象的访问定位<a class="post-anchor" href="#对象的访问定位"></a></h2><p>创建完对象就要使用该对象，要使用对象就得要先访问该对象，那么在JVM中是怎么访问对象的呢？</p>
+<p>不同JVM的对象访问方式，可能会不一样。常见的对象访问方式有：</p>
+<ol>
+<li>使用句柄访问</li>
+<li>使用直接指针访问</li>
+</ol>
+<h3 id="使用句柄访问">使用句柄访问<a class="post-anchor" href="#使用句柄访问"></a></h3><p>Java堆中划分一块内存作为==句柄池==，reference中存储句柄地址，而句柄中存储实例对象的地址。</p>
+<p>访问实例对象时就要走两步。</p>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C12.png" data-caption="image-20210816151814262" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C12.png" alt="image-20210816151814262"></a></p>
+<p>这种方式，最大的优点就是：不用频繁地改变reference中的地址，只需改变句柄中的实例数据指针即可。</p>
+<h3 id="使用直接指针访问">使用直接指针访问<a class="post-anchor" href="#使用直接指针访问"></a></h3><p>reference中直接存储对象地址。</p>
+<p>访问实例对象时一下子就可以访问到了。</p>
+<p><a href="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C13.png" data-caption="image-20210816151858434" data-fancybox="images"><img src="/2021/08/07/null/.%5CJVM%E5%AD%A6%E4%B9%A0%E4%B9%8BJava%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8%5C13.png" alt="image-20210816151858434"></a></p>
+<p>显然，它最大的优点就是：速度快！</p>
+<p>HotSpot虚拟机也是使用直接指针的方式。</p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/08/13/2018/">JWT学习</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/06/13/1747/">Ubuntu18.04装载硬盘</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/08/07/null/">https://wakie01.github.io/2021/08/07/null/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

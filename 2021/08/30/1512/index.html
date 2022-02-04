@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      Tracking without bells and whistles - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#摘要"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检测器"><span class="toc-text">检测器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目标检测器"><span class="toc-text">目标检测器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跟踪器"><span class="toc-text">跟踪器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#边界框回归"><span class="toc-text">边界框回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边界框初始化"><span class="toc-text">边界框初始化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跟踪器扩展"><span class="toc-text">跟踪器扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运动模型"><span class="toc-text">运动模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重新识别算法"><span class="toc-text">重新识别算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#补"><span class="toc-text">补</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多目标跟踪（MOT）评价指标："><span class="toc-text">多目标跟踪（MOT）评价指标：</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">Tracking without bells and whistles</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/08/30</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/08/30/1512/" data-flag-title="Tracking without bells and whistles">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Paper">Paper</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/CV">CV</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><p>题目：跟踪没有花里胡哨</p>
+<h1 id="摘要">摘要<a class="post-anchor" href="#摘要"></a></h1><p>本文所提出的方法：通过检测进行跟踪，<code>Tracking-by-detection</code>。</p>
+<p>对于通过检测进行跟踪，这需要以下技术：物体再识别、运动预测、遮挡处理等技术。</p>
+<p>在本论文中，作者展示的跟踪器，可以在不专门针对跟踪任务下完成跟踪，而且，作者没有对跟踪数据进行任何训练或优化。</p>
+<p>作者利用对象检测器的边界盒回归来预测对象在下一帧的位置，从而将检测器转换为跟踪器。</p>
+<p>作者所提出的这种方法为三个多目标跟踪提供一个新的先进技术，这种方法是通过直接的重新识别和摄像机运动补偿来实现的。</p>
+<p>以往的跟踪技术中，对于较小的、被遮挡的、容易丢失检测的物体，跟踪效果不太理想。</p>
+<h1 id="介绍">介绍<a class="post-anchor" href="#介绍"></a></h1><p><code>Tracking-by-detection</code>方法对于多目标跟踪，是一个很不错的方法，它将跟踪任务简化成两步：</p>
+<ol>
+<li>在每一帧中独立地检测目标位置。</li>
+<li>通过跨时间链接相应的检测信息来形成跟踪。</li>
+</ol>
+<p>显然，检测信息的链接是关键，它涉及到很多问题的解决，比如：在拥挤的环境中丢失检测目标、虚假检测、目标遮挡、目标交互等等。</p>
+<p>为了解决这些问题，作者在检测目标的任务上训练神经网络，这能在复杂跟踪场景下构建目标轨迹。</p>
+<p>文章的主要贡献：</p>
+<ol>
+<li>介绍了一种跟踪器，它利用检测器的回归头对目标边界框进行时间重新对齐，从而实现多目标跟踪。</li>
+<li>提出了对跟踪器的两个简单扩展：重识别的<code>Siamese</code>网络和一个运动模型。这样优化了“对于较小的、被遮挡的、容易丢失检测的物体，跟踪效果不太理想”的问题。</li>
+<li>文章所提出的回归方法与当下最好的跟踪方法相当。</li>
+</ol>
+<h1 id="检测器">检测器<a class="post-anchor" href="#检测器"></a></h1><p>作者倾向于将检测器转换为跟踪器，进行多目标检测。</p>
+<p>作者使用回归器进行跟踪任务。这样做有两个优点：</p>
+<ol>
+<li>不需要对跟踪进行特殊的训练</li>
+<li>在跟踪过程中不需要进行优化处理，因此跟踪器可以是在线的。</li>
+</ol>
+<p>至于使用什么回归器，我还不知道。</p>
+<h2 id="目标检测器">目标检测器<a class="post-anchor" href="#目标检测器"></a></h2><p>作者所提出的跟踪器中，其核心组件就是一个基于回归的检测器。</p>
+<p>作者用<code>ResNet-101</code>数据集训练<code>Faster R-CNN</code>模型，和用<code>MOT17Det</code>行人检测数据集训练<code>Feature Pyramid Networks(FPN)</code>模型。</p>
+<p>目标检测器工作流程：</p>
+<ol>
+<li>为了进行目标检测，<code>Faster R-CNN</code>使用<code>Region Proposal Network</code>来为每个潜在对象生成大量边界框建议。</li>
+<li>然后<code>Region of Interest（RoI）</code>池对每个边界框建议提取特征图，并将这些特征图传递到分类器头和回归器头。</li>
+<li>然后分类器头会对每个边框建议图，结合其特征图进行评分，评估它是否是个行人。</li>
+<li>而回归器头则在目标周围精确细化边界框的位置。</li>
+<li>然后检测器通过应用非最大抑制（<code>non-maximum-suppression,NMS</code>）来筛选边界框建议，从而生成最终的对象检测集。</li>
+</ol>
+<h2 id="跟踪器">跟踪器<a class="post-anchor" href="#跟踪器"></a></h2><p>多目标跟踪的挑战是提取空间和时间位置，即：视频帧中多个目标的轨迹。</p>
+<p><a href="/2021/08/30/1512/.%5CTracking-without-bells-and-whistles%5C1.png" data-caption="image-20210901151717186" data-fancybox="images"><img src="/2021/08/30/1512/.%5CTracking-without-bells-and-whistles%5C1.png" alt="image-20210901151717186"></a></p>
+<p>一个目标的轨迹，定义为：有序的目标边界框列表，即：<br>$$<br>T_k=\lbrace b_{t1}^k , b_{t2}^k , … , \rbrace<br>$$<br>其中：</p>
+<ul>
+<li>$b_{t} ^k$ ：在第t帧中目标k的边界框坐标</li>
+<li>$t$ ：视频的某一帧</li>
+<li>$k$ ：某个目标的轨迹</li>
+</ul>
+<p>定义某一帧中所有目标边界框的集合为：<br>$$<br>B_t=\lbrace b_t ^{k1} , b_t ^{k2} , … \rbrace<br>$$<br>其中：</p>
+<ul>
+<li>$b_t ^{k1}$ ：第k1个目标在视频的第t帧中的边界框坐标</li>
+</ul>
+<blockquote>
+<p>有时 $B_t=\lbrace b_t ^{k1} , b_t ^{k2} , … \rbrace$ 会写出 $D_t=\lbrace d_t ^{k1} , d_t ^{k2} , … \rbrace$ </p>
+</blockquote>
+<h3 id="边界框回归">边界框回归<a class="post-anchor" href="#边界框回归"></a></h3><p>首先通过边界框回归，将目标前一帧<code>t-1</code>的活动轨迹扩展到当前帧<code>t</code>，即由 $b_{t-1} ^k$ 回归转变为 $b_t ^k$ 。</p>
+<p>执行完边界框回归后，就会对以下两种情况进行清除轨迹：</p>
+<ol>
+<li>对于在新的帧中不见的目标或者被非目标对象遮挡的目标，如果分类器对它们新的评分 $s_t ^k$ 小于 $\sigma _{active}$  ，就会被清除。</li>
+<li>当目标间被遮挡住时，就会应用非最大抑制（<code>non-maximum-suppression,NMS</code>）</li>
+</ol>
+<h3 id="边界框初始化">边界框初始化<a class="post-anchor" href="#边界框初始化"></a></h3><p>为了考虑新的目标，目标检测器会做以下事情：</p>
+<ol>
+<li>提供某一帧中的所有目标边界框的集合，即：$D_t$ 。</li>
+<li>当当前帧的目标与之前帧的目标的<code>IoU</code>值（<code>Intersection over Union</code>，联合体上的交点）小于 $\lambda _{new}$ 时，则认为该目标为新目标。</li>
+</ol>
+<h2 id="跟踪器扩展">跟踪器扩展<a class="post-anchor" href="#跟踪器扩展"></a></h2><p>作者对<code>vanilla</code>跟踪器进行了两个扩展：</p>
+<ol>
+<li>运动模型</li>
+<li>重新识别算法</li>
+</ol>
+<p>这两种方法目的都是提高帧之间的身份保持能力。</p>
+<h3 id="运动模型">运动模型<a class="post-anchor" href="#运动模型"></a></h3><p>之前的运动设定是这样的：目标的位置在帧与帧之间只发生轻微的变化。而这种设定显然在以下两种场景下不行：</p>
+<ol>
+<li>摄像机运动幅度较大的场景</li>
+<li>视频帧速率较低的场景</li>
+</ol>
+<p>前一帧的目标，在后一帧中全部都没有，这显然是不行的。</p>
+<p>因此，作者使用两种类型的运动模型，来改进未来帧中目标边界框的位置：</p>
+<ol>
+<li><p>对于摄像机运动的场景：</p>
+<p>作者使用了一种简单的摄像机运动补偿（<code>camera motion compensation,CMC</code>）方法，该方法最大化增加相关系数（<code>Enhanced Correlation Coefficient,ECC</code>）来进行图像配准，从而实现帧与帧之间的对齐。</p>
+</li>
+<li><p>对于视频帧速率较低的场景：</p>
+<p>对所有目标应用恒定速假设（<code>constant velocity assumption，CVA</code>）</p>
+</li>
+</ol>
+<h3 id="重新识别算法">重新识别算法<a class="post-anchor" href="#重新识别算法"></a></h3><p>为了使跟踪器保持在线，作者使用了一种短期的再识别方法，该方法基于<code>Siamese</code>神经网络生成的外观向量。</p>
+<p>为此，作者对杀死的目标，存储固定帧数的样本，然后将这些样本的目标轨迹和新检测的目标轨迹，进行比较嵌入空间距离（<code>embedding space distance</code>），然后通过阈值进行重新识别。</p>
+<p>其中，嵌入空间距离是通过<code>Siamese CNN</code>和每个边界框的外观特征向量计算的。</p>
+<p>此外，为了尽量避免重识别错误，只考虑杀死的目标轨迹和新的目标边界框，并且新的目标边界框具有足够大的<code>IoU</code>。</p>
+<h1 id="补">补<a class="post-anchor" href="#补"></a></h1><h2 id="多目标跟踪（MOT）评价指标：">多目标跟踪（MOT）评价指标：<a class="post-anchor" href="#多目标跟踪（MOT）评价指标："></a></h2><p><a href="/2021/08/30/1512/.%5CTracking-without-bells-and-whistles%5C2.png" data-caption="img" data-fancybox="images"><img src="/2021/08/30/1512/.%5CTracking-without-bells-and-whistles%5C2.png" alt="img"></a></p>
+<p><a href="/2021/08/30/1512/.%5CTracking-without-bells-and-whistles%5C3.png" data-caption="img" data-fancybox="images"><img src="/2021/08/30/1512/.%5CTracking-without-bells-and-whistles%5C3.png" alt="img"></a></p>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/09/10/1717/">Java Comparator接口compare方法</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/08/13/2018/">JWT学习</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/08/30/1512/">https://wakie01.github.io/2021/08/30/1512/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 

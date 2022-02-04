@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <script>
+  var _hmt = _hmt || []
+  ;(function() {
+    var hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?5a0acc897fd96474a2c8f4deac84611a'
+    var s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  })()
+</script> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Touch the stone and cross the river" />
+    
+    <title>
+      论文阅读-Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network - Wakie&#39;s Blog
+    </title>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="shortcut icon" href="/images/curegirl.jpeg" type="image/x-icon" />
+    
+<link rel="stylesheet" href="/style/style.css">
+
+  <meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="Wakie's Blog" type="application/atom+xml">
+</head>
+  <body>
+    <canvas id='pagemap'></canvas>
+    
+    <div id="post-toc" class="animated hiddenToc hide">
+      <span class="title">Toc</span>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#论文介绍"><span class="toc-text">论文介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动机"><span class="toc-text">动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#贡献"><span class="toc-text">贡献</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ESPCN"><span class="toc-text">ESPCN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#亚像素卷积"><span class="toc-text">亚像素卷积</span></a></li></ol></li></ol>
+    </div>
+    
+    <div id="fixed-menu-wrap">
+      <span class="iconfont icon-sousuo search-box menu-reset"></span>
+      <span class="icon-toc menu-reset">Toc</span>
+      <span class="iconfont icon-arrowup menu-reset"></span>
+    </div>
+    <div id="fixed-menu">
+      <span class="iconfont icon-menu-"></span>
+    </div>
+    <div id="progress">
+      <div class="line"></div>
+    </div>
+    <div id="search-shade" class="animated hiddenSearch hide">
+      <div class="input-wrap">
+        <span class="iconfont icon-sousuo search-box"></span>
+        <input type="text" placeholder="Search" />
+        <span class="iconfont icon-close"></span>
+      </div>
+      <div class="search-result">
+        <div class="meta">
+          <span><b id="result-count">0</b> results found</span>
+          <img src="/images/curegirl.jpeg" />
+        </div>
+        <ul id="result-box"></ul>
+      </div>
+    </div>
+    <div id="menu-mask" class="animated hideMenuMask hide">
+      <span class="iconfont icon-close"></span>
+      <div class="nav">
+        
+        <a href="/" class="">
+          首页
+        </a>
+        
+        <a href="/archives" class="">
+          归档
+        </a>
+        
+        <a href="/categories" class="">
+          分类
+        </a>
+        
+        <a href="/tags" class="">
+          标签
+        </a>
+        
+        <a href="/friends" class="">
+          友链
+        </a>
+        
+        <a href="/about" class="">
+          关于
+        </a>
+        
+      </div>
+    </div>
+    <div id="header">
+      <div class="intro">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <div class="author">Wakie</div>
+      </div>
+      <div class="nav">
+        <span class="iconfont icon-menu menu-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+    </div>
+    <div id="side" class="animated bounceInLeft">
+      <div class="shrink">
+        <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        <span class="iconfont icon-menu toggle-icon"></span>
+        <a href="#" class="search-box">
+          <span class="iconfont icon-sousuo"></span>
+        </a>
+      </div>
+      <div class="magnify">
+        <div class="about">
+          <div class="author">Wakie</div>
+          <a href="/" class="logo" style="background-image: url('/images/curegirl.jpeg')"></a>
+        </div>
+
+        <div class="nav">
+          
+          <a href="/" class="">
+            首页
+          </a>
+          
+          <a href="/archives" class="">
+            归档
+          </a>
+          
+          <a href="/categories" class="">
+            分类
+          </a>
+          
+          <a href="/tags" class="">
+            标签
+          </a>
+          
+          <a href="/friends" class="">
+            友链
+          </a>
+          
+          <a href="/about" class="">
+            关于
+          </a>
+          
+          <a href="#" class="search-box">
+            <span class="iconfont icon-sousuo"></span>
+          </a>
+        </div>
+        <div class="bottom">
+          <div class="follow">
+            
+            <a href="https://github.com/Wakie01" target="_block">
+              <span class="iconfont icon-github"></span>
+            </a>
+            
+            <a href="https://www.facebook.com/wewe.liang.16/" target="_block">
+              <span class="iconfont icon-facebook"></span>
+            </a>
+            
+            <a href="https://twitter.com/Liangweij1" target="_block">
+              <span class="iconfont icon-twitter"></span>
+            </a>
+             
+            <a href="/atom.xml" target="_block">
+              <span class="iconfont icon-rss"></span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container">
+      <div class="main animated bounceInRight delay-0.7s">
+        <article class="post-entry">
+    <div class="header">
+      
+      <div class="title">论文阅读-Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network</div>
+      <div class="meta">
+        <span class="item">
+          <span class="iconfont icon-time-circle"></span>
+          <span>2021/11/15</span>
+        </span>
+
+        
+          <span class="item leancloud-visitors" id="/2021/11/15/1728/" data-flag-title="论文阅读-Real-Time Single Image and Video Super-Resolution Using an Efficient Sub-Pixel Convolutional Neural Network">
+            <span class="iconfont icon-eye1"></span>
+            <span class="leancloud-visitors-count"></span>
+          </span>
+        
+
+         
+        <span class="item">
+          <span class="iconfont icon-folder"></span>
+          <span>
+              
+                
+                  <a href="/categories/Paper">Paper</a>
+                
+              
+          </span>
+        </span>
+        
+        
+         
+          <span class="item">
+            <span class="iconfont icon-tag1"></span>
+            <span>
+                
+                  
+                    <a href="/tags/SR">SR</a>
+                  
+                
+            </span>
+          </span>
+         
+      </div>
+      <div>
+      </div>
+    </div>
+    <html><head></head><body><h1 id="论文介绍">论文介绍<a class="post-anchor" href="#论文介绍"></a></h1><p>Shi W, Caballero J, Huszár F, et al. Real-time single image and video super-resolution using an efficient sub-pixel convolutional neural network[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2016: 1874-1883.</p>
+<p>引用量：3156</p>
+<h1 id="动机">动机<a class="post-anchor" href="#动机"></a></h1><ol>
+<li>以往的上采样方法——双三次插值，效果不够好，且增加了模型的计算复杂度</li>
+<li>以往的SR模型是预上采样，计算复杂度较高</li>
+</ol>
+<h1 id="贡献">贡献<a class="post-anchor" href="#贡献"></a></h1><ol>
+<li>提出亚像素卷积层（sub-pixel convolution layer），并藉此来对图像进行上采样。</li>
+</ol>
+<h2 id="ESPCN">ESPCN<a class="post-anchor" href="#ESPCN"></a></h2><p>本论文提出的网络是ESPCN 。</p>
+<p><a href="/2021/11/15/1728/1.png" data-caption="image-20211116160107202" data-fancybox="images"><img src="/2021/11/15/1728/1.png" alt="image-20211116160107202"></a></p>
+<p>ESPCN有 $L$ 层，其中前 $L-1$ 层做特征提取，最后一层做上采样操作。</p>
+<p>其中前 $L-1$ 层的操作如下：<br>$$<br>\begin{align}<br>f^{,1}({\bf{I}}^{LR};W_1,b_1) & =\phi \left(W_1 * {\bf{I}}^{LR}+b_1 \right) \<br>& \<br>f^{,l}({\bf{I}}^{LR};W_{1:l},b_{1:l}) & = \phi \left( W_l * f^{l-1}({\bf{I}}^{LR})+b_l \right)<br>\end{align}<br>$$<br>其中：</p>
+<ul>
+<li>$\phi$ ：非线性激活函数</li>
+<li>$W_l$ ：第 $l$ 层的卷积核，尺寸：$n_{l} \times n_{l-1} \times k_l \times k_l$ <ul>
+<li>$k_l \times k_l$ ：第 $l$ 层的卷积核的长、宽</li>
+<li>$n_l$ ：第 $l$ 层的卷积核卷积过后输出的特征数，注意 $n_0=C$ ，$C$ 为输入图像的通道数</li>
+</ul>
+</li>
+<li>$*$ ：卷积操作</li>
+<li>$b_{,l}$ ：第 $l$ 层的偏差，尺寸： $1 \times n_l$ </li>
+<li>$l$ ：$l \in (1,L-1)$ </li>
+<li>$f^{,l}$ ：第 $l$ 层卷积操作</li>
+</ul>
+<p>总的来说，前 $L-1$ 层的操作就是做 $L-1$ 次卷积，做特征提取。</p>
+<p>第 $L$ 层的操作为将LR特征矩阵转化为HR图像 ${\bf{I}}^{SR}$ ，操作如下：<br>$$<br>{\bf{I}}^{SR}=f^L({\bf{I}}^{LR})={\mathcal{PS}} \left( W_L * f^{,L-1} ({\bf{I}}^{LR}) + b_L \right)<br>$$<br>其中：</p>
+<ul>
+<li>${\mathcal{PS}}$ ：周期洗牌算子，将 $H \times W \times C \cdot r^2$ 张量转化为 $rH \times rW \times C$ </li>
+<li>$W_L$ ：第 $L$ 层的卷积核，尺寸： $n_{L-1} \times r^2C \times k_L \times k_L$ </li>
+</ul>
+<h2 id="亚像素卷积">亚像素卷积<a class="post-anchor" href="#亚像素卷积"></a></h2><p>上图的最后一层就是亚像素卷积，其运作如下：</p>
+<ol>
+<li>假设输入图像尺寸： $3 \times 3$ ，缩放因子： $r$ </li>
+<li>对输入图像进行Half Padding卷积操作，提取特征，得到 $r^2 \times 3 \times 3$ 特征矩阵</li>
+<li>对特征矩阵进行周期筛选（periodic shuffling），如上图所示排列，得到尺寸为 $r<em>3 \times r</em>3$ 的超分图像。</li>
+</ol>
+<p>其特点：</p>
+<ol>
+<li>利用图像信息</li>
+<li>快</li>
+</ol>
+</body></html>
+
+  
+    <div class="post-reward">
+    <div id="reward-button">打赏</div>
+      <div id="qr">
+        <div class="wrap">
+            
+            <div class="bg-wrap">
+              <a href="/images/zhifubao.png" target="_block" class="bg" style="background-image:url('/images/zhifubao.png')"></a>
+              支付宝
+            </div>
+            
+            
+            <div class="bg-wrap">
+                <a href="/images/weixin.png" target="_block" class="bg" style="background-image:url('/images/weixin.png')"></a>
+              微信
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  
+  <div class="post-guide">
+    <div class="item left">
+        
+          <a href="/2021/11/16/1112/">大顶堆与小顶堆学习</a>
+        
+    </div>
+    <div class="item right">
+        
+          <a href="/2021/11/15/1846/">幂等性</a>
+        
+    </div>
+  </div>
+
+  
+
+  <div class="post-copyright">
+    <div class="auth">
+      本文作者：<a href="https://wakie01.github.io">Wakie</a>
+    </div>
+    <div class="link">
+      永久链接：<a href="https://wakie01.github.io/2021/11/15/1728/">https://wakie01.github.io/2021/11/15/1728/</a>
+    </div>
+    <div class="declare">
+      版权声明：本文首发于<a href="https://wakie01.github.io">Wakie</a>的博客，转载请注明出处！
+    </div>
+  </div>
+
+  <div id="comment"></div>
+
+  
+  
+</article>
+        <footer>
+          <div class="copyright">
+            ©2022
+            <a href="https://wakie01.github.io">Wakie</a> Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> |
+            <a href="https://github.com/shixiaohu2206/hexo-theme-huhu" target="_blank" rel="noopener">hexo-theme-huhu</a>
+          </div>
+          
+        </footer>
+      </div>
+    </div>
+  </body>
+  
+</html>
+<script type="text/javascript">
+                  window.HUHU_CONFIG = JSON.parse("{\"share\":[\"weibo\",\"weixin\",\"qqkongjian\",\"QQ\",\"douban\",\"facebook\",\"twitter\",\"google\"],\"valine\":{\"API_ID\":\"nr42vxAz3QQouMN3Ajh6FG93-gzGzoHsz\",\"API_KEY\":\"JQCnuSnFEctiJezljTgAgRIz\"},\"service_worker\":{\"open\":false},\"baidu_tongji\":{\"site_from\":\"2020/06/08\",\"site_id\":\"20322847\",\"access_token\":\"121.cc35f58701595e83d50b3e7fcd0cda17.Y_ySS7w9n_dXvvPXP9ZwFYXJW2yGK8vEF92FbHe.l_N36g\"}}")
+                </script> <script type="text/javascript">window.addEventListener('load', function() {
+    
+    window.loadJs = function(d, m, a) {
+      var c = document.getElementsByTagName('head')[0] || document.head || document.documentElement
+      var b = document.createElement('script')
+      b.defer = true
+      b.setAttribute('type', 'text/javascript')
+      b.setAttribute('charset', 'UTF-8')
+      b.setAttribute('async', 'true')
+      b.setAttribute('src', d)
+      m && b.setAttribute('data-main', '/scripts/app-built')
+      if (typeof a === 'function') {
+        if (window.attachEvent) {
+          b.onreadystatechange = function() {
+            var e = b.readyState
+            if (e === 'loaded' || e === 'complete') {
+              b.onreadystatechange = null
+              a()
+            }
+          }
+        } else {
+          b.onload = a
+        }
+      }
+      c.appendChild(b)
+    }
+    window.loadJs && window.loadJs('https://cdn.bootcss.com/require.js/2.3.6/require.min.js', true, function() {require.config({"paths":{"util":"util","share":"share","search":"search","pagemap":"pagemap.min","registerSW":"registerSW","valine":"cdn/Valine.min","av":["https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min"],"pjax":["https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min"],"jquery":["https://cdn.bootcss.com/jquery/3.4.1/jquery.min"],"confirm":["https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min"],"fancybox":["https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min"],"chart":["https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.bundle.min"]},"map":{"*":{"css":"https://cdn.bootcss.com/require-css/0.1.10/css.min.js"}},"shim":{"fancybox":{"deps":["css!https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css"]},"confirm":{"deps":["css!https://cdn.bootcss.com/jquery-confirm/3.3.4/jquery-confirm.min.css"]},"chart":{"deps":["css!https://cdn.bootcss.com/Chart.js/2.8.0-rc.1/Chart.min.css"]}},"waitSeconds":3})})
+  })</script> <script type="text/javascript">
+                  ;(function() {
+                    var bp = document.createElement('script')
+                    var curProtocol = window.location.protocol.split(':')[0]
+                    if (curProtocol === 'https') {
+                      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'
+                    } else {
+                      bp.src = 'http://push.zhanzhang.baidu.com/push.js'
+                    }
+                    var s = document.getElementsByTagName('script')[0]
+                    s.parentNode.insertBefore(bp, s)
+                  })()
+                </script> 
